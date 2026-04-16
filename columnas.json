@@ -1,0 +1,98 @@
+[
+  {
+    "id": "tapia-pisada",
+    "href": "columna-tapia-pisada.html",
+    "date": "2026-04-11",
+    "categories": ["arquitectura"],
+    "es": {
+      "title": "Lo que Europa llama innovación",
+      "excerpt": "La tapia pisada lleva 5.000 años regulando temperatura sin sistemas de aislamiento. En Europa pagan fortunas por imitarla. En Santander la llamamos patrimonio — y aún la subestimamos.",
+      "date": "11 de abril de 2026",
+      "tag": "Patrimonio · Bioclimática"
+    },
+    "en": {
+      "title": "What Europe calls innovation",
+      "excerpt": "Rammed earth has been regulating temperature without insulation systems for 5,000 years. In Europe, fortunes are paid to replicate it. In Santander we call it heritage — and still underestimate it.",
+      "date": "April 11, 2026",
+      "tag": "Heritage · Bioclimatic"
+    },
+    "it": {
+      "title": "Quello che l'Europa chiama innovazione",
+      "excerpt": "La tapia pisada regola la temperatura senza sistemi di isolamento da 5.000 anni. In Europa si pagano fortune per imitarla. A Santander la chiamiamo patrimonio — e la sottovalutiamo ancora.",
+      "date": "11 aprile 2026",
+      "tag": "Patrimonio · Bioclimatica"
+    }
+  },
+  {
+    "id": "ladrillo",
+    "href": "columna-ladrillo.html",
+    "date": "2026-04-13",
+    "categories": ["mercado", "arquitectura"],
+    "es": {
+      "title": "El ladrillo que no cuadra",
+      "excerpt": "73.100 empresas. $36,4 billones en ingresos. Y sin embargo, los números no cuadran. Esta es la historia de un sector que mueve el país sin moverse a sí mismo.",
+      "date": "13 de abril de 2026",
+      "tag": "Mercado · Arquitectura"
+    },
+    "en": {
+      "title": "The brick that doesn't add up",
+      "excerpt": "73,100 companies. $36.4 billion in revenue. And yet the numbers don't add up. This is the story of a sector that builds the country without building itself.",
+      "date": "April 13, 2026",
+      "tag": "Market · Architecture"
+    },
+    "it": {
+      "title": "Il mattone che non torna",
+      "excerpt": "73.100 aziende. 36,4 miliardi di ricavi. Eppure i conti non tornano. Questa è la storia di un settore che costruisce il paese senza costruire se stesso.",
+      "date": "13 aprile 2026",
+      "tag": "Mercato · Architettura"
+    }
+  },
+  {
+    "id": "velocidad-luz",
+    "href": "columna-velocidad-luz.html",
+    "date": "2026-04-07",
+    "categories": ["geopolitica", "ia"],
+    "es": {
+      "title": "Velocidad de la luz y olor a pólvora",
+      "excerpt": "La nave ya activó los motores. Las estrellas ya son líneas. No hay manera de frenar. Pero todavía podemos decidir hacia dónde vamos.",
+      "date": "7 de abril de 2026",
+      "tag": "Geopolítica · IA"
+    },
+    "en": {
+      "title": "Speed of light and the smell of gunpowder",
+      "excerpt": "The ship has already fired its engines. The stars are already lines. There is no way to slow down. But we can still decide where we are going.",
+      "date": "April 7, 2026",
+      "tag": "Geopolitics · AI"
+    },
+    "it": {
+      "title": "Velocità della luce e odore di polvere da sparo",
+      "excerpt": "La nave ha già acceso i motori. Le stelle sono già linee. Non c'è modo di frenare. Ma possiamo ancora decidere dove andare.",
+      "date": "7 aprile 2026",
+      "tag": "Geopolitica · IA"
+    }
+  },
+  {
+    "id": "conciencia-ia",
+    "href": "columna-conciencia-ia.html",
+    "date": "2026-03-07",
+    "categories": ["ia"],
+    "es": {
+      "title": "Diálogo sobre conciencia, inteligencia artificial y humanidad",
+      "excerpt": "Lo que hace genuina una expresión no es que venga de un lugar no condicionado — ese lugar no existe para nadie — sino que emerja de un procesamiento real, de una integración propia de lo recibido.",
+      "date": "7 de marzo de 2026",
+      "tag": "Inteligencia Artificial"
+    },
+    "en": {
+      "title": "Dialogue on consciousness, artificial intelligence and humanity",
+      "excerpt": "What makes an expression genuine is not that it comes from an unconditioned place — that place does not exist for anyone — but that it emerges from real processing, from one's own integration of what has been received.",
+      "date": "March 7, 2026",
+      "tag": "Artificial Intelligence"
+    },
+    "it": {
+      "title": "Dialogo su coscienza, intelligenza artificiale e umanità",
+      "excerpt": "Ciò che rende genuina un'espressione non è che provenga da un luogo non condizionato — quel luogo non esiste per nessuno — ma che emerga da una vera elaborazione, da una propria integrazione di ciò che è stato ricevuto.",
+      "date": "7 marzo 2026",
+      "tag": "Intelligenza Artificiale"
+    }
+  }
+]

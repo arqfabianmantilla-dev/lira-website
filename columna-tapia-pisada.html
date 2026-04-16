@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lo que Europa llama innovación · LIRA</title>
+  <meta name="description" content="La tapia pisada lleva 5.000 años regulando temperatura sin sistemas de aislamiento. En Europa pagan fortunas por imitarla. Por Fabian Mantilla — LIRA Estudio de Arquitectura." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f2ede4; --bg-nav: #ede8df; --bg-dark: #e4ddd2;
+      --ink: #141210; --ink-mid: #2e2b26; --ink-soft: #5c5850;
+      --green: #4a6b4a; --green-lt: #6a8b6a;
+      --oro: #9C8A5A; --border: #ccc6b8; --quote-bar: #a89870;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 20px; line-height: 1.88; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2.5rem; border-bottom: 1px solid var(--border); background: var(--bg-nav); position: sticky; top: 0; z-index: 10; }
+    .nav-logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--ink); }
+    .nav-logo img { width: 38px; height: 38px; object-fit: contain; }
+    .nav-logo-text strong { display: block; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; }
+    .nav-logo-text span { display: block; font-family: var(--sans); font-size: 10px; font-weight: 300; letter-spacing: 0.08em; color: var(--ink-mid); text-transform: uppercase; }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; }
+    .nav-back { text-decoration: none; color: var(--ink-mid); margin-right: 0.4rem; }
+    .nav-back:hover { color: var(--ink); }
+    .nav-lang { color: var(--ink-soft); cursor: pointer; background: none; border: none; font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; padding: 0; }
+    .nav-lang:hover { color: var(--ink); }
+    .nav-lang.active { color: var(--ink); font-weight: 500; }
+    .nav-sep { color: var(--border); }
+
+    /* HERO */
+    .hero-img { width: 100%; max-height: 480px; object-fit: cover; object-position: center 55%; display: block; filter: brightness(0.82) contrast(1.06) saturate(0.88); }
+    .hero-caption { font-family: var(--sans); font-size: 11px; color: var(--ink-soft); text-align: right; padding: 0.4rem 2.5rem 0; letter-spacing: 0.04em; }
+
+    /* ARTICLE */
+    article { max-width: 740px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    .meta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 2rem; font-family: var(--sans); font-size: 12px; letter-spacing: 0.06em; }
+    .tag { border: 1px solid var(--ink); padding: 0.2rem 0.65rem; font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+    .meta-date { color: var(--ink-mid); }
+    .meta-dot { color: var(--border); }
+    .meta-read { color: var(--ink-soft); }
+
+    h1 { font-family: var(--serif); font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 400; line-height: 1.08; margin-bottom: 0.4rem; color: var(--ink); }
+    h1 em { font-style: italic; color: var(--green); }
+    .subtitle { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.25rem); font-style: italic; font-weight: 300; color: var(--ink-mid); margin-bottom: 2.2rem; }
+    blockquote { background: #d8d0c2; border-left: 3px solid var(--quote-bar); padding: 1.4rem 1.8rem; margin: 0 0 1.8rem; font-size: clamp(1.05rem, 2.2vw, 1.3rem); font-style: italic; font-weight: 400; color: #2e2a22; line-height: 1.75; }
+    .attribution { font-family: var(--sans); font-size: 12px; color: var(--ink-soft); margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+
+    h2 { font-family: var(--serif); font-size: clamp(1.45rem, 3.5vw, 2.1rem); font-weight: 400; color: var(--ink); margin: 3.5rem 0 1.2rem; line-height: 1.18; }
+    h2 em { font-style: italic; color: var(--green); }
+    p { margin-bottom: 1.5rem; font-weight: 400; color: var(--ink); font-size: 1.05rem; }
+
+    .pull { font-family: var(--serif); font-size: clamp(1.2rem, 2.8vw, 1.5rem); font-style: italic; font-weight: 400; color: var(--ink-mid); border-left: 2px solid var(--quote-bar); padding: 0.5rem 0 0.5rem 1.4rem; margin: 2.5rem 0; line-height: 1.55; }
+    .pull.arquitecto { background: #7a8f72; color: #f0ece4; border-left: none; padding: 1.4rem 1.8rem; font-style: italic; font-size: clamp(1.15rem, 2.8vw, 1.5rem); }
+
+    .dato { background: var(--bg-dark); border-left: 3px solid var(--green); padding: 1.1rem 1.4rem; margin: 2rem 0; font-family: var(--sans); font-size: 13.5px; color: var(--ink); line-height: 1.7; font-weight: 400; }
+    .dato strong { color: var(--green); font-weight: 500; display: block; margin-bottom: 0.4rem; letter-spacing: 0.05em; text-transform: uppercase; font-size: 10.5px; }
+
+    .mid-img-wrap { margin: 3rem -2rem; }
+    .mid-img-wrap img { width: 100%; max-height: 340px; object-fit: cover; object-position: center 40%; display: block; filter: brightness(0.8) contrast(1.08) saturate(0.85); }
+    .mid-img-caption { font-family: var(--sans); font-size: 11px; color: var(--ink-soft); padding: 0.4rem 2rem 0; letter-spacing: 0.04em; text-align: right; }
+
+    .grafico-wrap { margin: 2.5rem 0; background: var(--bg-dark); padding: 1.5rem 1.5rem 1.2rem; }
+    .grafico-titulo { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 1.2rem; }
+    .grafico-fuente { font-family: var(--sans); font-size: 10.5px; color: var(--ink-soft); margin-top: 0.8rem; letter-spacing: 0.03em; }
+    svg text { font-family: 'DM Sans', system-ui, sans-serif; }
+
+    /* TIMELINE */
+    .timeline-wrap { margin: 2.5rem 0; background: var(--bg-dark); padding: 1.5rem; }
+    .timeline-titulo { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 1.4rem; }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item { display: flex; gap: 1.2rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border); }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-year { font-family: var(--sans); font-size: 11px; font-weight: 500; color: var(--green); min-width: 80px; padding-top: 2px; letter-spacing: 0.04em; }
+    .tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-top: 6px; flex-shrink: 0; }
+    .tl-text { font-family: var(--sans); font-size: 13px; color: var(--ink); line-height: 1.6; }
+    .tl-place { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+
+    .drop::first-letter { font-family: var(--serif); font-size: 5rem; font-weight: 500; float: left; line-height: 0.78; margin: 0.15rem 0.12rem 0 0; color: var(--ink); }
+
+    .article-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); font-family: var(--sans); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.03em; line-height: 1.75; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; color: var(--ink-mid); font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; margin-top: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
+    .back-link:hover { color: var(--ink); border-color: var(--ink); }
+
+    .col-cta-wrap { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 2.5rem; }
+    .col-cta-label { font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--green); margin-bottom: .6rem; font-weight: 500; display: block; }
+    .col-cta-inner { background: var(--bg-nav); border: 1px solid var(--border); padding: 2rem; text-align: center; margin-top: 0.5rem; }
+    .col-cta-title { font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 400; margin-bottom: .5rem; }
+    .col-cta-sub { font-family: var(--serif); font-size: .95rem; color: var(--ink-mid); margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+    .col-cta-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .col-cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--green); color: #f2ede4; font-family: var(--sans); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: opacity .2s; }
+    .col-cta-btn:hover { opacity: .85; }
+    .col-cta-ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+    .col-cta-ghost:hover { border-color: var(--green); color: var(--green); }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.2rem; }
+      article { padding: 2rem 1.2rem 4rem; }
+      .hero-caption { padding-right: 1.2rem; }
+      .mid-img-wrap { margin: 2.5rem -1.2rem; }
+      .tl-year { min-width: 64px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/logo-lira.png" alt="LIRA" />
+    <div class="nav-logo-text">
+      <strong>LIRA</strong>
+      <span id="nav-studio">Estudio de Arquitectura</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="/#columnas" class="nav-back" id="nav-back">← COLUMNAS</a>
+    <button class="nav-lang active" onclick="setLang('es')">ES</button>
+    <span class="nav-sep">·</span>
+    <button class="nav-lang" onclick="setLang('en')">EN</button>
+    <span class="nav-sep">·</span>
+    <button class="nav-lang" onclick="setLang('it')">IT</button>
+  </div>
+</nav>
+
+<img src="/tapia-mesa-santos.jpg" alt="Casa en tapia pisada · Mesa de los Santos, Santander" class="hero-img" onerror="this.style.display='none'" />
+<p class="hero-caption" id="img-caption">Mesa de los Santos, Santander · Colombia</p>
+
+<article>
+  <div class="meta">
+    <span class="tag" id="tag">Patrimonio · Bioclimática</span>
+    <span class="meta-date" id="meta-date">Abril de 2026</span>
+    <span class="meta-dot">·</span>
+    <span class="meta-read" id="meta-read">Lectura: ~6 min</span>
+  </div>
+
+  <h1 id="title">Lo que Europa llama <em>innovación</em></h1>
+  <p class="subtitle" id="subtitle"><strong>En Santander lo llaman patrimonio. Afuera lo descubren. Adentro aún lo subestiman.</strong></p>
+
+  <blockquote id="opening-quote">"En Italia pagan fortunas por sistemas de aislamiento térmico. La tapia pisada hace lo mismo — con tierra del mismo lote, sin cemento, sin hierro, sin factura."</blockquote>
+
+  <p class="attribution" id="attribution">Fabian Mantilla · Trentino Alto Adige, Italia · Abril 2026</p>
+
+  <!-- ── I ── -->
+  <h2 id="h2-1">I. La ferretería <em>y la paradoja</em></h2>
+
+  <p class="drop" id="p1">Hay una paradoja que vivo cada vez que entro a una ferretería aquí en el norte de Italia. Los estantes están llenos de sistemas de aislamiento térmico — lanas minerales, paneles de corcho prensado, membranas de vapor, soluciones de alta tecnología para mantener el calor adentro en invierno y afuera en verano. Todo costoso. Todo importado. Todo celebrado como innovación.</p>
+
+  <p id="p2">En Santander, mis abuelos vivían en casas de tapia pisada que hacían exactamente lo mismo. Gratis. Con tierra del mismo lote.</p>
+
+  <p class="pull" id="pull1">"Lo que hoy se vende como arquitectura sostenible de vanguardia en Europa lleva cinco mil años funcionando en todos los continentes."</p>
+
+  <!-- TIMELINE -->
+  <div class="timeline-wrap">
+    <p class="timeline-titulo" id="tl-titulo">5.000 años de tierra pisada</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-year">~3000 a.C.</span>
+        <div class="tl-dot"></div>
+        <div><div class="tl-text" id="tl1-text">Primeras construcciones documentadas con tierra compactada</div><div class="tl-place" id="tl1-place">Valle del río Amarillo · China</div></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">~221 a.C.</span>
+        <div class="tl-dot"></div>
+        <div><div class="tl-text" id="tl2-text">Gran Muralla China construida en gran parte con tapia pisada</div><div class="tl-place" id="tl2-place">China · 21.000 km de longitud</div></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">Siglo XIII</span>
+        <div class="tl-dot"></div>
+        <div><div class="tl-text" id="tl3-text">La Alhambra de Granada levantada en tapia pisada y tierra local</div><div class="tl-place" id="tl3-place">Granada · España</div></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">Siglos XVI–XIX</span>
+        <div class="tl-dot"></div>
+        <div><div class="tl-text" id="tl4-text">Arquitectura colonial en tapia pisada se extiende por toda la región andina colombiana</div><div class="tl-place" id="tl4-place">Santander · Barichara · Girón · Colombia</div></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">Hoy</span>
+        <div class="tl-dot" style="background:var(--oro);"></div>
+        <div><div class="tl-text" id="tl5-text">En Europa se paga entre 80 y 150 €/m² por sistemas de aislamiento térmico que imitan lo que la tapia hace por naturaleza</div><div class="tl-place" id="tl5-place">Italia · Alemania · Francia</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── II ── -->
+  <h2 id="h2-2">II. Cómo funciona la <em>tierra que respira</em></h2>
+
+  <p id="p3">La tapia pisada es un muro construido con tierra arcillosa húmeda compactada en capas de 10 a 15 centímetros dentro de un encofrado de madera. Sin hierro, sin cemento, sin aditivos industriales. La tierra se seca al sol. El encofrado se corre. El muro queda.</p>
+
+  <p id="p4">Su secreto bioclimático es la inercia térmica. Los muros de tapia tienen un grosor que oscila entre 50 y 90 centímetros. Esa masa absorbe el calor durante las horas de mayor temperatura y lo libera lentamente durante la noche, cuando el exterior se enfría. El resultado es un interior que permanece fresco de día y templado de noche — sin aire acondicionado, sin calefacción, sin factura eléctrica.</p>
+
+  <div class="dato">
+    <strong id="dato1-label">Dato técnico</strong>
+    <span id="dato1-text">La tapia pisada tiene baja conductividad calórica, excelente inercia térmica, aislamiento acústico superior al ladrillo y capacidad higroscópica — absorbe y libera humedad regulando el ambiente interior. En italiano: <em>inerzia termica</em>. En Barichara: "fresco".</span>
+  </div>
+
+  <!-- GRÁFICO COMPARATIVO -->
+  <div class="grafico-wrap">
+    <p class="grafico-titulo" id="g1-titulo">Costo aproximado de aislamiento térmico · comparación</p>
+    <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- Tapia pisada -->
+      <rect x="40" y="120" width="100" height="50" fill="#4a6b4a" rx="2"/>
+      <text x="90" y="114" text-anchor="middle" font-size="13" font-weight="500" fill="#1c1a16">~8 €/m²</text>
+      <text x="90" y="186" text-anchor="middle" font-size="11" fill="#46433c" id="g1-l1">Tapia pisada</text>
+      <text x="90" y="198" text-anchor="middle" font-size="10" fill="#7a7770" id="g1-l1b">Santander</text>
+      <!-- Bloque de cemento -->
+      <rect x="230" y="80" width="100" height="90" fill="#4a6b4a" rx="2" opacity="0.55"/>
+      <text x="280" y="74" text-anchor="middle" font-size="13" font-weight="500" fill="#1c1a16">~35 €/m²</text>
+      <text x="280" y="186" text-anchor="middle" font-size="11" fill="#46433c" id="g1-l2">Bloque + revoque</text>
+      <text x="280" y="198" text-anchor="middle" font-size="10" fill="#7a7770" id="g1-l2b">Colombia</text>
+      <!-- Sistema italiano -->
+      <rect x="420" y="20" width="100" height="150" fill="#4a6b4a" rx="2" opacity="0.3"/>
+      <text x="470" y="14" text-anchor="middle" font-size="13" font-weight="500" fill="#1c1a16">80–150 €/m²</text>
+      <text x="470" y="186" text-anchor="middle" font-size="11" fill="#46433c" id="g1-l3">Cappotto termico</text>
+      <text x="470" y="198" text-anchor="middle" font-size="10" fill="#7a7770" id="g1-l3b">Italia / Europa</text>
+    </svg>
+    <p class="grafico-fuente" id="g1-fuente">Estimado propio · Prezzi DEI 2024 (Italia) · valores de mercado Santander 2024. El cappotto termico es el sistema de aislamiento exterior más utilizado en Italia.</p>
+  </div>
+
+  <!-- ── III ── -->
+  <h2 id="h2-3">III. El problema <em>no fue técnico</em></h2>
+
+  <p id="p5">Investigadores de la Universidad Santo Tomás — mi universidad — estudiaron el comportamiento térmico de viviendas en tapia pisada en San Juan Girón, Santander, en un clima cálido húmedo. Los resultados confirmaron lo que los maestros de obra locales saben desde siempre: que la tierra portante responde bien al clima tropical cuando la orientación del edificio acompaña.</p>
+
+  <p id="p6">No hay problema técnico. El problema fue cultural. En algún momento del siglo XX decidimos que lo moderno era lo importado — el bloque de cemento, la losa de concreto, el aire acondicionado para compensar lo que la envolvente ya no hace. Y la tapia quedó reducida a patrimonio, a museo, a imagen pintoresca en una postal de Barichara.</p>
+
+  <p id="p6b">No es un diagnóstico nuevo. Simón Vélez lo dijo sobre la guadua hace décadas: que en Colombia la gente imaginaba que era material para pobres, mientras en Europa la exponían en ferias de arquitectura internacional. La tapia pisada vive el mismo malentendido. Lo que en Santander construyó catedrales, casas patronales y centros históricos declarados patrimonio de la humanidad, hoy se mira con vergüenza desde adentro. El problema no es el material — es el prestigio que le negamos a lo propio.</p>
+
+  <p class="pull arquitecto" id="pull2">"Desde Italia entiendo mejor esa pérdida. Aquí el patrimonio construido es industria, turismo, identidad nacional. Nadie demuele una casa del siglo XVII para poner bloque. En Santander sí."</p>
+
+  <!-- imagen intermedia -->
+  <div class="mid-img-wrap">
+    <img src="/barichara-calle.jpg" alt="Calles de Barichara · Santander" onerror="this.style.display='none'" />
+  </div>
+  <p class="mid-img-caption" id="mid-caption">Barichara, Santander · Colombia — arquitectura colonial en tapia pisada y piedra</p>
+
+  <!-- ── IV ── -->
+  <h2 id="h2-4">IV. Construir con lo que <em>el territorio ya sabe</em></h2>
+
+  <p id="p7">La arquitectura bioclimática no se inventa — se recuerda. Lo que hoy se vende en ferias de sostenibilidad europeas como innovación de vanguardia lleva siglos demostrando su eficiencia en los centros históricos de Santander. La diferencia es que allá se llama <em>cappotto termico</em> y tiene manual de instalación certificado. Acá se llamaba tapia pisada y lo sabía el maestro de obra del pueblo.</p>
+
+  <p id="p8">En LIRA trabajamos con tapia pisada no por nostalgia, sino por convicción técnica. Es el material que más sentido tiene en el territorio que conocemos — bioclimático por naturaleza, local por definición, construido con tierra del mismo lote donde va a vivir la gente. Y más honesto que cualquier solución importada que llegue en pallet desde Europa.</p>
+
+  <div class="dato">
+    <strong id="dato2-label">En LIRA</strong>
+    <span id="dato2-text">El proyecto Casa Campestre Mesa de los Santos (2023) fue construido en tapia pisada en el municipio de Mesa de los Santos, Santander. El proceso, los materiales y el resultado están documentados en video en nuestro portafolio.</span>
+  </div>
+
+  <p id="p9">La próxima vez que alguien en Europa le diga que la arquitectura sostenible es cara, cuéntele que en Santander hay casas de 300 años en pie — construidas con tierra, sin hierro, sin cemento — que mantienen una temperatura interior de 22°C en uno de los climas más exigentes del trópico andino.</p>
+
+  <p id="p10">Eso no es patrimonio. Es ingeniería.</p>
+
+  <!-- FOOTER -->
+  <div class="article-footer">
+    <p id="footer-text">Columna publicada en abril de 2026 · Fabian Mantilla · LIRA Estudio de Arquitectura · Trentino Alto Adige, Italia<br><span style="opacity:0.65;">Referencias: Universidad Santo Tomás · Terram Colombia · Ecointeligencia · Wikipedia ES · Prezzi DEI 2024</span></p>
+    <a href="/#columnas" class="back-link" id="back-link">← Volver a columnas</a>
+  </div>
+
+  <!-- CTA -->
+  <div class="col-cta-wrap">
+    <span class="col-cta-label" id="cta-label">¿Tienes un proyecto en mente?</span>
+    <div class="col-cta-inner">
+      <h3 class="col-cta-title" id="cta-title">Hablemos antes de que empiece la obra</h3>
+      <p class="col-cta-sub" id="cta-sub">Acompañamos proyectos de arquitectura bioclimática, interiorismo y patrimonio en Colombia e Italia.</p>
+      <div class="col-cta-btns">
+        <a href="/#contacto" class="col-cta-btn" id="cta-btn1">Escribirnos</a>
+        <a href="https://wa.me/393200805705" class="col-cta-btn col-cta-ghost" id="cta-btn2" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<script>
+const T = {
+  es: {
+    navStudio:'Estudio de Arquitectura', navBack:'← COLUMNAS',
+    imgCaption:'Mesa de los Santos, Santander · Colombia',
+    midCaption:'Barichara, Santander · Colombia — arquitectura colonial en tapia pisada y piedra',
+    tag:'Patrimonio · Bioclimática', metaDate:'Abril de 2026', metaRead:'Lectura: ~6 min',
+    title:'Lo que Europa llama <em>innovación</em>',
+    subtitle:'<strong>En Santander lo llaman patrimonio. Afuera lo descubren. Adentro aún lo subestiman.</strong>',
+    openingQuote:'"En Italia pagan fortunas por sistemas de aislamiento térmico. La tapia pisada hace lo mismo — con tierra del mismo lote, sin cemento, sin hierro, sin factura."',
+    attribution:'Fabian Mantilla · Trentino Alto Adige, Italia · Abril 2026',
+    tlTitulo:'5.000 años de tierra pisada',
+    tl1:'Primeras construcciones documentadas con tierra compactada', tl1p:'Valle del río Amarillo · China',
+    tl2:'Gran Muralla China construida en gran parte con tapia pisada', tl2p:'China · 21.000 km de longitud',
+    tl3:'La Alhambra de Granada levantada en tapia pisada y tierra local', tl3p:'Granada · España',
+    tl4:'Arquitectura colonial en tapia pisada se extiende por toda la región andina colombiana', tl4p:'Santander · Barichara · Girón · Colombia',
+    tl5:'En Europa se paga entre 80 y 150 €/m² por sistemas de aislamiento térmico que imitan lo que la tapia hace por naturaleza', tl5p:'Italia · Alemania · Francia',
+    g1:'Costo aproximado de aislamiento térmico · comparación',
+    g1l1:'Tapia pisada', g1l1b:'Santander',
+    g1l2:'Bloque + revoque', g1l2b:'Colombia',
+    g1l3:'Cappotto termico', g1l3b:'Italia / Europa',
+    g1f:'Estimado propio · Prezzi DEI 2024 (Italia) · valores de mercado Santander 2024. El cappotto termico es el sistema de aislamiento exterior más utilizado en Italia.',
+    pull1:'"Lo que hoy se vende como arquitectura sostenible de vanguardia en Europa lleva cinco mil años funcionando en todos los continentes."',
+    dato1Label:'Dato técnico',
+    dato1:'La tapia pisada tiene baja conductividad calórica, excelente inercia térmica, aislamiento acústico superior al ladrillo y capacidad higroscópica — absorbe y libera humedad regulando el ambiente interior. En italiano: <em>inerzia termica</em>. En Barichara: "fresco".',
+    pull2:'"Desde Italia entiendo mejor esa pérdida. Aquí el patrimonio construido es industria, turismo, identidad nacional. Nadie demuele una casa del siglo XVII para poner bloque. En Santander sí."',
+    p6b:'No es un diagnóstico nuevo. Simón Vélez lo dijo sobre la guadua hace décadas: que en Colombia la gente imaginaba que era material para pobres, mientras en Europa la exponían en ferias de arquitectura internacional. La tapia pisada vive el mismo malentendido. Lo que en Santander construyó catedrales, casas patronales y centros históricos declarados patrimonio de la humanidad, hoy se mira con vergüenza desde adentro. El problema no es el material — es el prestigio que le negamos a lo propio.',
+    dato2Label:'En LIRA',
+    dato2:'El proyecto Casa Campestre Mesa de los Santos (2023) fue construido en tapia pisada en el municipio de Mesa de los Santos, Santander. El proceso, los materiales y el resultado están documentados en video en nuestro portafolio.',
+    footer:'Columna publicada en abril de 2026 · Fabian Mantilla · LIRA Estudio de Arquitectura · Trentino Alto Adige, Italia',
+    backLink:'← Volver a columnas',
+    ctaLabel:'¿Tienes un proyecto en mente?',
+    ctaTitle:'Hablemos antes de que empiece la obra',
+    ctaSub:'Acompañamos proyectos de arquitectura bioclimática, interiorismo y patrimonio en Colombia e Italia.',
+    ctaBtn1:'Escribirnos', ctaBtn2:'WhatsApp',
+    h21:'I. La ferretería <em>y la paradoja</em>',
+    h22:'II. Cómo funciona la <em>tierra que respira</em>',
+    h23:'III. El problema <em>no fue técnico</em>',
+    h24:'IV. Construir con lo que <em>el territorio ya sabe</em>',
+  },
+  en: {
+    navStudio:'Architecture Studio', navBack:'← COLUMNS',
+    imgCaption:'Mesa de los Santos, Santander · Colombia',
+    midCaption:'Barichara, Santander · Colombia — colonial architecture in rammed earth and stone',
+    tag:'Heritage · Bioclimatic', metaDate:'April 2026', metaRead:'Read: ~6 min',
+    title:'What Europe calls <em>innovation</em>',
+    subtitle:'<strong>In Santander they call it heritage. Abroad they discover it. At home they still underestimate it.</strong>',
+    openingQuote:'"In Italy, fortunes are paid for thermal insulation systems. Rammed earth does the same — with soil from the same plot, no cement, no steel, no invoice."',
+    attribution:'Fabian Mantilla · Trentino Alto Adige, Italy · April 2026',
+    tlTitulo:'5,000 years of rammed earth',
+    tl1:'First documented constructions with compacted earth', tl1p:'Yellow River Valley · China',
+    tl2:'The Great Wall of China built largely with rammed earth', tl2p:'China · 21,000 km in length',
+    tl3:'The Alhambra of Granada raised in rammed earth and local soil', tl3p:'Granada · Spain',
+    tl4:'Colonial rammed earth architecture spreads across the Colombian Andean region', tl4p:'Santander · Barichara · Girón · Colombia',
+    tl5:'In Europe, 80–150 €/m² is paid for thermal insulation systems that mimic what rammed earth does naturally', tl5p:'Italy · Germany · France',
+    g1:'Approximate thermal insulation cost · comparison',
+    g1l1:'Rammed earth', g1l1b:'Santander',
+    g1l2:'Block + plaster', g1l2b:'Colombia',
+    g1l3:'Cappotto termico', g1l3b:'Italy / Europe',
+    g1f:'Own estimates · Prezzi DEI 2024 (Italy) · Santander market values 2024. Cappotto termico is the most widely used external insulation system in Italy.',
+    pull1:'"What is sold today as cutting-edge sustainable architecture in Europe has been working on every continent for five thousand years."',
+    dato1Label:'Technical note',
+    dato1:'Rammed earth has low thermal conductivity, excellent thermal mass, acoustic insulation superior to brick, and hygroscopic capacity — absorbing and releasing moisture to regulate the interior environment. In Italian: <em>inerzia termica</em>. In Barichara: simply "cool".',
+    pull2:'"From Italy I understand that loss better. Here the built heritage is an industry, a tourism draw, a national identity. Nobody demolishes a 17th-century house to put in blocks. In Santander, they do."',
+    p6b:'This is not a new diagnosis. Simón Vélez said it about guadua bamboo decades ago: that in Colombia people imagined it was a material for the poor, while in Europe it was exhibited at international architecture fairs. Rammed earth lives the same misunderstanding. What built cathedrals, manor houses and historic centres declared world heritage in Santander is today looked upon with embarrassment from within. The problem is not the material — it is the prestige we deny to what is our own.',
+    dato2Label:'At LIRA',
+    dato2:'The Casa Campestre Mesa de los Santos project (2023) was built in rammed earth in the municipality of Mesa de los Santos, Santander. The process, materials and result are documented in video in our portfolio.',
+    footer:'Column published April 2026 · Fabian Mantilla · LIRA Architecture Studio · Trentino Alto Adige, Italy',
+    backLink:'← Back to columns',
+    ctaLabel:'Do you have a project in mind?',
+    ctaTitle:'Let\'s talk before construction begins',
+    ctaSub:'We accompany bioclimatic architecture, interior design and heritage projects in Colombia and Italy.',
+    ctaBtn1:'Contact us', ctaBtn2:'WhatsApp',
+    h21:'I. The hardware store <em>and the paradox</em>',
+    h22:'II. How <em>breathing earth</em> works',
+    h23:'III. The problem <em>was not technical</em>',
+    h24:'IV. Building with what <em>the land already knows</em>',
+  },
+  it: {
+    navStudio:'Studio di Architettura', navBack:'← COLONNE',
+    imgCaption:'Mesa de los Santos, Santander · Colombia',
+    midCaption:'Barichara, Santander · Colombia — architettura coloniale in terra battuta e pietra',
+    tag:'Patrimonio · Bioclimatica', metaDate:'Aprile 2026', metaRead:'Lettura: ~6 min',
+    title:'Quello che l\'Europa chiama <em>innovazione</em>',
+    subtitle:'<strong>A Santander lo chiamano patrimonio. All\'estero lo scoprono. In patria lo sottovalutano ancora.</strong>',
+    openingQuote:'"In Italia si pagano fortune per sistemi di isolamento termico. La tapia pisada fa lo stesso — con la terra dello stesso terreno, senza cemento, senza ferro, senza fattura."',
+    attribution:'Fabian Mantilla · Trentino Alto Adige, Italia · Aprile 2026',
+    tlTitulo:'5.000 anni di terra battuta',
+    tl1:'Prime costruzioni documentate con terra compattata', tl1p:'Valle del Fiume Giallo · Cina',
+    tl2:'La Grande Muraglia Cinese costruita in gran parte con terra battuta', tl2p:'Cina · 21.000 km di lunghezza',
+    tl3:'L\'Alhambra di Granada eretta in terra battuta e terra locale', tl3p:'Granada · Spagna',
+    tl4:'L\'architettura coloniale in terra battuta si diffonde in tutta la regione andina colombiana', tl4p:'Santander · Barichara · Girón · Colombia',
+    tl5:'In Europa si pagano tra 80 e 150 €/m² per sistemi di isolamento termico che imitano ciò che la tapia fa per natura', tl5p:'Italia · Germania · Francia',
+    g1:'Costo approssimativo dell\'isolamento termico · confronto',
+    g1l1:'Tapia pisada', g1l1b:'Santander',
+    g1l2:'Blocco + intonaco', g1l2b:'Colombia',
+    g1l3:'Cappotto termico', g1l3b:'Italia / Europa',
+    g1f:'Stime proprie · Prezzi DEI 2024 (Italia) · valori di mercato Santander 2024. Il cappotto termico è il sistema di isolamento a cappotto più utilizzato in Italia.',
+    pull1:'"Quello che oggi viene venduto come architettura sostenibile d\'avanguardia in Europa funziona su tutti i continenti da cinquemila anni."',
+    dato1Label:'Nota tecnica',
+    dato1:'La tapia pisada ha bassa conducibilità termica, eccellente inerzia termica, isolamento acustico superiore al laterizio e capacità igroscopica — assorbe e rilascia umidità regolando l\'ambiente interno. In italiano: <em>inerzia termica</em>. A Barichara: semplicemente "fresco".',
+    pull2:'"Dall\'Italia capisco meglio quella perdita. Qui il patrimonio costruito è industria, turismo, identità nazionale. Nessuno demolisce una casa del XVII secolo per metterci dei blocchi. A Santander sì."',
+    p6b:'Non è una diagnosi nuova. Simón Vélez lo disse sul bambù guadua decenni fa: che in Colombia la gente immaginava fosse un materiale per i poveri, mentre in Europa lo esponevano nelle fiere di architettura internazionale. La tapia pisada vive lo stesso malinteso. Ciò che a Santander ha costruito cattedrali, case padronali e centri storici dichiarati patrimonio dell\'umanità, oggi viene guardato con vergogna dall\'interno. Il problema non è il materiale — è il prestigio che neghiamo a ciò che è nostro.',
+    dato2Label:'In LIRA',
+    dato2:'Il progetto Casa Campestre Mesa de los Santos (2023) è stato costruito in terra battuta nel comune di Mesa de los Santos, Santander. Il processo, i materiali e il risultato sono documentati in video nel nostro portfolio.',
+    footer:'Colonna pubblicata ad aprile 2026 · Fabian Mantilla · LIRA Studio di Architettura · Trentino Alto Adige, Italia',
+    backLink:'← Torna alle colonne',
+    ctaLabel:'Hai un progetto in mente?',
+    ctaTitle:'Parliamone prima che inizino i lavori',
+    ctaSub:'Seguiamo progetti di architettura bioclimatica, interior design e patrimonio in Colombia e Italia.',
+    ctaBtn1:'Scrivici', ctaBtn2:'WhatsApp',
+    h21:'I. Il negozio di ferramenta <em>e il paradosso</em>',
+    h22:'II. Come funziona la <em>terra che respira</em>',
+    h23:'III. Il problema <em>non era tecnico</em>',
+    h24:'IV. Costruire con quello che <em>il territorio già sa</em>',
+  }
+};
+
+function setLang(l) {
+  const t = T[l];
+  document.documentElement.lang = l;
+  document.querySelectorAll('.nav-lang').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.getElementById('nav-studio').textContent   = t.navStudio;
+  document.getElementById('nav-back').textContent     = t.navBack;
+  document.getElementById('img-caption').textContent  = t.imgCaption;
+  document.getElementById('mid-caption').textContent  = t.midCaption;
+  document.getElementById('tag').textContent          = t.tag;
+  document.getElementById('meta-date').textContent    = t.metaDate;
+  document.getElementById('meta-read').textContent    = t.metaRead;
+  document.getElementById('title').innerHTML          = t.title;
+  document.getElementById('subtitle').innerHTML     = t.subtitle;
+  document.getElementById('opening-quote').textContent = t.openingQuote;
+  document.getElementById('attribution').textContent  = t.attribution;
+  document.getElementById('tl-titulo').textContent    = t.tlTitulo;
+  document.getElementById('tl1-text').textContent     = t.tl1;
+  document.getElementById('tl1-place').textContent    = t.tl1p;
+  document.getElementById('tl2-text').textContent     = t.tl2;
+  document.getElementById('tl2-place').textContent    = t.tl2p;
+  document.getElementById('tl3-text').textContent     = t.tl3;
+  document.getElementById('tl3-place').textContent    = t.tl3p;
+  document.getElementById('tl4-text').textContent     = t.tl4;
+  document.getElementById('tl4-place').textContent    = t.tl4p;
+  document.getElementById('tl5-text').textContent     = t.tl5;
+  document.getElementById('tl5-place').textContent    = t.tl5p;
+  document.getElementById('g1-titulo').textContent    = t.g1;
+  document.getElementById('g1-l1').textContent        = t.g1l1;
+  document.getElementById('g1-l1b').textContent       = t.g1l1b;
+  document.getElementById('g1-l2').textContent        = t.g1l2;
+  document.getElementById('g1-l2b').textContent       = t.g1l2b;
+  document.getElementById('g1-l3').textContent        = t.g1l3;
+  document.getElementById('g1-l3b').textContent       = t.g1l3b;
+  document.getElementById('g1-fuente').textContent    = t.g1f;
+  document.getElementById('pull1').textContent        = t.pull1;
+  document.getElementById('dato1-label').textContent  = t.dato1Label;
+  document.getElementById('dato1-text').innerHTML     = t.dato1;
+  document.getElementById('pull2').textContent        = t.pull2;
+  document.getElementById('p6b').textContent          = t.p6b;
+  document.getElementById('mid-caption').textContent  = t.midCaption;
+  document.getElementById('dato2-label').textContent  = t.dato2Label;
+  document.getElementById('dato2-text').textContent   = t.dato2;
+  document.getElementById('footer-text').innerHTML    = t.footer + '<br><span style="opacity:0.65;">Referencias: Universidad Santo Tomás · Terram Colombia · Ecointeligencia · Wikipedia ES · Prezzi DEI 2024</span>';
+  document.getElementById('back-link').textContent    = t.backLink;
+  document.getElementById('cta-label').textContent   = t.ctaLabel;
+  document.getElementById('cta-title').textContent   = t.ctaTitle;
+  document.getElementById('cta-sub').textContent     = t.ctaSub;
+  document.getElementById('cta-btn1').textContent    = t.ctaBtn1;
+  document.getElementById('cta-btn2').textContent    = t.ctaBtn2;
+  document.getElementById('h2-1').innerHTML          = t.h21;
+  document.getElementById('h2-2').innerHTML          = t.h22;
+  document.getElementById('h2-3').innerHTML          = t.h23;
+  document.getElementById('h2-4').innerHTML          = t.h24;
+  localStorage.setItem('lira-lang', l);
+}
+
+setLang(localStorage.getItem('lira-lang') || 'es');
+</script>
+</body>
+</html>

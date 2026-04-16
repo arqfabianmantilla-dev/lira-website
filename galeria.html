@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galería completa · LIRA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --tapia:#EDE6D8; --eucalipto:#5A7355; --tinta:#1C1814; --tinta-soft:#3a3228; --oro:#9C8A5A; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--tapia); color: var(--tinta); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: var(--tapia); border-bottom: 1px solid rgba(28,24,20,.12); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--tinta); }
+    .nav-logo img { height: 38px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; letter-spacing: .14em; }
+    .nav-logo-sub { font-size: 9.5px; font-weight: 300; letter-spacing: .22em; text-transform: uppercase; opacity: .65; margin-top: 3px; }
+    .nav-right { display: flex; align-items: center; gap: 28px; }
+    .nav-back { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--eucalipto); text-decoration: none; transition: opacity .2s; }
+    .nav-back:hover { opacity: .65; }
+    .lang-switcher { display: flex; gap: 4px; }
+    .lang-btn { background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .12em; color: var(--tinta); opacity: .38; padding: 4px 6px; transition: opacity .2s; }
+    .lang-btn:hover { opacity: .7; }
+    .lang-btn.active { opacity: 1; color: var(--eucalipto); }
+
+    /* PAGE HEADER */
+    .page-header { padding: 110px 48px 48px; }
+    .page-tag { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--eucalipto); margin-bottom: 12px; display: flex; align-items: center; gap: 14px; }
+    .page-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--eucalipto); }
+    .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 300; line-height: 1.1; }
+    .page-title em { font-style: italic; color: var(--eucalipto); }
+
+    /* FILTER BAR */
+    .filter-bar { padding: 0 48px 32px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .filter-btn { background: none; border: 1px solid rgba(28,24,20,.2); cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--tinta-soft); padding: 7px 16px; transition: all .2s; }
+    .filter-btn:hover { border-color: var(--eucalipto); color: var(--eucalipto); }
+    .filter-btn.active { background: var(--eucalipto); border-color: var(--eucalipto); color: var(--tapia); }
+
+    /* GALLERY GRID */
+    .gallery-wrap { padding: 0 48px 100px; }
+    .project-block { margin-bottom: 64px; }
+    .project-block.hidden { display: none; }
+    .project-label { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .project-label-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; }
+    .project-label-name em { font-style: italic; color: var(--eucalipto); }
+    .project-label-line { flex: 1; height: 1px; background: rgba(28,24,20,.1); }
+    .project-label-link { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--eucalipto); text-decoration: none; opacity: .7; white-space: nowrap; }
+    .project-label-link:hover { opacity: 1; }
+
+    .img-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+    .img-item { overflow: hidden; cursor: pointer; aspect-ratio: 4/3; background: rgba(28,24,20,.06); position: relative; }
+    .img-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; display: block; }
+    .img-item:hover img { transform: scale(1.05); }
+
+    /* broken image indicator */
+    .img-item img[data-error="true"] { display: none; }
+    .img-item.broken { background: rgba(28,24,20,.06); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
+    .img-item.broken::after { content: attr(data-name); font-size: 9px; letter-spacing: .1em; opacity: .35; text-align: center; padding: 4px; word-break: break-all; }
+    .img-item.broken::before { content: '⚠'; font-size: 18px; opacity: .25; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(28,24,20,.96); align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { position: relative; max-width: 92vw; max-height: 90vh; }
+    .lightbox-inner img { max-width: 92vw; max-height: 86vh; object-fit: contain; display: block; }
+    .lightbox-close { position: absolute; top: -36px; right: 0; background: none; border: none; cursor: pointer; color: var(--tapia); font-size: 22px; opacity: .7; font-family: 'DM Sans', sans-serif; }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--tapia); font-size: 36px; opacity: .6; padding: 12px; transition: opacity .2s; line-height: 1; }
+    .lightbox-nav:hover { opacity: 1; }
+    .lightbox-nav.prev { right: calc(100% + 4px); }
+    .lightbox-nav.next { left: calc(100% + 4px); }
+    .lightbox-info { position: absolute; bottom: -32px; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; }
+    .lightbox-proj { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--tapia); opacity: .5; }
+    .lightbox-counter { font-size: 11px; letter-spacing: .14em; color: var(--tapia); opacity: .45; }
+
+    /* PROJECT NAV */
+    .proj-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 48px 40px; flex-wrap: wrap; gap: 12px; }
+    .proj-nav-btn { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--tinta); border: 1px solid rgba(28,24,20,.15); padding: 14px 20px; transition: border-color .2s, color .2s; max-width: 320px; }
+    .proj-nav-btn:hover { border-color: var(--eucalipto); color: var(--eucalipto); }
+    .proj-nav-btn.prev { flex-direction: row; }
+    .proj-nav-btn.next { flex-direction: row-reverse; text-align: right; }
+    .proj-nav-arrow { font-size: 20px; opacity: .5; flex-shrink: 0; }
+    .proj-nav-label { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; opacity: .45; display: block; margin-bottom: 4px; }
+    .proj-nav-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; line-height: 1.2; }
+
+    footer { border-top: 1px solid rgba(28,24,20,.12); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; opacity: .5; }
+    .footer-logo img { height: 28px; }
+    .footer-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: .14em; }
+    .footer-copy { font-size: 11px; opacity: .4; }
+    .footer-link { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--eucalipto); text-decoration: none; opacity: .7; }
+    .footer-link:hover { opacity: 1; }
+
+    @media (max-width: 768px) {
+      nav, .page-header, .filter-bar, .gallery-wrap, .proj-nav { padding-left: 20px; padding-right: 20px; }
+      footer { padding: 32px 20px; }
+      .img-grid { grid-template-columns: repeat(2, 1fr); }
+      .lightbox-nav.prev { right: auto; left: 4px; }
+      .lightbox-nav.next { left: auto; right: 4px; }
+    }
+    @media (max-width: 480px) {
+      .img-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLB()">✕ cerrar</button>
+    <button class="lightbox-nav prev" onclick="navLB(-1)">‹</button>
+    <img id="lb-img" src="" alt=""/>
+    <button class="lightbox-nav next" onclick="navLB(1)">›</button>
+    <div class="lightbox-info">
+      <span class="lightbox-proj" id="lb-proj"></span>
+      <span class="lightbox-counter" id="lb-count"></span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo-lira.png" alt="LIRA"/>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">LIRA</span>
+      <span class="nav-logo-sub" id="nav-sub">Estudio de Arquitectura</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html#portafolio" class="nav-back" id="nav-back">← Portafolio</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn"        onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        onclick="setLang('it')">IT</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header class="page-header">
+  <p class="page-tag" id="page-tag">Todo el trabajo</p>
+  <h1 class="page-title" id="page-title">Galería <em>completa</em></h1>
+</header>
+
+<!-- FILTERS -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filter('all')" id="f-all">Todos</button>
+  <button class="filter-btn" onclick="filter('interiorismo')" id="f-int">Interiorismo</button>
+  <button class="filter-btn" onclick="filter('arquitectura')" id="f-arq">Arquitectura</button>
+  <button class="filter-btn" onclick="filter('comercial')" id="f-com">Comercial</button>
+  <button class="filter-btn" onclick="filter('academico')" id="f-acad">Académico</button>
+  <button class="filter-btn" onclick="filter('patrimonio')" id="f-pat">Patrimonio</button>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-wrap">
+
+  <!-- LA RONDA -->
+  <div class="project-block" data-cat="interiorismo" id="block-ronda">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-ronda"><em>La Ronda</em> · Floridablanca 2023</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-la-ronda.html" class="project-label-link" id="link-ronda">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-ronda"></div>
+  </div>
+
+  <!-- TERRARIUM -->
+  <div class="project-block" data-cat="interiorismo" id="block-terr">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-terr">Apartamento <em>Terrarium</em> · Floridablanca 2021</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-terrarium.html" class="project-label-link" id="link-terr">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-terr"></div>
+  </div>
+
+  <!-- ABADÍAS -->
+  <div class="project-block" data-cat="interiorismo" id="block-abadias">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-abadias">Apartamento <em>Abadías</em> · Floridablanca 2021</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-abadias.html" class="project-label-link" id="link-abadias">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-abadias"></div>
+  </div>
+
+  <!-- ÍNDIGO & GALENO -->
+  <div class="project-block" data-cat="interiorismo" id="block-ig">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-ig"><em>Índigo & Galeno</em> · Bucaramanga 2020</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-indigo-galeno.html" class="project-label-link" id="link-ig">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-ig"></div>
+  </div>
+
+  <!-- CELOSÍA -->
+  <div class="project-block" data-cat="interiorismo" id="block-cel">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-cel">Apartamento <em>Celosía</em> · Bucaramanga 2018</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-celosia.html" class="project-label-link" id="link-cel">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-cel"></div>
+  </div>
+
+  <!-- CONSULTORIO -->
+  <div class="project-block" data-cat="interiorismo" id="block-cons">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-cons"><em>Consultorio Odontológico</em> · España 2023</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-consultorio.html" class="project-label-link" id="link-cons">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-cons"></div>
+  </div>
+
+  <!-- CASA CAMPESTRE MESA -->
+  <div class="project-block" data-cat="arquitectura" id="block-mesa">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-mesa">Casa Campestre <em>Mesa de los Santos</em> · 2023</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-casa-campestre.html" class="project-label-link" id="link-mesa">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-mesa">
+      <div class="img-item" data-name="video youtube" style="display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;opacity:.4;">Video en YouTube</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASA 2016 -->
+  <div class="project-block" data-cat="arquitectura" id="block-2016">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-2016">Casa Campestre <em>Santander</em> · 2016</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-casa-campestre-2016.html" class="project-label-link" id="link-2016">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-2016"></div>
+  </div>
+
+  <!-- TESIS GERIÁTRICO -->
+  <div class="project-block" data-cat="academico" id="block-ger">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-ger">Centro Geriátrico <em>Campestre</em> · Tesis 2018</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-tesis-geriatrico.html" class="project-label-link" id="link-ger">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-ger"></div>
+  </div>
+
+  <!-- PROYECTOS ARQUITECTURA -->
+  <div class="project-block" data-cat="academico" id="block-arq">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-arq">Proyectos de <em>Arquitectura</em> · Santander</span>
+      <div class="project-label-line"></div>
+      <a href="proyectos-arquitectura.html" class="project-label-link" id="link-arq">Ver proyectos →</a>
+    </div>
+    <div class="img-grid" id="grid-arq"></div>
+  </div>
+
+  <!-- PATRIMONIO -->
+  <div class="project-block" data-cat="patrimonio" id="block-pat">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-pat">Patrimonio <em>&amp; Territorio</em> · Santander</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-patrimonio-territorio.html" class="project-label-link" id="link-pat">Ver proyectos →</a>
+    </div>
+    <div class="img-grid" id="grid-pat"></div>
+  </div>
+
+  <!-- PLAZA PIJAO -->
+  <div class="project-block" data-cat="comercial" id="block-pijao">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-pijao">Plaza <em>Pijao</em> · Natagaima 2020</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-plaza-pijao.html" class="project-label-link" id="link-pijao">Ver proyecto →</a>
+    </div>
+    <div class="img-grid" id="grid-pijao"></div>
+  </div>
+
+  <!-- COMERCIAL EDUCATIVO -->
+  <div class="project-block" data-cat="comercial" id="block-come">
+    <div class="project-label">
+      <span class="project-label-name" id="lbl-come">Comercial <em>&amp; Educativo</em> · Colombia</span>
+      <div class="project-label-line"></div>
+      <a href="proyecto-comercial-educativo.html" class="project-label-link" id="link-come">Ver proyectos →</a>
+    </div>
+    <div class="img-grid" id="grid-come"></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="logo-lira.png" alt="LIRA"/>
+    <span class="footer-logo-name">LIRA</span>
+  </div>
+  <span class="footer-copy" id="f-copy">© 2024 LIRA Estudio de Arquitectura</span>
+  <a href="index.html#portafolio" class="footer-link" id="f-back">← Portafolio</a>
+</footer>
+
+<script>
+// ── IMAGEN DATA ──
+const projects = {
+  ronda:   { label:'La Ronda', imgs:['1.png','2.png','3.png','4.png','5.png','6.png','7.png','8.png','9.png','10.png','11.png','12.png','13.png'] },
+  terr:    { label:'Terrarium', imgs:['01_PLANTA_3D.jpg','808.jpg','644.jpg','1_SALA_A_OK.jpg','1_SALA_B_OK.jpg','3_SALA_COMEDOR_A.jpg','3_SALA_COMEDOR_B.jpg','4_HAB_A.jpg','4_HAB_B.jpg','5_HAB_A.jpg','5_HAB_B.jpg','6_HAB_A.jpg','6_HAB_B.jpg','7_A.jpg','7.jpg','8_A.jpg','8_B.jpg','9_A.jpg','9_B.jpg','terrarium-10.jpg'] },
+  abadias: { label:'Abadías', imgs:['CF_MURO_TV_2_.jpg','01.jpg','02.jpg','03.jpg','04.jpg','05.jpg','06.jpg','07.jpg','08.jpg','10.jpg','14.jpg','15.jpg','16.jpg','18.jpg','19.jpg','20.jpg','centrado.jpg','CF_MURO_TV_1.jpg','CF_MURO_TV_1_2.jpg','CF_MURO_TV_2.jpg'] },
+  ig:      { label:'Índigo & Galeno', imgs:['2_COMEDOR_1B.jpg','3_SALA_2.jpg','Enscape_2021-02-26-18-36-24.jpg','Enscape_2021-02-26-18-37-24.jpg','Enscape_2021-02-26-18-38-24.jpg','3__2_.jpg','1__3_.jpg'] },
+  cel:     { label:'Celosía', imgs:['CAMARA_1.png','CAMARA_2.png','CAMARA_3.png'] },
+  cons:    { label:'Consultorio Odontológico', imgs:['cons-01.jpg','cons-02.jpg','cons-03.jpg','cons-04.jpg','cons-05.jpg','cons-06.jpg','cons-07.jpg','cons-08.jpg','cons-09.jpg','cons-10.jpg'] },
+  2016:    { label:'Casa Campestre 2016', imgs:['01_PRIMER_PROYECTO_CONSTRUIDO_AÑO_2016.jpg','1.jpg','2.jpg'] },
+  ger:     { label:'Centro Geriátrico', imgs:['PORTADA_pro.jpg','LATERAL_pro.jpg','PLANO_1_PLANTA_URBANA_OK_pro.jpg'] },
+  arq:     { label:'Proyectos Arquitectura', imgs:['C1_PRE.jpg','C4_3.jpg','4_FULL.jpg','CASA_12-3.jpg'] },
+  pat:     { label:'Patrimonio & Territorio', imgs:['RENDER_MAQUETA_B.jpg','FINCA_EL_LLANITO.jpg'] },
+  pijao:   { label:'Plaza Pijao', imgs:['C5.jpg','C3.jpg','C7.jpg','C1.jpg'] },
+  come:    { label:'Comercial & Educativo', imgs:['CALIDO.jpg','PLANTA_ARQ_POST.jpg','PLANTA_B.jpg'] },
+};
+
+// Flat list for lightbox
+let allImgs = [];
+let lbIdx = 0;
+
+// Build grids
+Object.entries(projects).forEach(([key, data]) => {
+  const grid = document.getElementById('grid-' + key);
+  if (!grid) return;
+  data.imgs.forEach((src, i) => {
+    const start = allImgs.length;
+    allImgs.push({ src, label: data.label });
+    const div = document.createElement('div');
+    div.className = 'img-item';
+    div.dataset.name = src;
+    div.dataset.idx = start;
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = data.label + ' · ' + src;
+    img.addEventListener('error', () => {
+      div.classList.add('broken');
+    });
+    img.addEventListener('click', () => openLB(start));
+    div.appendChild(img);
+    grid.appendChild(div);
+  });
+});
+
+// ── LIGHTBOX ──
+function openLB(i) {
+  lbIdx = i;
+  document.getElementById('lb-img').src = allImgs[i].src;
+  document.getElementById('lb-proj').textContent = allImgs[i].label;
+  document.getElementById('lb-count').textContent = (i+1) + ' / ' + allImgs.length;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLB() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function navLB(dir) {
+  lbIdx = (lbIdx + dir + allImgs.length) % allImgs.length;
+  document.getElementById('lb-img').src = allImgs[lbIdx].src;
+  document.getElementById('lb-proj').textContent = allImgs[lbIdx].label;
+  document.getElementById('lb-count').textContent = (lbIdx+1) + ' / ' + allImgs.length;
+}
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLB(); });
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') navLB(1);
+  if (e.key === 'ArrowLeft')  navLB(-1);
+  if (e.key === 'Escape') closeLB();
+});
+
+// ── FILTER ──
+function filter(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[onclick="filter('${cat}')"]`).classList.add('active');
+  document.querySelectorAll('.project-block').forEach(b => {
+    if (cat === 'all' || b.dataset.cat === cat) b.classList.remove('hidden');
+    else b.classList.add('hidden');
+  });
+}
+
+// ── LANG ──
+const T = {
+  es: { navSub:'Estudio de Arquitectura', navBack:'← Portafolio', pageTag:'Todo el trabajo', pageTitle:'Galería <em>completa</em>', fAll:'Todos', fInt:'Interiorismo', fArq:'Arquitectura', fCom:'Comercial', fAcad:'Académico', fPat:'Patrimonio', fCopy:'© 2024 LIRA Estudio de Arquitectura', fBack:'← Portafolio', verProy:'Ver proyecto →', verProys:'Ver proyectos →' },
+  en: { navSub:'Architecture Studio', navBack:'← Portfolio', pageTag:'All work', pageTitle:'Complete <em>gallery</em>', fAll:'All', fInt:'Interiors', fArq:'Architecture', fCom:'Commercial', fAcad:'Academic', fPat:'Heritage', fCopy:'© 2024 LIRA Architecture Studio', fBack:'← Portfolio', verProy:'View project →', verProys:'View projects →' },
+  it: { navSub:'Studio di Architettura', navBack:'← Portfolio', pageTag:'Tutto il lavoro', pageTitle:'Galleria <em>completa</em>', fAll:'Tutti', fInt:'Interior Design', fArq:'Architettura', fCom:'Commerciale', fAcad:'Accademico', fPat:'Patrimonio', fCopy:'© 2024 LIRA Studio di Architettura', fBack:'← Portfolio', verProy:'Vedi progetto →', verProys:'Vedi progetti →' }
+};
+
+function setLang(l) {
+  const t = T[l];
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.getElementById('nav-sub').textContent = t.navSub;
+  document.getElementById('nav-back').textContent = t.navBack;
+  document.getElementById('page-tag').textContent = t.pageTag;
+  document.getElementById('page-title').innerHTML = t.pageTitle;
+  document.getElementById('f-all').textContent  = t.fAll;
+  document.getElementById('f-int').textContent  = t.fInt;
+  document.getElementById('f-arq').textContent  = t.fArq;
+  document.getElementById('f-com').textContent  = t.fCom;
+  document.getElementById('f-acad').textContent = t.fAcad;
+  document.getElementById('f-pat').textContent  = t.fPat;
+  document.getElementById('f-copy').textContent = t.fCopy;
+  document.getElementById('f-back').textContent = t.fBack;
+  localStorage.setItem('lira-lang', l);
+}
+setLang(localStorage.getItem('lira-lang') || 'es');
+</script>
+</body>
+</html>

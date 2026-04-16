@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="page-title">Columnas · LIRA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --tapia:#EDE6D8; --eucalipto:#5A7355; --tinta:#1C1814; --tinta-soft:#3a3228; --oro:#9C8A5A; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--tapia); color: var(--tinta); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: var(--tapia); border-bottom: 1px solid rgba(28,24,20,.12); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--tinta); }
+    .nav-logo img { height: 38px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; letter-spacing: .14em; }
+    .nav-logo-sub  { font-size: 9.5px; font-weight: 300; letter-spacing: .22em; text-transform: uppercase; opacity: .65; margin-top: 3px; }
+    .nav-right { display: flex; align-items: center; gap: 28px; }
+    .nav-back { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--eucalipto); text-decoration: none; transition: opacity .2s; }
+    .nav-back:hover { opacity: .65; }
+    .lang-switcher { display: flex; gap: 4px; align-items: center; }
+    .lang-btn { background: none; border: 1px solid rgba(28,24,20,.2); border-radius: 20px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .1em; color: var(--tinta); opacity: .65; padding: 5px 11px; transition: all .2s; }
+    .lang-btn:hover { opacity: 1; border-color: rgba(28,24,20,.45); }
+    .lang-btn.active { opacity: 1; color: #fff; background: var(--eucalipto); border-color: var(--eucalipto); }
+    .lang-switcher-mobile { display: none; gap: 4px; align-items: center; }
+    @media(max-width:768px) { .lang-switcher { display:none; } .lang-switcher-mobile { display:flex; } .lang-switcher-mobile .lang-btn { font-size:10px; padding:4px 9px; } }
+
+    /* ── HERO ── */
+    .archive-hero { padding: 120px 48px 48px; border-bottom: 1px solid rgba(28,24,20,.1); }
+    .archive-tag { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--eucalipto); font-weight: 400; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
+    .archive-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--eucalipto); }
+    .archive-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 60px); font-weight: 300; line-height: 1.1; }
+    .archive-title em { font-style: italic; color: var(--eucalipto); }
+    .archive-count { font-size: 12px; opacity: .45; margin-top: 12px; letter-spacing: .06em; }
+
+    /* ── SEARCH + FILTERS ── */
+    .archive-controls { padding: 36px 48px 0; display: flex; flex-direction: column; gap: 20px; }
+    .search-wrap { position: relative; max-width: 520px; }
+    .search-input { width: 100%; background: none; border: none; border-bottom: 1px solid rgba(28,24,20,.25); padding: 10px 36px 10px 0; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--tinta); outline: none; transition: border-color .2s; }
+    .search-input::placeholder { opacity: .35; }
+    .search-input:focus { border-color: var(--eucalipto); }
+    .search-icon { position: absolute; right: 0; top: 50%; transform: translateY(-50%); opacity: .35; font-size: 15px; pointer-events: none; }
+    .search-clear { position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 16px; opacity: .4; display: none; color: var(--tinta); padding: 4px; }
+    .search-clear.visible { display: block; }
+    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .filter-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; opacity: .4; margin-right: 4px; }
+    .filter-btn { background: none; border: 1px solid rgba(28,24,20,.18); border-radius: 20px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: var(--tinta); opacity: .6; padding: 5px 14px; transition: all .2s; }
+    .filter-btn:hover { opacity: 1; }
+    .filter-btn.active { opacity: 1; color: var(--eucalipto); border-color: var(--eucalipto); background: rgba(90,115,85,.08); }
+
+    /* ── RESULTS ── */
+    .archive-results { padding: 16px 48px 8px; }
+    .results-info { font-size: 11px; opacity: .38; letter-spacing: .08em; min-height: 24px; }
+    .no-results { padding: 80px 48px; text-align: center; }
+    .no-results-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; opacity: .4; margin-bottom: 8px; }
+    .no-results-sub { font-size: 13px; opacity: .3; }
+
+    /* ── CARDS GRID ── */
+    .archive-grid { padding: 24px 48px 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .col-card { display: flex; flex-direction: column; padding: 32px; border: 1px solid rgba(28,24,20,.08); text-decoration: none; color: var(--tinta); transition: border-color .25s, background .25s; background: transparent; }
+    .col-card:hover { border-color: rgba(90,115,85,.4); background: rgba(90,115,85,.04); }
+    .col-card-tag { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--eucalipto); opacity: .75; margin-bottom: 14px; font-weight: 500; }
+    .col-card-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; line-height: 1.25; margin-bottom: 16px; flex-grow: 1; }
+    .col-card-title em { font-style: italic; color: var(--eucalipto); }
+    .col-card-excerpt { font-size: 13px; line-height: 1.65; opacity: .6; margin-bottom: 24px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .col-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(28,24,20,.08); }
+    .col-card-date { font-size: 11px; opacity: .38; letter-spacing: .06em; }
+    .col-card-read { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--eucalipto); opacity: .7; }
+    .col-card-cats { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+    .col-cat-pill { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; background: rgba(90,115,85,.1); color: var(--eucalipto); border-radius: 20px; padding: 3px 9px; font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid rgba(28,24,20,.12); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; opacity: .5; }
+    .footer-logo img { height: 28px; }
+    .footer-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: .14em; }
+    .footer-copy { font-size: 11px; opacity: .4; }
+    .footer-link { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--eucalipto); text-decoration: none; opacity: .7; }
+    .footer-link:hover { opacity: 1; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .archive-hero { padding: 100px 20px 36px; }
+      .archive-controls { padding: 24px 20px 0; }
+      .archive-results { padding: 12px 20px 4px; }
+      .archive-grid { padding: 16px 20px 60px; grid-template-columns: 1fr; gap: 2px; }
+      .no-results { padding: 60px 20px; }
+      footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+    @media (min-width: 769px) and (max-width: 1100px) {
+      .archive-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo-lira.png" alt="LIRA"/>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">LIRA</span>
+      <span class="nav-logo-sub" id="nav-sub">Estudio de Arquitectura</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html#columnas" class="nav-back" id="nav-back">← Inicio</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn"        onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        onclick="setLang('it')">IT</button>
+    </div>
+    <div class="lang-switcher-mobile">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn"        onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        onclick="setLang('it')">IT</button>
+    </div>
+  </div>
+</nav>
+
+<div class="archive-hero">
+  <p class="archive-tag" id="hero-tag">Opinión y pensamiento</p>
+  <h1 class="archive-title" id="hero-title">Todas las <em>columnas</em></h1>
+  <p class="archive-count" id="hero-count"></p>
+</div>
+
+<div class="archive-controls">
+  <div class="search-wrap">
+    <input class="search-input" id="search-input" type="text" placeholder="Buscar por título o tema…" autocomplete="off"/>
+    <span class="search-icon">⌕</span>
+    <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label" id="filter-label">Filtrar</span>
+    <button class="filter-btn active" data-cat="all" onclick="setFilter('all')" id="cat-all">Todas</button>
+    <button class="filter-btn" data-cat="ia"          onclick="setFilter('ia')"          id="cat-ia">IA</button>
+    <button class="filter-btn" data-cat="geopolitica" onclick="setFilter('geopolitica')" id="cat-geo">Geopolítica</button>
+    <button class="filter-btn" data-cat="arquitectura" onclick="setFilter('arquitectura')" id="cat-arq">Arquitectura</button>
+    <button class="filter-btn" data-cat="mercado"     onclick="setFilter('mercado')"     id="cat-mer">Mercado</button>
+  </div>
+</div>
+
+<div class="archive-results">
+  <p class="results-info" id="results-info"></p>
+</div>
+
+<div class="archive-grid" id="archive-grid"></div>
+
+<div class="no-results" id="no-results" style="display:none;">
+  <p class="no-results-title" id="nr-title">Sin resultados</p>
+  <p class="no-results-sub" id="nr-sub">Intenta con otra palabra o categoría</p>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <img src="logo-lira.png" alt="LIRA"/>
+    <span class="footer-logo-name">LIRA</span>
+  </div>
+  <span class="footer-copy" id="f-copy">© 2026 LIRA Estudio de Arquitectura · Santander & Italia</span>
+  <a href="index.html" class="footer-link" id="f-home">Inicio</a>
+</footer>
+
+<script>
+// ── TRANSLATIONS ─────────────────────────────────────────────────────────────
+const UI = {
+  es: {
+    navSub:'Estudio de Arquitectura', navBack:'← Inicio',
+    heroTag:'Opinión y pensamiento', heroTitle:'Todas las <em>columnas</em>',
+    heroCount: n => `${n} columna${n!==1?'s':''}`,
+    searchPlaceholder:'Buscar por título o tema…',
+    filterLabel:'Filtrar', catAll:'Todas', catIa:'IA',
+    catGeo:'Geopolítica', catArq:'Arquitectura', catMer:'Mercado',
+    read:'Leer columna →',
+    resultsAll: n => `${n} columna${n!==1?'s':''}`,
+    resultsFiltered: (n,q) => `${n} resultado${n!==1?'s':''} para "${q}"`,
+    resultsNone:'Sin resultados', resultsNoneSub:'Intenta con otra palabra o categoría',
+    fCopy:'© 2026 LIRA Estudio de Arquitectura · Santander & Italia', fHome:'Inicio',
+    pageTitle:'Columnas · LIRA'
+  },
+  en: {
+    navSub:'Architecture Studio', navBack:'← Home',
+    heroTag:'Opinion & thought', heroTitle:'All <em>columns</em>',
+    heroCount: n => `${n} column${n!==1?'s':''}`,
+    searchPlaceholder:'Search by title or topic…',
+    filterLabel:'Filter', catAll:'All', catIa:'AI',
+    catGeo:'Geopolitics', catArq:'Architecture', catMer:'Market',
+    read:'Read column →',
+    resultsAll: n => `${n} column${n!==1?'s':''}`,
+    resultsFiltered: (n,q) => `${n} result${n!==1?'s':''} for "${q}"`,
+    resultsNone:'No results', resultsNoneSub:'Try a different word or category',
+    fCopy:'© 2026 LIRA Architecture Studio · Santander & Italy', fHome:'Home',
+    pageTitle:'Columns · LIRA'
+  },
+  it: {
+    navSub:'Studio di Architettura', navBack:'← Inizio',
+    heroTag:'Opinione e pensiero', heroTitle:'Tutte le <em>colonne</em>',
+    heroCount: n => `${n} colonna${n!==1?'e':''}`,
+    searchPlaceholder:'Cerca per titolo o tema…',
+    filterLabel:'Filtra', catAll:'Tutte', catIa:'IA',
+    catGeo:'Geopolitica', catArq:'Architettura', catMer:'Mercato',
+    read:'Leggi la colonna →',
+    resultsAll: n => `${n} colonna${n!==1?'e':''}`,
+    resultsFiltered: (n,q) => `${n} risultat${n!==1?'i':'o'} per "${q}"`,
+    resultsNone:'Nessun risultato', resultsNoneSub:'Prova un\'altra parola o categoria',
+    fCopy:'© 2026 LIRA Studio di Architettura · Santander & Italia', fHome:'Home',
+    pageTitle:'Colonne · LIRA'
+  }
+};
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let allColumns = [];
+let currentLang = localStorage.getItem('lira-lang') || 'es';
+let currentCat  = 'all';
+let currentQ    = '';
+
+// ── FETCH DATA ────────────────────────────────────────────────────────────────
+fetch('columnas.json')
+  .then(r => r.json())
+  .then(data => {
+    allColumns = data;
+    applyLang(currentLang);
+    render();
+  });
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function render() {
+  const ui   = UI[currentLang];
+  const q    = currentQ.toLowerCase().trim();
+  const grid = document.getElementById('archive-grid');
+
+  const filtered = allColumns.filter(col => {
+    const t = col[currentLang];
+    const matchCat = currentCat === 'all' || col.categories.includes(currentCat);
+    const matchQ   = !q ||
+      t.title.toLowerCase().includes(q) ||
+      t.excerpt.toLowerCase().includes(q) ||
+      t.tag.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+
+  // Update count
+  document.getElementById('hero-count').textContent = ui.heroCount(allColumns.length);
+
+  // Update results info
+  const info = document.getElementById('results-info');
+  info.textContent = q
+    ? ui.resultsFiltered(filtered.length, currentQ)
+    : ui.resultsAll(filtered.length);
+
+  // Show/hide no-results
+  const noRes = document.getElementById('no-results');
+  grid.style.display = filtered.length ? 'grid' : 'none';
+  noRes.style.display = filtered.length ? 'none' : 'block';
+
+  // Build cards
+  grid.innerHTML = filtered.map(col => {
+    const t = col[currentLang];
+    const catPills = col.categories.map(c => {
+      const labels = { ia: {es:'IA',en:'AI',it:'IA'}, geopolitica:{es:'Geopolítica',en:'Geopolitics',it:'Geopolitica'}, arquitectura:{es:'Arquitectura',en:'Architecture',it:'Architettura'}, mercado:{es:'Mercado',en:'Market',it:'Mercato'} };
+      return `<span class="col-cat-pill">${(labels[c]||{})[currentLang]||c}</span>`;
+    }).join('');
+
+    // Highlight search match in title
+    let titleHtml = t.title;
+    if (q) {
+      const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+      titleHtml = t.title.replace(re, '<mark style="background:rgba(90,115,85,.2);color:var(--eucalipto);">$1</mark>');
+    }
+
+    return `<a href="${col.href}" class="col-card">
+      <p class="col-card-tag">${t.tag}</p>
+      <div class="col-card-cats">${catPills}</div>
+      <h3 class="col-card-title">${titleHtml}</h3>
+      <p class="col-card-excerpt">${t.excerpt}</p>
+      <div class="col-card-footer">
+        <span class="col-card-date">${t.date}</span>
+        <span class="col-card-read">${ui.read}</span>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+// ── SEARCH ────────────────────────────────────────────────────────────────────
+document.getElementById('search-input').addEventListener('input', function() {
+  currentQ = this.value;
+  document.getElementById('search-clear').classList.toggle('visible', currentQ.length > 0);
+  document.getElementById('search-icon') && null;
+  render();
+});
+
+function clearSearch() {
+  currentQ = '';
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-clear').classList.remove('visible');
+  render();
+}
+
+// ── FILTER ────────────────────────────────────────────────────────────────────
+function setFilter(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.filter-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.cat === cat)
+  );
+  render();
+}
+
+// ── LANGUAGE ─────────────────────────────────────────────────────────────────
+function applyLang(l) {
+  currentLang = l;
+  localStorage.setItem('lira-lang', l);
+  const ui = UI[l];
+  document.querySelectorAll('.lang-btn').forEach(b =>
+    b.classList.toggle('active', b.textContent === l.toUpperCase())
+  );
+  document.getElementById('nav-sub').textContent     = ui.navSub;
+  document.getElementById('nav-back').textContent    = ui.navBack;
+  document.getElementById('hero-tag').textContent    = ui.heroTag;
+  document.getElementById('hero-title').innerHTML    = ui.heroTitle;
+  document.getElementById('search-input').placeholder = ui.searchPlaceholder;
+  document.getElementById('filter-label').textContent = ui.filterLabel;
+  document.getElementById('cat-all').textContent    = ui.catAll;
+  document.getElementById('cat-ia').textContent     = ui.catIa;
+  document.getElementById('cat-geo').textContent    = ui.catGeo;
+  document.getElementById('cat-arq').textContent    = ui.catArq;
+  document.getElementById('cat-mer').textContent    = ui.catMer;
+  document.getElementById('nr-title').textContent   = ui.resultsNone;
+  document.getElementById('nr-sub').textContent     = ui.resultsNoneSub;
+  document.getElementById('f-copy').textContent     = ui.fCopy;
+  document.getElementById('f-home').textContent     = ui.fHome;
+  document.title = ui.pageTitle;
+  render();
+}
+
+function setLang(l) { applyLang(l); }
+</script>
+</body>
+</html>

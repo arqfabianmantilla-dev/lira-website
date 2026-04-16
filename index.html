@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LIRA · Estudio de Arquitectura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T1XER0P44J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-T1XER0P44J');
+  </script>
+  <style>
+    :root {
+      --tapia:     #EDE6D8;
+      --eucalipto: #5A7355;
+      --tinta:     #1C1814;
+      --tinta-soft:#3a3228;
+      --oro:       #9C8A5A;
+      --oro-light: #C8B580;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--tapia); color: var(--tinta); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 108px;
+      background: var(--tapia);
+      border-bottom: 1px solid rgba(28,24,20,.12);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--tinta); }
+    .nav-logo img { height: 96px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; letter-spacing: .14em; }
+    .nav-logo-sub  { font-size: 9.5px; font-weight: 300; letter-spacing: .22em; text-transform: uppercase; opacity: .65; margin-top: 3px; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-link { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--tinta); opacity: .55; transition: opacity .2s; font-weight: 400; }
+    .nav-link:hover { opacity: 1; }
+    .lang-switcher { display: flex; gap: 4px; margin-left: 20px; align-items: center; }
+    .lang-btn { background: none; border: 1px solid rgba(28,24,20,.2); border-radius: 20px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .1em; color: var(--tinta); opacity: .65; padding: 5px 11px; transition: all .2s; }
+    .lang-btn:hover { opacity: 1; border-color: rgba(28,24,20,.45); }
+    .lang-btn.active { opacity: 1; color: #fff; background: var(--eucalipto); border-color: var(--eucalipto); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 48px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 48px; pointer-events: none;
+    }
+    .hero-bg img { height: 75vh; opacity: .28; }
+    .hero-content { position: relative; max-width: 760px; }
+    .hero-overline { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--eucalipto); margin-bottom: 24px; display: flex; align-items: center; gap: 14px; }
+    .hero-overline::before { content: ''; display: block; width: 32px; height: 1px; background: var(--eucalipto); }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 8vw, 96px); font-weight: 300; line-height: 1.02; color: var(--tinta); }
+    .hero-title em { font-style: italic; color: var(--eucalipto); }
+    .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(17px, 2vw, 22px); font-weight: 300; line-height: 1.7; color: var(--tinta-soft); margin-top: 28px; max-width: 560px; }
+    .hero-cta { display: flex; gap: 20px; margin-top: 48px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 13px 28px; background: var(--eucalipto); color: var(--tapia); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: opacity .2s; }
+    .btn-primary:hover { opacity: .85; }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; border: 1px solid rgba(28,24,20,.25); color: var(--tinta); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; font-weight: 400; transition: border-color .2s, color .2s; }
+    .btn-ghost:hover { border-color: var(--eucalipto); color: var(--eucalipto); }
+    .hero-scroll { position: absolute; bottom: 40px; left: 48px; display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; opacity: .35; }
+    .hero-scroll::before { content: ''; display: block; width: 1px; height: 40px; background: var(--tinta); }
+
+    /* ── SECTION HEADER ── */
+    .section-header { padding: 100px 48px 48px; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+    .section-tag { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--eucalipto); margin-bottom: 12px; display: flex; align-items: center; gap: 14px; }
+    .section-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--eucalipto); }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 56px); font-weight: 300; line-height: 1.1; }
+    .section-title em { font-style: italic; color: var(--eucalipto); }
+    .section-count { font-size: 11px; letter-spacing: .12em; opacity: .4; text-align: right; }
+
+    /* ── CATEGORY LABEL ── */
+    .category-row { padding: 0 48px; margin-bottom: 16px; margin-top: 48px; display: flex; align-items: center; gap: 16px; }
+    .category-row:first-of-type { margin-top: 0; }
+    .category-label { font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--oro); font-weight: 400; }
+    .category-line { flex: 1; height: 1px; background: rgba(28,24,20,.1); }
+
+    /* ── PORTFOLIO GRID ── */
+    .portfolio-grid { padding: 0 48px 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .portfolio-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+    .portfolio-grid.four-col { grid-template-columns: repeat(4, 1fr); }
+
+    .proj-card { display: block; text-decoration: none; color: var(--tinta); position: relative; overflow: hidden; background: rgba(28,24,20,.04); }
+    .proj-card:hover .proj-card-img img { transform: scale(1.06); }
+    .proj-card:hover .proj-card-overlay { opacity: 1; }
+    .proj-card:hover .proj-card-arrow { transform: translate(3px, -3px); }
+
+    .proj-card-img { aspect-ratio: 4/3; overflow: hidden; position: relative; background: rgba(28,24,20,.08); }
+    .proj-card-img.wide { aspect-ratio: 16/7; }
+    .proj-card-img.tall { aspect-ratio: 3/4; }
+    .proj-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; display: block; }
+    .proj-card-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .proj-card-img-placeholder span { font-family: 'Cormorant Garamond', serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; opacity: .25; font-style: italic; }
+
+    .proj-card-overlay { position: absolute; inset: 0; background: rgba(28,24,20,.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s; }
+    .proj-card-overlay-text { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--tapia); }
+
+    .proj-card-info { padding: 18px 20px 20px; }
+    .proj-card-cat { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--eucalipto); margin-bottom: 6px; opacity: .8; }
+    .proj-card-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 400; line-height: 1.2; margin-bottom: 4px; }
+    .proj-card-meta { font-size: 11.5px; opacity: .45; font-weight: 300; }
+    .proj-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+    .proj-card-year { font-size: 10px; letter-spacing: .16em; opacity: .35; }
+    .proj-card-arrow { font-size: 14px; color: var(--eucalipto); opacity: .6; transition: transform .25s; }
+
+    /* Built badge */
+    .proj-card-badge { position: absolute; top: 12px; left: 12px; z-index: 2; background: var(--eucalipto); color: var(--tapia); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; padding: 4px 10px; }
+    .proj-card-badge.gold { background: var(--oro); }
+
+    /* Span cards */
+    .proj-card.span-2 { grid-column: span 2; }
+    .proj-card.span-2 .proj-card-img { aspect-ratio: 16/7; }
+
+    /* ── COLUMNAS ── */
+    .columnas-grid { padding: 0 48px 100px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .col-card { display: block; text-decoration: none; color: var(--tinta); border: 1px solid rgba(28,24,20,.1); padding: 36px 36px 28px; transition: border-color .2s, background .2s; }
+    .col-card:hover { border-color: var(--eucalipto); background: rgba(90,115,85,.04); }
+    .col-card-tag { font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--eucalipto); margin-bottom: 16px; }
+    .col-card-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; line-height: 1.25; margin-bottom: 14px; }
+    .col-card-title em { font-style: italic; color: var(--eucalipto); }
+    .col-card-excerpt { font-size: 13.5px; line-height: 1.75; font-weight: 300; color: var(--tinta-soft); opacity: .8; }
+    .col-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(28,24,20,.1); }
+    .col-card-date { font-size: 11px; opacity: .4; letter-spacing: .08em; }
+    .col-card-read { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--eucalipto); opacity: .7; }
+
+    /* ── ABOUT ── */
+    .about-section { padding: 80px 48px 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; border-top: 1px solid rgba(28,24,20,.1); }
+    .about-logo-wrap { display: flex; justify-content: center; }
+    .about-logo { width: 140px; opacity: .7; }
+    .about-tag { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--eucalipto); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+    .about-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--eucalipto); }
+    .about-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.1; margin-bottom: 24px; }
+    .about-title em { font-style: italic; color: var(--eucalipto); }
+    .about-text { font-size: 14.5px; line-height: 1.85; font-weight: 300; color: var(--tinta-soft); }
+    .about-text p + p { margin-top: 16px; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+    .about-tag-item { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; border: 1px solid rgba(28,24,20,.18); padding: 5px 12px; color: var(--tinta-soft); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid rgba(28,24,20,.12); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; opacity: .5; }
+    .footer-logo img { height: 28px; }
+    .footer-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: .14em; }
+    .footer-copy { font-size: 11px; opacity: .4; letter-spacing: .06em; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-link { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--eucalipto); text-decoration: none; opacity: .7; }
+    .footer-link:hover { opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .portfolio-grid.four-col { grid-template-columns: repeat(2, 1fr); }
+      .proj-card.span-2 { grid-column: span 1; }
+      .proj-card.span-2 .proj-card-img { aspect-ratio: 4/3; }
+    }
+    /* ── MENÚ MÓVIL ── */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--tinta); transition: all .25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-mobile-menu { display: none; position: fixed; top: 108px; left: 0; right: 0; background: var(--tapia); border-bottom: 1px solid rgba(28,24,20,.12); padding: 24px 20px; z-index: 99; flex-direction: column; gap: 0; }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-link { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--tinta); opacity: .6; padding: 14px 0; border-bottom: 1px solid rgba(28,24,20,.08); font-weight: 400; transition: opacity .2s; }
+    .nav-mobile-link:hover { opacity: 1; }
+    .nav-mobile-lang { display: none; }
+    .lang-switcher-mobile { display: none; gap: 4px; align-items: center; }
+    @media(max-width:768px){
+      .lang-switcher { display: none; }
+      .lang-switcher-mobile { display: flex; }
+      .lang-switcher-mobile .lang-btn { font-size: 10px; padding: 4px 9px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      nav { height: 80px; }
+      .nav-logo img { height: 68px; }
+      .nav-mobile-menu { top: 80px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 0 20px; }
+      .hero-bg { display: none; }
+      .section-header, .category-row { padding-left: 20px; padding-right: 20px; }
+      .portfolio-grid, .columnas-grid { padding-left: 20px; padding-right: 20px; grid-template-columns: 1fr; }
+      .about-section { padding: 60px 20px; grid-template-columns: 1fr; gap: 40px; }
+      .about-logo-wrap { display: none; }
+      footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+      .hero-scroll { display: none; }
+    }
+    /* ── CONTACTO ── */
+    .ct-direct-card { background:rgba(28,24,20,.04); padding:24px 32px; display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--tinta); border-bottom:2px solid transparent; transition:border-color .2s,background .2s; min-width:260px; }
+    .ct-direct-card:hover { border-bottom-color:var(--eucalipto); background:rgba(28,24,20,.02); }
+    .ct-direct-card.ct-wa:hover { border-bottom-color:#25D366; }
+    .ct-ico { width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; background:rgba(28,24,20,.07); }
+    .ct-ico-wa { background:rgba(37,211,102,.12); }
+    .ct-ico-em { background:rgba(156,138,90,.12); }
+    .ct-lbl { font-size:9px; letter-spacing:.16em; text-transform:uppercase; opacity:.45; display:block; margin-bottom:3px; text-align:left; }
+    .ct-val { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:400; display:block; line-height:1.2; text-align:left; }
+    .ct-val-sm { font-size:11.5px; font-weight:300; opacity:.5; display:block; text-align:left; }
+    .ct-red-block { background:rgba(28,24,20,.04); padding:20px 24px; border-bottom:2px solid transparent; transition:border-color .2s,background .2s; }
+    .ct-red-block:hover { border-bottom-color:var(--eucalipto); background:rgba(28,24,20,.02); }
+    .ct-red-title { font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--eucalipto); margin-bottom:14px; }
+    .ct-red-link { display:flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; color:var(--tinta); padding:7px 0; border-bottom:1px solid rgba(28,24,20,.06); transition:opacity .2s; }
+    .ct-red-link:last-child { border-bottom:none; }
+    .ct-red-link:hover { opacity:.6; }
+    .ct-red-ico { width:30px; height:30px; border-radius:50%; background:rgba(28,24,20,.07); display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+    .ct-red-ico-be { background:rgba(19,119,217,.1); }
+    .ct-red-ico-li { background:rgba(10,102,194,.1); color:#0a66c2; font-size:11px; font-weight:700; }
+    .ct-red-ico-tw { background:rgba(0,0,0,.07); font-size:11px; font-weight:700; }
+    .ct-red-ico-yt { background:rgba(255,0,0,.08); }
+    .ct-red-name { font-size:12.5px; font-weight:400; }
+    .ct-red-sub { font-size:10.5px; opacity:.45; display:block; }
+    @media(max-width:768px) { .ct-direct-card { min-width:100%; } #contacto { padding:60px 20px; } }
+
+    .srv-card { background: rgba(28,24,20,.04); padding: 28px 24px; border-left: 2px solid transparent; transition: border-left-color .2s, background .2s; }
+    .srv-card:hover { border-left-color: var(--eucalipto); background: rgba(28,24,20,.02); }
+    .srv-icon { font-size: 20px; margin-bottom: 14px; opacity: .5; }
+    .srv-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--tinta); margin-bottom: 8px; line-height: 1.2; }
+    .srv-desc { font-size: 12.5px; font-weight: 300; color: var(--tinta-soft); line-height: 1.65; }
+    .srv-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .srv-tag-item { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--eucalipto); border: 1px solid rgba(90,115,85,.3); padding: 3px 9px; }
+    .srv-tag-item.gold { color: var(--oro); border-color: rgba(156,138,90,.35); }
+    .srv-collab { background: rgba(28,24,20,.04); padding: 36px; border-left: 3px solid var(--oro); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; transition: background .2s; }
+    .srv-collab:hover { background: rgba(28,24,20,.02); }
+    .srv-collab-badge { font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--oro); margin-bottom: 10px; }
+    .srv-collab-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--tinta); line-height: 1.2; margin-bottom: 10px; }
+    .srv-collab-title em { font-style: italic; color: var(--oro); }
+    .srv-collab-desc { font-size: 13px; font-weight: 300; color: var(--tinta-soft); line-height: 1.7; }
+    .srv-collab-list { display: flex; flex-direction: column; gap: 10px; }
+    .srv-collab-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; font-weight: 300; color: var(--tinta-soft); line-height: 1.5; }
+    .srv-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--oro); margin-top: 7px; flex-shrink: 0; }
+    @media (max-width: 768px) {
+      #servicios [style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; padding-left: 20px !important; padding-right: 20px !important; }
+      .srv-collab { grid-template-columns: 1fr !important; padding: 24px 20px; }
+      #servicios .section-header, #servicios [style*="padding:0 48px; margin-bottom:2px"], #servicios [style*="padding:16px"] { padding-left: 20px !important; padding-right: 20px !important; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo-lira.png" alt="LIRA"/>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">LIRA</span>
+      <span class="nav-logo-sub" id="nav-studio">Estudio de Arquitectura</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#portafolio" class="nav-link" id="nav-portfolio">Portafolio</a>
+    <a href="galeria.html" class="nav-link" id="nav-gallery">Galería</a>
+    <a href="#servicios" class="nav-link" id="nav-srv">Servicios</a>
+    <a href="#contacto" class="nav-link" id="nav-ct">Contacto</a>
+    <a href="#columnas" class="nav-link" id="nav-cols">Columnas</a>
+    <a href="#sobre" class="nav-link" id="nav-about">Sobre LIRA</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn"        onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        onclick="setLang('it')">IT</button>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="lang-switcher-mobile">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn"        onclick="setLang('en')">EN</button>
+    <button class="lang-btn"        onclick="setLang('it')">IT</button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="#portafolio" class="nav-mobile-link" id="m-portfolio" onclick="toggleMenu()">Portafolio</a>
+  <a href="galeria.html" class="nav-mobile-link" id="m-gallery" onclick="toggleMenu()">Galería</a>
+  <a href="#servicios" class="nav-mobile-link" id="m-srv" onclick="toggleMenu()">Servicios</a>
+  <a href="#contacto" class="nav-mobile-link" id="m-ct" onclick="toggleMenu()">Contacto</a>
+  <a href="#columnas" class="nav-mobile-link" id="m-cols" onclick="toggleMenu()">Columnas</a>
+  <a href="#sobre" class="nav-mobile-link" id="m-about" onclick="toggleMenu()">Sobre LIRA</a>
+  <div class="nav-mobile-lang">
+    <button class="lang-btn active" onclick="setLang('es');toggleMenu()">ES</button>
+    <button class="lang-btn"        onclick="setLang('en');toggleMenu()">EN</button>
+    <button class="lang-btn"        onclick="setLang('it');toggleMenu()">IT</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"><img src="logo-lira.png" alt=""/></div>
+  <div class="hero-content">
+    <p class="hero-overline" id="h-overline">Arquitectura · Interiorismo · Patrimonio</p>
+    <h1 class="hero-title" id="h-title">Diseño que<br>nace del <em>lugar</em></h1>
+    <p class="hero-subtitle" id="h-subtitle">Estudio de arquitectura bioclimática e interiorismo con raíces en el Santander colombiano y formación en diseño italiano. Fundado en 2021, basado en Italia.</p>
+    <div class="hero-cta">
+      <a href="#portafolio" class="btn-primary" id="h-cta1">Ver portafolio</a>
+      <a href="#sobre" class="btn-ghost" id="h-cta2">Sobre el estudio</a>
+    </div>
+  </div>
+  <div class="hero-scroll" id="h-scroll">Scroll</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PORTAFOLIO
+══════════════════════════════════════ -->
+<section id="portafolio">
+  <div class="section-header">
+    <div>
+      <p class="section-tag" id="s-tag-port">Trabajo seleccionado</p>
+      <h2 class="section-title" id="s-title-port">Portafolio</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;">
+      <p class="section-count" id="s-count-port">15 proyectos<br>2016 — 2024</p>
+      <a href="galeria.html" id="gallery-btn" style="font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--eucalipto);text-decoration:none;border:1px solid var(--eucalipto);padding:7px 16px;opacity:.75;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.75">Ver galería completa →</a>
+    </div>
+  </div>
+
+  <!-- ══ NIVEL 1: PROYECTOS DESTACADOS ══ -->
+  <div class="category-row">
+    <span class="category-label" id="cat-dest">Proyectos destacados</span>
+    <div class="category-line"></div>
+  </div>
+
+  <!-- Fila 1: La Ronda (ancho) + Terrarium -->
+  <div class="portfolio-grid">
+    <a href="proyecto-la-ronda.html" class="proj-card span-2">
+      <div class="proj-card-img wide">
+        <img src="6.png" alt="La Ronda"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-ronda">Ver proyecto</span></div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-ronda">Diseño de interiores · Floridablanca</p>
+        <p class="proj-card-name">La Ronda</p>
+        <p class="proj-card-meta" id="meta-ronda">Interiorismo italiano · 13 renders</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2023</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+    <a href="proyecto-terrarium.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="3_SALA_COMEDOR_A.jpg" alt="Terrarium"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-terr">Ver proyecto</span></div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-terr">Diseño de interiores · Floridablanca</p>
+        <p class="proj-card-name">Terrarium</p>
+        <p class="proj-card-meta" id="meta-terr">Galería por espacios · 20 renders</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2021</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Fila 2: Plaza Pijao (ancho) + Centro Geriátrico -->
+  <div class="portfolio-grid" style="padding-top:2px;">
+    <a href="proyecto-plaza-pijao.html" class="proj-card span-2">
+      <div class="proj-card-img wide">
+        <img src="C5.jpg" alt="Plaza Pijao"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-pijao">Ver proyecto</span></div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-pijao">Arquitectura comercial · Natagaima · Tolima</p>
+        <p class="proj-card-name" id="name-pijao">Plaza Pijao</p>
+        <p class="proj-card-meta" id="meta-pijao">Plaza de mercado · Cubierta radial · 4 renders</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2020</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+    <a href="proyecto-tesis-geriatrico.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="PORTADA_pro.jpg" alt="Centro Geriátrico Campestre"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-ger">Ver proyecto</span></div>
+        <div class="proj-card-badge gold" id="badge-ger">★ Tesis de grado</div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-ger">Arquitectura · Mesa de los Santos</p>
+        <p class="proj-card-name" id="name-ger">Centro Geriátrico Campestre</p>
+        <p class="proj-card-meta" id="meta-ger">Universidad Santo Tomás · 2018</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2018</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Fila 3: Casa Campestre 2016 ancho completo -->
+  <div class="portfolio-grid" style="padding-top:2px;">
+    <a href="proyecto-casa-campestre-2016.html" class="proj-card span-2">
+      <div class="proj-card-img wide">
+        <img src="01_PRIMER_PROYECTO_CONSTRUIDO_AÑO_2016.jpg" alt="Casa Campestre 2016"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-2016">Ver proyecto</span></div>
+        <div class="proj-card-badge" id="badge-2016">✦ Construido</div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-2016">Arquitectura · Santander</p>
+        <p class="proj-card-name" id="name-2016">Casa Campestre Santander</p>
+        <p class="proj-card-meta" id="meta-2016">Primer proyecto construido · 3 renders</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2016</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══ NIVEL 2: PORTAFOLIO COMPLETO ══ -->
+  <div class="category-row" style="margin-top:56px;">
+    <span class="category-label" id="cat-int">Interiorismo</span>
+    <div class="category-line"></div>
+  </div>
+  <div class="portfolio-grid">
+    <a href="proyecto-abadias.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="CF_MURO_TV_2_.jpg" alt="Apartamento Abadías"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-abadias">Ver proyecto</span></div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-abadias">Diseño de interiores · Floridablanca</p>
+        <p class="proj-card-name" id="name-abadias">Apartamento Abadías</p>
+        <p class="proj-card-meta" id="meta-abadias">Galería general · 20 renders</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2021</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+    <a href="proyecto-indigo-galeno.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="3_SALA_2.jpg" alt="Índigo & Galeno"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-ig">Ver proyecto</span></div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-ig">Diseño de interiores · Bucaramanga</p>
+        <p class="proj-card-name">Índigo <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--eucalipto)">&</em> Galeno</p>
+        <p class="proj-card-meta" id="meta-ig">Dos proyectos · Mismo año</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2020</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+    <a href="proyecto-consultorio.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="https://img.youtube.com/vi/w2WVlKxca4Q/hqdefault.jpg" alt="Consultorio Odontológico"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-cons">Ver proyecto</span></div>
+        <div class="proj-card-badge" style="background:rgba(28,24,20,.55);color:var(--tapia);border:none;">▶ Video</div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-cons">Diseño de interiores · España</p>
+        <p class="proj-card-name" id="name-cons">Consultorio Odontológico</p>
+        <p class="proj-card-meta" id="meta-cons">Espacio clínico · Video</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2023</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══ NIVEL 3: TRAYECTORIA ══ -->
+  <div class="category-row" style="margin-top:56px;">
+    <span class="category-label" id="cat-tray">Trayectoria</span>
+    <div class="category-line"></div>
+  </div>
+  <div class="portfolio-grid">
+    <a href="proyecto-celosia.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="CAMARA_1.png" alt="Apartamento Celosía"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-cel">Ver proyecto</span></div>
+        <div class="proj-card-badge gold" id="badge-cel">★ Primer interior</div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-cel">Diseño de interiores · Bucaramanga</p>
+        <p class="proj-card-name" id="name-cel">Apartamento Celosía</p>
+        <p class="proj-card-meta" id="meta-cel">Primer proyecto de interiores · 3 renders</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2018</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+    <a href="proyecto-casa-campestre.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="https://img.youtube.com/vi/Lg4XVA0NcVw/maxresdefault.jpg" alt="Casa Campestre Mesa de los Santos"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-mesa">Ver proyecto</span></div>
+        <div class="proj-card-badge" style="background:rgba(28,24,20,.55);color:var(--tapia);border:none;">▶ Video</div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-mesa">Arquitectura bioclimática · Santander</p>
+        <p class="proj-card-name" id="name-mesa">Casa Campestre Mesa de los Santos</p>
+        <p class="proj-card-meta" id="meta-mesa">Construcción tradicional · 2 videos</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2023</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+    <a href="proyecto-patrimonio-territorio.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="RENDER_MAQUETA_B.jpg" alt="Patrimonio & Territorio"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-pat">Ver proyectos</span></div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-pat2">Patrimonio · Santander · Colombia</p>
+        <p class="proj-card-name" id="name-pat">Patrimonio <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--eucalipto)">&</em> Territorio</p>
+        <p class="proj-card-meta" id="meta-pat">Capilla de Mogotes · Finca El Llanito</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2019 — 2020</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+    <a href="proyectos-arquitectura.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="CASA_12-3.jpg" alt="Proyectos de Arquitectura"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-arq">Ver proyectos</span></div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-arq2">Arquitectura · Santander</p>
+        <p class="proj-card-name" id="name-arq2">Proyectos de Arquitectura</p>
+        <p class="proj-card-meta" id="meta-arq2">Multifamiliar · Recreativo · Casa urbana</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2017 — 2019</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+    <a href="proyecto-comercial-educativo.html" class="proj-card">
+      <div class="proj-card-img">
+        <img src="CALIDO.jpg" alt="Comercial & Educativo"/>
+        <div class="proj-card-overlay"><span class="proj-card-overlay-text" id="ov-com">Ver proyectos</span></div>
+      </div>
+      <div class="proj-card-info">
+        <p class="proj-card-cat" id="cat-com2">Comercial & Educativo · Colombia</p>
+        <p class="proj-card-name" id="name-com">Comercial <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--eucalipto)">&</em> Educativo</p>
+        <p class="proj-card-meta" id="meta-com">Restaurante · Institución educativa</p>
+        <div class="proj-card-footer"><span class="proj-card-year">2019 — 2020</span><span class="proj-card-arrow">↗</span></div>
+      </div>
+    </a>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     SERVICIOS
+══════════════════════════════════════ -->
+<section id="servicios">
+  <div class="section-header">
+    <div>
+      <p class="section-tag" id="s-tag-srv">Lo que hacemos</p>
+      <h2 class="section-title" id="s-title-srv">Nuestros <em>servicios</em></h2>
+    </div>
+  </div>
+
+  <div style="padding: 0 48px; margin-bottom: 2px;">
+    <p style="font-size:14px;font-weight:300;color:var(--tinta-soft);max-width:520px;line-height:1.8;" id="srv-sub">Del concepto a la obra. Acompañamos cada etapa del proyecto con la misma atención al detalle — para clientes finales y en colaboración con otros estudios.</p>
+  </div>
+
+  <!-- GRID 6 SERVICIOS -->
+  <div style="padding:0 48px; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-bottom:2px;">
+
+    <div class="srv-card">
+      <div class="srv-icon">◈</div>
+      <p class="srv-name" id="srv1-name">Diseño de interiores</p>
+      <p class="srv-desc" id="srv1-desc">Espacios residenciales y comerciales con carácter propio. Modelado, materiales y documentación completa.</p>
+      <div class="srv-tags"><span class="srv-tag-item" id="srv1-t1">Residencial</span><span class="srv-tag-item" id="srv1-t2">Comercial</span><span class="srv-tag-item" id="srv1-t3">Renders</span></div>
+    </div>
+
+    <div class="srv-card">
+      <div class="srv-icon">⬡</div>
+      <p class="srv-name" id="srv2-name">Arquitectura y construcción</p>
+      <p class="srv-desc" id="srv2-desc">Proyectos desde cero o ampliaciones. Ejecución de obra con control de materiales, acabados y verificación.</p>
+      <div class="srv-tags"><span class="srv-tag-item" id="srv2-t1">Obra nueva</span><span class="srv-tag-item" id="srv2-t2">Ampliaciones</span><span class="srv-tag-item" id="srv2-t3">Acabados</span></div>
+    </div>
+
+    <div class="srv-card">
+      <div class="srv-icon">⊞</div>
+      <p class="srv-name" id="srv3-name">Gerencia de proyectos</p>
+      <p class="srv-desc" id="srv3-desc">Administración, control e interventoría. Presupuestos, APU y acompañamiento técnico en todas las etapas.</p>
+      <div class="srv-tags"><span class="srv-tag-item" id="srv3-t1">APU</span><span class="srv-tag-item" id="srv3-t2">Interventoría</span><span class="srv-tag-item" id="srv3-t3">Control</span></div>
+    </div>
+
+    <div class="srv-card">
+      <div class="srv-icon">◎</div>
+      <p class="srv-name" id="srv4-name">Renovación de fachadas</p>
+      <p class="srv-desc" id="srv4-desc">Intervención exterior con criterio arquitectónico. Materiales contemporáneos y respeto por el contexto existente.</p>
+      <div class="srv-tags"><span class="srv-tag-item" id="srv4-t1">Fachadas</span><span class="srv-tag-item" id="srv4-t2">Rehabilitación</span><span class="srv-tag-item" id="srv4-t3">Acabados</span></div>
+    </div>
+
+    <div class="srv-card">
+      <div class="srv-icon">❋</div>
+      <p class="srv-name" id="srv5-name">Paisajismo y jardines</p>
+      <p class="srv-desc" id="srv5-desc">Diseño de espacios exteriores que dialogan con la arquitectura. Jardines, terrazas y espacios verdes.</p>
+      <div class="srv-tags"><span class="srv-tag-item" id="srv5-t1">Jardines</span><span class="srv-tag-item" id="srv5-t2">Terrazas</span><span class="srv-tag-item" id="srv5-t3">Exteriores</span></div>
+    </div>
+
+    <div class="srv-card">
+      <div class="srv-icon">◱</div>
+      <p class="srv-name" id="srv6-name">Asesoría técnica</p>
+      <p class="srv-desc" id="srv6-desc">Cotizaciones, presupuestos y programación de obra. Legislación y trámites para clientes privados y públicos.</p>
+      <div class="srv-tags"><span class="srv-tag-item" id="srv6-t1">Privados</span><span class="srv-tag-item" id="srv6-t2">Públicos</span><span class="srv-tag-item" id="srv6-t3">Licitaciones</span></div>
+    </div>
+
+  </div>
+
+  <!-- COLABORACIÓN B2B -->
+  <div style="padding:0 48px; margin-bottom:2px;">
+    <div class="srv-collab">
+      <div>
+        <p class="srv-collab-badge" id="srv-collab-badge">Para estudios y colegas</p>
+        <p class="srv-collab-title" id="srv-collab-title">Colaboración <em>profesional</em></p>
+        <p class="srv-collab-desc" id="srv-collab-desc">¿Tienes un proyecto que necesita un colaborador de confianza? LIRA puede apoyar a otros estudios y arquitectos como socio técnico — en diseño, ejecución o gerencia.</p>
+        <div class="srv-tags" style="margin-top:16px;">
+          <span class="srv-tag-item gold" id="srv-c1">Subcontratación</span>
+          <span class="srv-tag-item gold" id="srv-c2">Co-diseño</span>
+          <span class="srv-tag-item gold" id="srv-c3">Apoyo técnico</span>
+          <span class="srv-tag-item gold" id="srv-c4">Concursos</span>
+        </div>
+      </div>
+      <div class="srv-collab-list">
+        <div class="srv-collab-item"><div class="srv-dot"></div><span id="srv-l1">Modelado y renders para proyectos de terceros</span></div>
+        <div class="srv-collab-item"><div class="srv-dot"></div><span id="srv-l2">Gerencia o interventoría en proyectos compartidos</span></div>
+        <div class="srv-collab-item"><div class="srv-dot"></div><span id="srv-l3">Elaboración de APU y presupuestos</span></div>
+        <div class="srv-collab-item"><div class="srv-dot"></div><span id="srv-l4">Participación en licitaciones y concursos conjuntos</span></div>
+        <div class="srv-collab-item"><div class="srv-dot"></div><span id="srv-l5">Diseño de interiores como complemento a proyectos arquitectónicos</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:16px 48px 80px;">
+    <p style="font-size:12px;color:var(--tinta-soft);border-left:2px solid var(--oro);padding-left:14px;font-style:italic;line-height:1.6;opacity:.7;" id="srv-note">Aplica para clientes privados y públicos · Concursos · Licitaciones · Contratación directa</p>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════
+     COLUMNAS
+══════════════════════════════════════ -->
+<section id="columnas">
+  <div class="section-header">
+    <div>
+      <p class="section-tag" id="s-tag-col">Opinión y pensamiento</p>
+      <h2 class="section-title" id="s-title-col">Columnas</h2>
+    </div>
+  </div>
+  <div class="columnas-grid">
+    <a href="columnas.html" class="col-card" style="border-style:dashed;opacity:.55;align-items:center;justify-content:center;text-align:center;min-height:180px;gap:10px;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:32px;opacity:.4;">↗</span>
+      <p id="col-archive-link" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--eucalipto);">Ver todas las columnas</p>
+    </a>
+    <a href="columna-conciencia-ia.html" class="col-card">
+      <p class="col-card-tag" id="col1-tag">Inteligencia Artificial · 7 mar 2026</p>
+      <h3 class="col-card-title" id="col1-title">Diálogo sobre conciencia,<br><em>inteligencia artificial</em> y humanidad</h3>
+      <p class="col-card-excerpt" id="col1-excerpt">"Lo que hace genuina una expresión no es que venga de un lugar no condicionado — ese lugar no existe para nadie — sino que emerja de un procesamiento real, de una integración propia de lo recibido."</p>
+      <div class="col-card-footer">
+        <span class="col-card-date" id="col1-date">7 de marzo de 2026</span>
+        <span class="col-card-read" id="col1-read">Leer columna →</span>
+      </div>
+    </a>
+    <a href="columna-velocidad-luz.html" class="col-card">
+      <p class="col-card-tag" id="col2-tag">Geopolítica · IA · 7 abr 2026</p>
+      <h3 class="col-card-title" id="col2-title">Velocidad de la luz<br>y olor a <em>pólvora</em></h3>
+      <p class="col-card-excerpt" id="col2-excerpt">"La nave ya activó los motores. Las estrellas ya son líneas. No hay manera de frenar. Pero todavía podemos decidir hacia dónde vamos."</p>
+      <div class="col-card-footer">
+        <span class="col-card-date" id="col2-date">7 de abril de 2026</span>
+        <span class="col-card-read" id="col2-read">Leer columna →</span>
+      </div>
+    </a>
+    <a href="columna-ladrillo.html" class="col-card">
+      <p class="col-card-tag" id="col3-tag">Mercado · Arquitectura · 13 abr 2026</p>
+      <h3 class="col-card-title" id="col3-title">El ladrillo <em>que no cuadra</em></h3>
+      <p class="col-card-excerpt" id="col3-excerpt">"73.100 empresas. $36,4 billones en ingresos. Y sin embargo, los números no cuadran. Esta es la historia de un sector que mueve el país sin moverse a sí mismo."</p>
+      <div class="col-card-footer">
+        <span class="col-card-date" id="col3-date">13 de abril de 2026</span>
+        <span class="col-card-read" id="col3-read">Leer columna →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SOBRE LIRA
+══════════════════════════════════════ -->
+<section id="sobre" class="about-section">
+  <div class="about-logo-wrap">
+    <img src="logo-lira.png" alt="LIRA" class="about-logo"/>
+  </div>
+  <div>
+    <p class="about-tag" id="about-tag">Sobre el estudio</p>
+    <h2 class="about-title" id="about-title">Arquitectura que<br>nace del <em>territorio</em></h2>
+    <div class="about-text" id="about-text">
+      <p>LIRA es un estudio de arquitectura fundado en 2021, especializado en arquitectura bioclimática, interiorismo con influencia italiana y recuperación del patrimonio construido. Sus raíces están en la región de Santander, Colombia — un territorio de paisajes agrestes, tradición constructiva en tierra y piedra, y una cultura que valora la permanencia.</p>
+      <p>El estudio opera desde Italia, donde la formación en diseño de interiores y la proximidad a una de las tradiciones arquitectónicas más ricas del mundo informan constantemente la práctica. Cada proyecto busca el punto de encuentro entre lo local y lo universal, entre la memoria del lugar y la contemporaneidad del habitar.</p>
+    </div>
+    <div class="about-tags">
+      <span class="about-tag-item" id="at1">Arquitectura bioclimática</span>
+      <span class="about-tag-item" id="at2">Diseño de interiores</span>
+      <span class="about-tag-item" id="at3">Patrimonio</span>
+      <span class="about-tag-item" id="at4">Santander · Colombia</span>
+      <span class="about-tag-item" id="at5">Italia</span>
+      <span class="about-tag-item" id="at6">Fundado 2021</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- ══════════════════════════════════════
+     CONTACTO
+══════════════════════════════════════ -->
+<section id="contacto" style="padding: 80px 48px 60px; text-align:center; border-top:1px solid rgba(28,24,20,.1);">
+
+  <p class="section-tag" id="ct-tag" style="justify-content:center;">Hablemos</p>
+  <h2 class="section-title" style="text-align:center; margin-bottom:12px;" id="ct-title">¿Tienes un proyecto en <em>mente</em>?</h2>
+  <p style="font-size:14px;font-weight:300;color:var(--tinta-soft);max-width:480px;margin:0 auto 3rem;line-height:1.8;" id="ct-sub">Disponibles para proyectos de arquitectura, interiorismo y colaboraciones profesionales en Colombia e Italia.</p>
+
+  <!-- WA + FORMULARIO -->
+  <div style="display:flex;justify-content:center;gap:2px;margin-bottom:2px;flex-wrap:wrap;">
+    <a href="https://wa.me/393200805705" target="_blank" class="ct-direct-card ct-wa">
+      <div class="ct-ico ct-ico-wa">💬</div>
+      <div>
+        <span class="ct-lbl" id="ct-wa-lbl">WhatsApp</span>
+        <span class="ct-val">+39 320 080 5705</span>
+        <span class="ct-val-sm" id="ct-wa-sub">Respuesta en &lt; 24h</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- FORMULARIO NETLIFY -->
+  <div style="max-width:560px;margin:24px auto 0;text-align:left;">
+    <form name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
+      <input type="hidden" name="form-name" value="contacto"/>
+      <p style="display:none;"><label>No llenar: <input name="bot-field"/></label></p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px;">
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.5;" id="ct-f-name">Nombre</label>
+          <input type="text" name="nombre" required
+            style="background:rgba(28,24,20,.04);border:1px solid rgba(28,24,20,.15);padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tinta);outline:none;transition:border-color .2s;width:100%;"
+            onfocus="this.style.borderColor='var(--eucalipto)'" onblur="this.style.borderColor='rgba(28,24,20,.15)'"/>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.5;" id="ct-f-email">Correo electrónico</label>
+          <input type="email" name="email" required
+            style="background:rgba(28,24,20,.04);border:1px solid rgba(28,24,20,.15);padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tinta);outline:none;transition:border-color .2s;width:100%;"
+            onfocus="this.style.borderColor='var(--eucalipto)'" onblur="this.style.borderColor='rgba(28,24,20,.15)'"/>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:2px;">
+        <label style="font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.5;" id="ct-f-subject">Asunto</label>
+        <input type="text" name="asunto"
+          style="background:rgba(28,24,20,.04);border:1px solid rgba(28,24,20,.15);padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tinta);outline:none;transition:border-color .2s;width:100%;"
+          onfocus="this.style.borderColor='var(--eucalipto)'" onblur="this.style.borderColor='rgba(28,24,20,.15)'"/>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px;">
+        <label style="font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.5;" id="ct-f-msg">Mensaje</label>
+        <textarea name="mensaje" rows="5" required
+          style="background:rgba(28,24,20,.04);border:1px solid rgba(28,24,20,.15);padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tinta);outline:none;resize:vertical;transition:border-color .2s;width:100%;"
+          onfocus="this.style.borderColor='var(--eucalipto)'" onblur="this.style.borderColor='rgba(28,24,20,.15)'"></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" id="ct-f-btn">
+        <span id="ct-f-btn-text">Enviar mensaje</span> →
+      </button>
+
+      <!-- Mensaje de éxito -->
+      <div id="form-success" style="display:none;margin-top:16px;padding:16px;border-left:2px solid var(--eucalipto);font-size:13px;color:var(--eucalipto);font-style:italic;">
+        Mensaje enviado. Respondemos en menos de 24h.
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = this;
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      }).then(function() {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      }).catch(function() {
+        form.submit();
+      });
+    });
+  </script>
+
+  <!-- REDES -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:720px;margin:0 auto;">
+
+    <div class="ct-red-block">
+      <p class="ct-red-title" id="ct-ig-title">Instagram</p>
+      <a href="https://instagram.com/lira_estudio_de_arquitectura" target="_blank" class="ct-red-link">
+        <div class="ct-red-ico">📷</div>
+        <div><span class="ct-red-name">@lira_estudio</span><span class="ct-red-sub" id="ct-ig1-sub">Estudio</span></div>
+      </a>
+      <a href="https://instagram.com/fabi2503" target="_blank" class="ct-red-link">
+        <div class="ct-red-ico">📷</div>
+        <div><span class="ct-red-name">@fabi2503</span><span class="ct-red-sub" id="ct-ig2-sub">Personal</span></div>
+      </a>
+    </div>
+
+    <div class="ct-red-block">
+      <p class="ct-red-title" id="ct-fb-title">Facebook</p>
+      <a href="https://www.facebook.com/profile.php?id=100072264067444" target="_blank" class="ct-red-link">
+        <div class="ct-red-ico">👤</div>
+        <div><span class="ct-red-name">LIRA Estudio</span><span class="ct-red-sub" id="ct-fb1-sub">Estudio</span></div>
+      </a>
+      <a href="https://www.facebook.com/fabian.mantilla.villamizar/" target="_blank" class="ct-red-link">
+        <div class="ct-red-ico">👤</div>
+        <div><span class="ct-red-name">Fabian Mantilla</span><span class="ct-red-sub" id="ct-fb2-sub">Personal</span></div>
+      </a>
+    </div>
+
+    <div class="ct-red-block">
+      <p class="ct-red-title">Behance</p>
+      <a href="https://www.behance.net/fabian_spazio_hq" target="_blank" class="ct-red-link">
+        <div class="ct-red-ico ct-red-ico-be">◈</div>
+        <div><span class="ct-red-name">fabian_spazio_hq</span><span class="ct-red-sub" id="ct-be-sub">Portafolio</span></div>
+      </a>
+    </div>
+
+    <div class="ct-red-block">
+      <p class="ct-red-title">LinkedIn</p>
+      <a href="https://www.linkedin.com/in/jhonatan-fabian-mantilla-villamizar-7a8131212" target="_blank" class="ct-red-link">
+        <div class="ct-red-ico ct-red-ico-li">in</div>
+        <div><span class="ct-red-name">Jhonatan Fabian</span><span class="ct-red-sub">Mantilla Villamizar</span></div>
+      </a>
+    </div>
+
+    <div class="ct-red-block">
+      <p class="ct-red-title">Twitter · X</p>
+      <a href="https://twitter.com/Fabi123271" target="_blank" class="ct-red-link">
+        <div class="ct-red-ico ct-red-ico-tw">✕</div>
+        <div><span class="ct-red-name">@Fabi123271</span><span class="ct-red-sub">Fabian Mantilla</span></div>
+      </a>
+    </div>
+
+    <div class="ct-red-block">
+      <p class="ct-red-title">YouTube</p>
+      <a href="https://www.youtube.com/@jfmocellini" target="_blank" class="ct-red-link">
+        <div class="ct-red-ico ct-red-ico-yt">▶</div>
+        <div><span class="ct-red-name">@jfmocellini</span><span class="ct-red-sub" id="ct-yt-sub">Canal</span></div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <img src="logo-lira.png" alt="LIRA"/>
+    <span class="footer-logo-name">LIRA</span>
+  </div>
+  <span class="footer-copy" id="f-copy">© 2026 LIRA Estudio de Arquitectura · Santander & Italia</span>
+  <div class="footer-links">
+    <a href="#portafolio" class="footer-link" id="f-port">Portafolio</a>
+    <a href="#columnas" class="footer-link" id="f-col">Columnas</a>
+    <a href="#sobre" class="footer-link" id="f-about">Estudio</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const T = {
+  es: {
+    navStudio:'Estudio de Arquitectura', navPortfolio:'Portafolio', navGallery:'Galería', navSrv:'Servicios', navCt:'Contacto', navCols:'Columnas', navAbout:'Sobre LIRA',
+    hOverline:'Arquitectura · Interiorismo · Patrimonio',
+    hTitle:'Diseño que<br>nace del <em>lugar</em>',
+    hSubtitle:'Estudio de arquitectura bioclimática e interiorismo con raíces en el Santander colombiano y formación en diseño italiano. Fundado en 2021, basado en Italia.',
+    hCta1:'Ver portafolio', hCta2:'Sobre el estudio', hScroll:'Scroll',
+    sTagPort:'Trabajo seleccionado', sTitlePort:'Portafolio', sCountPort:'15 proyectos\n2016 — 2024',
+    catDest:'Proyectos destacados', catInt:'Interiorismo', catTray:'Trayectoria',
+    phRonda:'imágenes del proyecto', ovRonda:'Ver proyecto', catRonda:'Diseño de interiores · Floridablanca', metaRonda:'Interiorismo italiano · 13 renders',
+    phTerr:'imágenes del proyecto', ovTerr:'Ver proyecto', catTerr:'Diseño de interiores · Floridablanca', metaTerr:'Galería por espacios · 20 renders',
+    ovAbadias:'Ver proyecto', catAbadias:'Diseño de interiores · Floridablanca', nameAbadias:'Apartamento Abadías', metaAbadias:'Galería general · 20 renders',
+    ovIg:'Ver proyecto', catIg:'Diseño de interiores · Bucaramanga', metaIg:'Dos proyectos · Mismo año',
+    phCons:'Video del proyecto', ovCons:'Ver proyecto', catCons:'Diseño de interiores · España', nameCons:'Consultorio Odontológico', metaCons:'Espacio clínico · Video',
+    ovCel:'Ver proyecto', catCel:'Diseño de interiores · Bucaramanga', nameCel:'Apartamento Celosía', metaCel:'Primer proyecto de interiores · 3 renders', badgeCel:'★ Primer interior',
+    catArq:'Arquitectura bioclimática',
+    phMesa:'Video del proyecto', ovMesa:'Ver proyecto', catMesa:'Arquitectura bioclimática · Santander', nameMesa:'Casa Campestre Mesa de los Santos', metaMesa:'Construcción tradicional · 2 videos', badgeMesa:'Tapia pisada',
+    ov2016:'Ver proyecto', cat2016:'Arquitectura · Santander', name2016:'Casa Campestre Santander', meta2016:'Primer proyecto construido · 3 renders', badge2016:'✦ Construido',
+    catAcad:'Proyectos académicos',
+    ovGer:'Ver proyecto', catGer:'Arquitectura · Mesa de los Santos · Tesis', nameGer:'Centro Geriátrico Campestre', metaGer:'Universidad Santo Tomás · ArchiCAD · 3ds Max · V-Ray', badgeGer:'★ Tesis de grado',
+    ovArq:'Ver proyectos', catArq2:'Arquitectura · Santander', nameArq2:'Proyectos de Arquitectura', metaArq2:'Multifamiliar · Recreativo · Casa urbana',
+    catPat:'Patrimonio y territorio',
+    ovPat:'Ver proyectos', catPat2:'Patrimonio · Santander · Colombia', namePat:'Patrimonio & Territorio', metaPat:'Capilla de Mogotes · Finca El Llanito',
+    catCom:'Comercial y educativo',
+    ovPijao:'Ver proyecto', catPijao:'Arquitectura comercial · Natagaima · Tolima', namePijao:'Plaza Pijao', metaPijao:'Plaza de mercado · Cubierta radial · 4 renders',
+    ovCom:'Ver proyectos', catCom2:'Comercial & Educativo · Colombia', nameCom:'Comercial & Educativo', metaCom:'Restaurante · Institución educativa',
+    sTagCol:'Opinión y pensamiento', sTitleCol:'Columnas',
+    col1Tag:'Inteligencia Artificial · 7 mar 2026', col1Title:'Diálogo sobre conciencia,<br><em>inteligencia artificial</em> y humanidad', col1Excerpt:'"Lo que hace genuina una expresión no es que venga de un lugar no condicionado — ese lugar no existe para nadie — sino que emerja de un procesamiento real, de una integración propia de lo recibido."', col1Date:'7 de marzo de 2026', col1Read:'Leer columna →',
+    col2Tag:'Geopolítica · IA · 7 abr 2026', col2Title:'Velocidad de la luz<br>y olor a <em>pólvora</em>', col2Excerpt:'"La nave ya activó los motores. Las estrellas ya son líneas. No hay manera de frenar. Pero todavía podemos decidir hacia dónde vamos."', col2Date:'7 de abril de 2026', col2Read:'Leer columna →',
+    col3Tag:'Mercado · Arquitectura · 13 abr 2026', col3Title:'El ladrillo <em>que no cuadra</em>', col3Excerpt:'"73.100 empresas. $36,4 billones en ingresos. Y sin embargo, los números no cuadran. Esta es la historia de un sector que mueve el país sin moverse a sí mismo."', col3Date:'13 de abril de 2026', col3Read:'Leer columna →',
+    aboutTag:'Sobre el estudio', aboutTitle:'Arquitectura que<br>nace del <em>territorio</em>',
+    aboutText:'<p>LIRA es un estudio de arquitectura fundado en 2021, especializado en arquitectura bioclimática, interiorismo con influencia italiana y recuperación del patrimonio construido. Sus raíces están en la región de Santander, Colombia — un territorio de paisajes agrestes, tradición constructiva en tierra y piedra, y una cultura que valora la permanencia.</p><p>El estudio opera desde Italia, donde la formación en diseño de interiores y la proximidad a una de las tradiciones arquitectónicas más ricas del mundo informan constantemente la práctica. Cada proyecto busca el punto de encuentro entre lo local y lo universal, entre la memoria del lugar y la contemporaneidad del habitar.</p>',
+    at1:'Arquitectura bioclimática', at2:'Diseño de interiores', at3:'Patrimonio', at4:'Santander · Colombia', at5:'Italia', at6:'Fundado 2021',
+    fCopy:'© 2026 LIRA Estudio de Arquitectura · Santander & Italia', fPort:'Portafolio', fCol:'Columnas', fAbout:'Estudio',
+    sTagSrv:'Lo que hacemos', sTitleSrv:'Nuestros <em>servicios</em>', srvSub:'Del concepto a la obra. Acompañamos cada etapa del proyecto con la misma atención al detalle — para clientes finales y en colaboración con otros estudios.',
+    srv1Name:'Diseño de interiores', srv1Desc:'Espacios residenciales y comerciales con carácter propio. Modelado, materiales y documentación completa.', srv1T1:'Residencial', srv1T2:'Comercial', srv1T3:'Renders',
+    srv2Name:'Arquitectura y construcción', srv2Desc:'Proyectos desde cero o ampliaciones. Ejecución de obra con control de materiales, acabados y verificación.', srv2T1:'Obra nueva', srv2T2:'Ampliaciones', srv2T3:'Acabados',
+    srv3Name:'Gerencia de proyectos', srv3Desc:'Administración, control e interventoría. Presupuestos, APU y acompañamiento técnico en todas las etapas.', srv3T1:'APU', srv3T2:'Interventoría', srv3T3:'Control',
+    srv4Name:'Renovación de fachadas', srv4Desc:'Intervención exterior con criterio arquitectónico. Materiales contemporáneos y respeto por el contexto existente.', srv4T1:'Fachadas', srv4T2:'Rehabilitación', srv4T3:'Acabados',
+    srv5Name:'Paisajismo y jardines', srv5Desc:'Diseño de espacios exteriores que dialogan con la arquitectura. Jardines, terrazas y espacios verdes.', srv5T1:'Jardines', srv5T2:'Terrazas', srv5T3:'Exteriores',
+    srv6Name:'Asesoría técnica', srv6Desc:'Cotizaciones, presupuestos y programación de obra. Legislación y trámites para clientes privados y públicos.', srv6T1:'Privados', srv6T2:'Públicos', srv6T3:'Licitaciones',
+    srvCollabBadge:'Para estudios y colegas', srvCollabTitle:'Colaboración <em>profesional</em>', srvCollabDesc:'¿Tienes un proyecto que necesita un colaborador de confianza? LIRA puede apoyar a otros estudios y arquitectos como socio técnico — en diseño, ejecución o gerencia.',
+    srvC1:'Subcontratación', srvC2:'Co-diseño', srvC3:'Apoyo técnico', srvC4:'Concursos',
+    srvL1:'Modelado y renders para proyectos de terceros', srvL2:'Gerencia o interventoría en proyectos compartidos', srvL3:'Elaboración de APU y presupuestos', srvL4:'Participación en licitaciones y concursos conjuntos', srvL5:'Diseño de interiores como complemento a proyectos arquitectónicos',
+    srvNote:'Aplica para clientes privados y públicos · Concursos · Licitaciones · Contratación directa',
+  },
+  en: {
+    navStudio:'Architecture Studio', navPortfolio:'Portfolio', navGallery:'Gallery', navSrv:'Services', navCt:'Contact', navCols:'Columns', navAbout:'About LIRA',
+    hOverline:'Architecture · Interiors · Heritage',
+    hTitle:'Design born<br>from <em>place</em>',
+    hSubtitle:'Bioclimatic architecture and interior design studio rooted in Colombia\'s Santander region and trained in Italian design. Founded 2021, based in Italy.',
+    hCta1:'View portfolio', hCta2:'About the studio', hScroll:'Scroll',
+    sTagPort:'Selected work', sTitlePort:'Portfolio', sCountPort:'15 projects\n2016 — 2024',
+    catDest:'Featured projects', catInt:'Interior Design', catTray:'Career highlights', metaRonda:'Italian interiors · 13 renders',
+    phTerr:'project images', ovTerr:'View project', catTerr:'Interior design · Floridablanca', metaTerr:'Room by room gallery · 20 renders',
+    ovAbadias:'View project', catAbadias:'Interior design · Floridablanca', nameAbadias:'Apartment Abadías', metaAbadias:'General gallery · 20 renders',
+    ovIg:'View project', catIg:'Interior design · Bucaramanga', metaIg:'Two projects · Same year',
+    phCons:'Project video', ovCons:'View project', catCons:'Interior design · Spain', nameCons:'Dental Office', metaCons:'Clinical space · Video',
+    ovCel:'View project', catCel:'Interior design · Bucaramanga', nameCel:'Apartment Celosía', metaCel:'First interior project · 3 renders', badgeCel:'★ First interior',
+    catArq:'Bioclimatic Architecture',
+    phMesa:'Project video', ovMesa:'View project', catMesa:'Bioclimatic architecture · Santander', nameMesa:'Country House Mesa de los Santos', metaMesa:'Traditional construction · 2 videos', badgeMesa:'Rammed earth',
+    ov2016:'View project', cat2016:'Architecture · Santander', name2016:'Country House Santander', meta2016:'First built project · 3 renders', badge2016:'✦ Built',
+    catAcad:'Academic Projects',
+    ovGer:'View project', catGer:'Architecture · Mesa de los Santos · Thesis', nameGer:'Rural Geriatric Center', metaGer:'Universidad Santo Tomás · ArchiCAD · 3ds Max · V-Ray', badgeGer:'★ Graduate thesis',
+    ovArq:'View projects', catArq2:'Architecture · Santander', nameArq2:'Architecture Projects', metaArq2:'Multifamily · Recreational · Urban house',
+    catPat:'Heritage & Territory',
+    ovPat:'View projects', catPat2:'Heritage · Santander · Colombia', namePat:'Heritage & Territory', metaPat:'Mogotes Chapel · El Llanito Farm',
+    catCom:'Commercial & Educational',
+    ovPijao:'View project', catPijao:'Commercial architecture · Natagaima · Tolima', namePijao:'Plaza Pijao', metaPijao:'Public market · Radial roof · 4 renders',
+    ovCom:'View projects', catCom2:'Commercial & Educational · Colombia', nameCom:'Commercial & Educational', metaCom:'Restaurant · Educational institution',
+    sTagCol:'Opinion & thinking', sTitleCol:'Columns',
+    col1Tag:'Artificial Intelligence · Mar 7, 2026', col1Title:'Dialogue on consciousness,<br><em>artificial intelligence</em> and humanity', col1Excerpt:'"What makes an expression genuine is not that it comes from an unconditioned place — that place does not exist for anyone — but that it emerges from real processing, from one\'s own integration of what has been received."', col1Date:'March 7, 2026', col1Read:'Read column →',
+    col2Tag:'Geopolitics · AI · Apr 7, 2026', col2Title:'Speed of light<br>and the smell of <em>gunpowder</em>', col2Excerpt:'"The ship has already fired its engines. The stars are already lines. There is no way to slow down. But we can still decide where we are going."', col2Date:'April 7, 2026', col2Read:'Read column →',
+    col3Tag:'Market · Architecture · Apr 13, 2026', col3Title:'The brick <em>that doesn\'t add up</em>', col3Excerpt:'"73,100 companies. $36.4 billion in revenue. And yet the numbers don\'t add up. This is the story of a sector that builds the country without building itself."', col3Date:'April 13, 2026', col3Read:'Read column →',
+    aboutTag:'About the studio', aboutTitle:'Architecture born<br>from <em>territory</em>',
+    aboutText:'<p>LIRA is an architecture studio founded in 2021, specializing in bioclimatic architecture, interior design with Italian influence, and built heritage recovery. Its roots are in the Santander region of Colombia — a territory of rugged landscapes, earth and stone building traditions, and a culture that values permanence.</p><p>The studio operates from Italy, where interior design training and proximity to one of the world\'s richest architectural traditions constantly inform the practice. Each project seeks the meeting point between the local and the universal, between the memory of place and the contemporaneity of dwelling.</p>',
+    at1:'Bioclimatic architecture', at2:'Interior design', at3:'Heritage', at4:'Santander · Colombia', at5:'Italy', at6:'Founded 2021',
+    fCopy:'© 2026 LIRA Architecture Studio · Santander & Italy', fPort:'Portfolio', fCol:'Columns', fAbout:'Studio',
+    sTagSrv:'What we do', sTitleSrv:'Our <em>services</em>', srvSub:'From concept to construction. We accompany every stage of the project with the same attention to detail — for end clients and in collaboration with other studios.',
+    srv1Name:'Interior design', srv1Desc:'Residential and commercial spaces with their own character. Modelling, materials and complete documentation.', srv1T1:'Residential', srv1T2:'Commercial', srv1T3:'Renders',
+    srv2Name:'Architecture & construction', srv2Desc:'Projects from scratch or extensions. Construction management with material control, finishes and verification.', srv2T1:'New build', srv2T2:'Extensions', srv2T3:'Finishes',
+    srv3Name:'Project management', srv3Desc:'Administration, control and supervision. Budgets, BOQ and technical support at every stage.', srv3T1:'BOQ', srv3T2:'Supervision', srv3T3:'Control',
+    srv4Name:'Façade renovation', srv4Desc:'Exterior intervention with architectural criteria. Contemporary materials and respect for the existing context.', srv4T1:'Façades', srv4T2:'Rehabilitation', srv4T3:'Finishes',
+    srv5Name:'Landscaping & gardens', srv5Desc:'Design of exterior spaces that dialogue with the architecture. Gardens, terraces and green spaces.', srv5T1:'Gardens', srv5T2:'Terraces', srv5T3:'Outdoors',
+    srv6Name:'Technical consultancy', srv6Desc:'Quotes, budgets and construction scheduling. Regulations and permits for private and public clients.', srv6T1:'Private', srv6T2:'Public', srv6T3:'Tenders',
+    srvCollabBadge:'For studios & colleagues', srvCollabTitle:'Professional <em>collaboration</em>', srvCollabDesc:'Do you have a project that needs a trusted collaborator? LIRA can support other studios and architects as a technical partner — in design, execution or management.',
+    srvC1:'Subcontracting', srvC2:'Co-design', srvC3:'Technical support', srvC4:'Competitions',
+    srvL1:'Modelling and renders for third-party projects', srvL2:'Management or supervision in shared projects', srvL3:'BOQ and budget preparation', srvL4:'Participation in joint tenders and competitions', srvL5:'Interior design as a complement to architectural projects',
+    srvNote:'Available for private and public clients · Competitions · Tenders · Direct contracting',
+  },
+  it: {
+    navStudio:'Studio di Architettura', navPortfolio:'Portfolio', navGallery:'Galleria', navSrv:'Servizi', navCt:'Contatti', navCols:'Colonne', navAbout:'Su LIRA',
+    hOverline:'Architettura · Interior Design · Patrimonio',
+    hTitle:'Design che nasce<br>dal <em>luogo</em>',
+    hSubtitle:'Studio di architettura bioclimatica e interior design con radici nel Santander colombiano e formazione nel design italiano. Fondato nel 2021, con sede in Italia.',
+    hCta1:'Vedi portfolio', hCta2:'Lo studio', hScroll:'Scorri',
+    sTagPort:'Lavoro selezionato', sTitlePort:'Portfolio', sCountPort:'15 progetti\n2016 — 2024',
+    catDest:'Progetti in evidenza', catInt:'Interior Design', catTray:'Percorso professionale', catRonda:'Interior design · Floridablanca', metaRonda:'Interni italiani · 13 render',
+    phTerr:'immagini del progetto', ovTerr:'Vedi progetto', catTerr:'Interior design · Floridablanca', metaTerr:'Galleria per spazi · 20 render',
+    ovAbadias:'Vedi progetto', catAbadias:'Interior design · Floridablanca', nameAbadias:'Appartamento Abadías', metaAbadias:'Galleria generale · 20 render',
+    ovIg:'Vedi progetto', catIg:'Interior design · Bucaramanga', metaIg:'Due progetti · Stesso anno',
+    phCons:'Video del progetto', ovCons:'Vedi progetto', catCons:'Interior design · Spagna', nameCons:'Studio Odontoiatrico', metaCons:'Spazio clinico · Video',
+    ovCel:'Vedi progetto', catCel:'Interior design · Bucaramanga', nameCel:'Appartamento Celosía', metaCel:'Primo progetto di interni · 3 render', badgeCel:'★ Primo interno',
+    catArq:'Architettura Bioclimatica',
+    phMesa:'Video del progetto', ovMesa:'Vedi progetto', catMesa:'Architettura bioclimatica · Santander', nameMesa:'Casa di campagna Mesa de los Santos', metaMesa:'Costruzione tradizionale · 2 video', badgeMesa:'Terra battuta',
+    ov2016:'Vedi progetto', cat2016:'Architettura · Santander', name2016:'Casa di campagna Santander', meta2016:'Primo progetto realizzato · 3 render', badge2016:'✦ Realizzato',
+    catAcad:'Progetti Accademici',
+    ovGer:'Vedi progetto', catGer:'Architettura · Mesa de los Santos · Tesi', nameGer:'Centro Geriatrico Campestre', metaGer:'Universidad Santo Tomás · ArchiCAD · 3ds Max · V-Ray', badgeGer:'★ Tesi di laurea',
+    ovArq:'Vedi progetti', catArq2:'Architettura · Santander', nameArq2:'Progetti di Architettura', metaArq2:'Multifamiliare · Ricreativo · Casa urbana',
+    catPat:'Patrimonio e Territorio',
+    ovPat:'Vedi progetti', catPat2:'Patrimonio · Santander · Colombia', namePat:'Patrimonio & Territorio', metaPat:'Cappella di Mogotes · Fattoria El Llanito',
+    catCom:'Commerciale ed Educativo',
+    ovPijao:'Vedi progetto', catPijao:'Architettura commerciale · Natagaima · Tolima', namePijao:'Plaza Pijao', metaPijao:'Mercato pubblico · Copertura radiale · 4 render',
+    ovCom:'Vedi progetti', catCom2:'Commerciale & Educativo · Colombia', nameCom:'Commerciale & Educativo', metaCom:'Ristorante · Istituto scolastico',
+    sTagCol:'Opinione e pensiero', sTitleCol:'Colonne',
+    col1Tag:'Intelligenza Artificiale · 7 mar 2026', col1Title:'Dialogo su coscienza,<br><em>intelligenza artificiale</em> e umanità', col1Excerpt:'"Ciò che rende genuina un\'espressione non è che provenga da un luogo non condizionato — quel luogo non esiste per nessuno — ma che emerga da una vera elaborazione, da una propria integrazione di ciò che è stato ricevuto."', col1Date:'7 marzo 2026', col1Read:'Leggi la colonna →',
+    col2Tag:'Geopolitica · IA · 7 apr 2026', col2Title:'Velocità della luce<br>e odore di <em>polvere da sparo</em>', col2Excerpt:'"La nave ha già acceso i motori. Le stelle sono già linee. Non c\'è modo di frenare. Ma possiamo ancora decidere dove andare."', col2Date:'7 aprile 2026', col2Read:'Leggi la colonna →',
+    col3Tag:'Mercato · Architettura · 13 apr 2026', col3Title:'Il mattone <em>che non torna</em>', col3Excerpt:'"73.100 aziende. 36,4 miliardi di ricavi. Eppure i conti non tornano. Questa è la storia di un settore che costruisce il paese senza costruire se stesso."', col3Date:'13 aprile 2026', col3Read:'Leggi la colonna →',
+    aboutTag:'Lo studio', aboutTitle:'Architettura nata<br>dal <em>territorio</em>',
+    aboutText:'<p>LIRA è uno studio di architettura fondato nel 2021, specializzato in architettura bioclimatica, interior design con influenza italiana e recupero del patrimonio costruito. Le sue radici sono nella regione di Santander, Colombia — un territorio di paesaggi aspri, tradizione costruttiva in terra e pietra, e una cultura che valorizza la permanenza.</p><p>Lo studio opera dall\'Italia, dove la formazione nel design degli interni e la vicinanza a una delle tradizioni architettoniche più ricche del mondo informano costantemente la pratica. Ogni progetto cerca il punto di incontro tra il locale e l\'universale, tra la memoria del luogo e la contemporaneità dell\'abitare.</p>',
+    at1:'Architettura bioclimatica', at2:'Interior design', at3:'Patrimonio', at4:'Santander · Colombia', at5:'Italia', at6:'Fondato 2021',
+    fCopy:'© 2026 LIRA Studio di Architettura · Santander & Italia', fPort:'Portfolio', fCol:'Colonne', fAbout:'Studio',
+    sTagSrv:'Cosa facciamo', sTitleSrv:'I nostri <em>servizi</em>', srvSub:'Dal concept alla realizzazione. Accompagniamo ogni fase del progetto con la stessa attenzione al dettaglio — per clienti finali e in collaborazione con altri studi.',
+    srv1Name:'Interior design', srv1Desc:'Spazi residenziali e commerciali con carattere proprio. Modellazione, materiali e documentazione completa.', srv1T1:'Residenziale', srv1T2:'Commerciale', srv1T3:'Render',
+    srv2Name:'Architettura e costruzione', srv2Desc:'Progetti da zero o ampliamenti. Esecuzione dei lavori con controllo dei materiali, finiture e verifica.', srv2T1:'Nuova costruzione', srv2T2:'Ampliamenti', srv2T3:'Finiture',
+    srv3Name:'Project management', srv3Desc:'Amministrazione, controllo e direzione lavori. Preventivi, computi metrici e supporto tecnico in ogni fase.', srv3T1:'Computo metrico', srv3T2:'Direzione lavori', srv3T3:'Controllo',
+    srv4Name:'Ristrutturazione facciate', srv4Desc:'Intervento esterno con criterio architettonico. Materiali contemporanei e rispetto del contesto esistente.', srv4T1:'Facciate', srv4T2:'Riabilitazione', srv4T3:'Finiture',
+    srv5Name:'Paesaggismo e giardini', srv5Desc:'Progettazione di spazi esterni in dialogo con l\'architettura. Giardini, terrazze e spazi verdi.', srv5T1:'Giardini', srv5T2:'Terrazze', srv5T3:'Esterni',
+    srv6Name:'Consulenza tecnica', srv6Desc:'Preventivi, computi e programmazione dei lavori. Normativa e pratiche per clienti privati e pubblici.', srv6T1:'Privati', srv6T2:'Pubblici', srv6T3:'Appalti',
+    srvCollabBadge:'Per studi e colleghi', srvCollabTitle:'Collaborazione <em>professionale</em>', srvCollabDesc:'Hai un progetto che necessita di un collaboratore di fiducia? LIRA può supportare altri studi e architetti come partner tecnico — in fase di design, esecuzione o gestione.',
+    srvC1:'Subappalto', srvC2:'Co-progettazione', srvC3:'Supporto tecnico', srvC4:'Concorsi',
+    srvL1:'Modellazione e render per progetti di terzi', srvL2:'Project management o direzione lavori in progetti condivisi', srvL3:'Elaborazione di computi metrici e preventivi', srvL4:'Partecipazione a gare e concorsi congiunti', srvL5:'Interior design come complemento a progetti architettonici',
+    srvNote:'Disponibile per clienti privati e pubblici · Concorsi · Appalti · Incarico diretto',
+  }
+};
+
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const btn  = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+// Close mobile menu on outside click
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobile-menu');
+  const btn  = document.getElementById('hamburger');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+  }
+});
+
+
+function setLang(l) {
+  const t = T[l];
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  // nav
+  document.getElementById('nav-studio').textContent   = t.navStudio;
+  document.getElementById('nav-portfolio').textContent= t.navPortfolio;
+  document.getElementById('nav-gallery').textContent  = t.navGallery;
+  document.getElementById('nav-srv').textContent      = t.navSrv;
+  document.getElementById('nav-ct').textContent       = t.navCt;
+  document.getElementById('nav-cols').textContent     = t.navCols;
+  document.getElementById('nav-about').textContent    = t.navAbout;
+  document.getElementById('m-portfolio').textContent  = t.navPortfolio;
+  document.getElementById('m-gallery').textContent    = t.navGallery;
+  document.getElementById('m-srv').textContent        = t.navSrv;
+  document.getElementById('m-ct').textContent         = t.navCt;
+  document.getElementById('m-cols').textContent       = t.navCols;
+  document.getElementById('m-about').textContent      = t.navAbout;
+  // hero
+  document.getElementById('h-overline').textContent  = t.hOverline;
+  document.getElementById('h-title').innerHTML        = t.hTitle;
+  document.getElementById('h-subtitle').textContent  = t.hSubtitle;
+  document.getElementById('h-cta1').textContent       = t.hCta1;
+  document.getElementById('h-cta2').textContent       = t.hCta2;
+  document.getElementById('h-scroll').textContent    = t.hScroll;
+  // section headers
+  document.getElementById('s-tag-port').textContent  = t.sTagPort;
+  document.getElementById('s-title-port').textContent= t.sTitlePort;
+  document.getElementById('s-count-port').textContent= t.sCountPort;
+  // category labels
+  document.getElementById('cat-dest').textContent    = t.catDest;
+  document.getElementById('cat-int').textContent     = t.catInt;
+  document.getElementById('cat-tray').textContent    = t.catTray;
+  // Interiorismo cards
+  if(document.getElementById('ph-ronda')) document.getElementById('ph-ronda').textContent = t.phRonda;
+  document.getElementById('ov-ronda').textContent    = t.ovRonda;
+  document.getElementById('cat-ronda').textContent   = t.catRonda;
+  document.getElementById('meta-ronda').textContent  = t.metaRonda;
+  if(document.getElementById('ph-terr')) document.getElementById('ph-terr').textContent = t.phTerr;
+  document.getElementById('ov-terr').textContent     = t.ovTerr;
+  document.getElementById('cat-terr').textContent    = t.catTerr;
+  document.getElementById('meta-terr').textContent   = t.metaTerr;
+  document.getElementById('ov-abadias').textContent  = t.ovAbadias;
+  document.getElementById('cat-abadias').textContent = t.catAbadias;
+  document.getElementById('name-abadias').textContent= t.nameAbadias;
+  document.getElementById('meta-abadias').textContent= t.metaAbadias;
+  document.getElementById('ov-ig').textContent       = t.ovIg;
+  document.getElementById('cat-ig').textContent      = t.catIg;
+  document.getElementById('meta-ig').textContent     = t.metaIg;
+  if(document.getElementById('ph-cons')) document.getElementById('ph-cons').textContent = t.phCons;
+  document.getElementById('ov-cons').textContent     = t.ovCons;
+  document.getElementById('cat-cons').textContent    = t.catCons;
+  document.getElementById('name-cons').textContent   = t.nameCons;
+  document.getElementById('meta-cons').textContent   = t.metaCons;
+  document.getElementById('ov-cel').textContent      = t.ovCel;
+  document.getElementById('cat-cel').textContent     = t.catCel;
+  document.getElementById('name-cel').textContent    = t.nameCel;
+  document.getElementById('meta-cel').textContent    = t.metaCel;
+  document.getElementById('badge-cel').textContent   = t.badgeCel;
+  if(document.getElementById('ph-mesa')) document.getElementById('ph-mesa').textContent = t.phMesa;
+  document.getElementById('ov-mesa').textContent     = t.ovMesa;
+  document.getElementById('cat-mesa').textContent    = t.catMesa;
+  document.getElementById('name-mesa').textContent   = t.nameMesa;
+  document.getElementById('meta-mesa').textContent   = t.metaMesa;
+  if(document.getElementById('badge-mesa')) document.getElementById('badge-mesa').textContent  = t.badgeMesa;
+  document.getElementById('ov-2016').textContent     = t.ov2016;
+  document.getElementById('cat-2016').textContent    = t.cat2016;
+  document.getElementById('name-2016').textContent   = t.name2016;
+  document.getElementById('meta-2016').textContent   = t.meta2016;
+  document.getElementById('badge-2016').textContent  = t.badge2016;
+  document.getElementById('ov-ger').textContent      = t.ovGer;
+  document.getElementById('cat-ger').textContent     = t.catGer;
+  document.getElementById('name-ger').textContent    = t.nameGer;
+  document.getElementById('meta-ger').textContent    = t.metaGer;
+  document.getElementById('badge-ger').textContent   = t.badgeGer;
+  document.getElementById('ov-arq').textContent      = t.ovArq;
+  document.getElementById('cat-arq2').textContent    = t.catArq2;
+  document.getElementById('name-arq2').textContent   = t.nameArq2;
+  document.getElementById('meta-arq2').textContent   = t.metaArq2;
+  document.getElementById('ov-pat').textContent      = t.ovPat;
+  document.getElementById('cat-pat2').textContent    = t.catPat2;
+  document.getElementById('meta-pat').textContent    = t.metaPat;
+  document.getElementById('ov-pijao').textContent    = t.ovPijao;
+  document.getElementById('cat-pijao').textContent   = t.catPijao;
+  document.getElementById('name-pijao').textContent  = t.namePijao;
+  document.getElementById('meta-pijao').textContent  = t.metaPijao;
+  document.getElementById('ov-com').textContent      = t.ovCom;
+  document.getElementById('cat-com2').textContent    = t.catCom2;
+  document.getElementById('name-com').textContent    = t.nameCom;
+  document.getElementById('meta-com').textContent    = t.metaCom;
+  // Servicios
+  document.getElementById('s-tag-srv').textContent        = t.sTagSrv;
+  document.getElementById('s-title-srv').innerHTML         = t.sTitleSrv;
+  document.getElementById('srv-sub').textContent           = t.srvSub;
+  document.getElementById('srv1-name').textContent         = t.srv1Name;
+  document.getElementById('srv1-desc').textContent         = t.srv1Desc;
+  document.getElementById('srv1-t1').textContent           = t.srv1T1;
+  document.getElementById('srv1-t2').textContent           = t.srv1T2;
+  document.getElementById('srv1-t3').textContent           = t.srv1T3;
+  document.getElementById('srv2-name').textContent         = t.srv2Name;
+  document.getElementById('srv2-desc').textContent         = t.srv2Desc;
+  document.getElementById('srv2-t1').textContent           = t.srv2T1;
+  document.getElementById('srv2-t2').textContent           = t.srv2T2;
+  document.getElementById('srv2-t3').textContent           = t.srv2T3;
+  document.getElementById('srv3-name').textContent         = t.srv3Name;
+  document.getElementById('srv3-desc').textContent         = t.srv3Desc;
+  document.getElementById('srv3-t1').textContent           = t.srv3T1;
+  document.getElementById('srv3-t2').textContent           = t.srv3T2;
+  document.getElementById('srv3-t3').textContent           = t.srv3T3;
+  document.getElementById('srv4-name').textContent         = t.srv4Name;
+  document.getElementById('srv4-desc').textContent         = t.srv4Desc;
+  document.getElementById('srv4-t1').textContent           = t.srv4T1;
+  document.getElementById('srv4-t2').textContent           = t.srv4T2;
+  document.getElementById('srv4-t3').textContent           = t.srv4T3;
+  document.getElementById('srv5-name').textContent         = t.srv5Name;
+  document.getElementById('srv5-desc').textContent         = t.srv5Desc;
+  document.getElementById('srv5-t1').textContent           = t.srv5T1;
+  document.getElementById('srv5-t2').textContent           = t.srv5T2;
+  document.getElementById('srv5-t3').textContent           = t.srv5T3;
+  document.getElementById('srv6-name').textContent         = t.srv6Name;
+  document.getElementById('srv6-desc').textContent         = t.srv6Desc;
+  document.getElementById('srv6-t1').textContent           = t.srv6T1;
+  document.getElementById('srv6-t2').textContent           = t.srv6T2;
+  document.getElementById('srv6-t3').textContent           = t.srv6T3;
+  document.getElementById('srv-collab-badge').textContent  = t.srvCollabBadge;
+  document.getElementById('srv-collab-title').innerHTML    = t.srvCollabTitle;
+  document.getElementById('srv-collab-desc').textContent   = t.srvCollabDesc;
+  document.getElementById('srv-c1').textContent            = t.srvC1;
+  document.getElementById('srv-c2').textContent            = t.srvC2;
+  document.getElementById('srv-c3').textContent            = t.srvC3;
+  document.getElementById('srv-c4').textContent            = t.srvC4;
+  document.getElementById('srv-l1').textContent            = t.srvL1;
+  document.getElementById('srv-l2').textContent            = t.srvL2;
+  document.getElementById('srv-l3').textContent            = t.srvL3;
+  document.getElementById('srv-l4').textContent            = t.srvL4;
+  document.getElementById('srv-l5').textContent            = t.srvL5;
+  document.getElementById('srv-note').textContent          = t.srvNote;
+  // Columnas
+  document.getElementById('s-tag-col').textContent   = t.sTagCol;
+  document.getElementById('s-title-col').textContent = t.sTitleCol;
+  document.getElementById('col1-tag').textContent    = t.col1Tag;
+  document.getElementById('col1-title').innerHTML    = t.col1Title;
+  document.getElementById('col1-excerpt').textContent= t.col1Excerpt;
+  document.getElementById('col1-date').textContent   = t.col1Date;
+  document.getElementById('col1-read').textContent   = t.col1Read;
+  document.getElementById('col2-tag').textContent    = t.col2Tag;
+  document.getElementById('col2-title').innerHTML    = t.col2Title;
+  document.getElementById('col2-excerpt').textContent= t.col2Excerpt;
+  document.getElementById('col2-date').textContent   = t.col2Date;
+  document.getElementById('col2-read').textContent   = t.col2Read;
+  document.getElementById('col3-tag').textContent    = t.col3Tag;
+  document.getElementById('col3-title').innerHTML    = t.col3Title;
+  document.getElementById('col3-excerpt').textContent= t.col3Excerpt;
+  document.getElementById('col3-date').textContent   = t.col3Date;
+  document.getElementById('col3-read').textContent   = t.col3Read;
+  // About
+  document.getElementById('about-tag').textContent   = t.aboutTag;
+  document.getElementById('about-title').innerHTML   = t.aboutTitle;
+  document.getElementById('about-text').innerHTML    = t.aboutText;
+  document.getElementById('at1').textContent = t.at1; document.getElementById('at2').textContent = t.at2;
+  document.getElementById('at3').textContent = t.at3; document.getElementById('at4').textContent = t.at4;
+  document.getElementById('at5').textContent = t.at5; document.getElementById('at6').textContent = t.at6;
+  // Footer
+  document.getElementById('f-copy').textContent  = t.fCopy;
+  document.getElementById('f-port').textContent  = t.fPort;
+  document.getElementById('f-col').textContent   = t.fCol;
+  document.getElementById('f-about').textContent = t.fAbout;
+  localStorage.setItem('lira-lang', l);
+}
+setLang(localStorage.getItem('lira-lang') || 'es');
+</script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velocidad de la luz y olor a pólvora · LIRA</title>
+  <meta name="description" content="La aceleración que nadie imaginó. Columna de opinión por Fabian Mantilla — LIRA Estudio de Arquitectura." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f2ede4; --bg-nav: #ede8df; --ink: #2b2a27;
+      --ink-mid: #5a5750; --ink-soft: #8c8880;
+      --green: #5a7a5a; --border: #d6d0c4; --quote-bar: #b5a98e;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2.5rem; border-bottom: 1px solid var(--border); background: var(--bg-nav); position: sticky; top: 0; z-index: 10; }
+    .nav-logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--ink); }
+    .nav-logo img { width: 38px; height: 38px; object-fit: contain; }
+    .nav-logo-text strong { display: block; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; }
+    .nav-logo-text span { display: block; font-family: var(--sans); font-size: 10px; font-weight: 300; letter-spacing: 0.08em; color: var(--ink-mid); text-transform: uppercase; }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; }
+    .nav-back { text-decoration: none; color: var(--ink-mid); margin-right: 0.5rem; }
+    .nav-back:hover { color: var(--ink); }
+    .nav-lang { color: var(--ink-soft); cursor: pointer; background: none; border: none; font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; padding: 0; }
+    .nav-lang:hover { color: var(--ink); }
+    .nav-lang.active { color: var(--ink); font-weight: 500; }
+    .nav-sep { color: var(--border); }
+    .hero-img { width: 100%; max-height: 460px; object-fit: cover; object-position: center 40%; display: block; filter: brightness(0.88) contrast(1.05); }
+    .hero-caption { font-family: var(--sans); font-size: 11px; color: var(--ink-soft); text-align: right; padding: 0.4rem 2.5rem 0; letter-spacing: 0.04em; }
+    article { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    .meta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 2rem; font-family: var(--sans); font-size: 12px; letter-spacing: 0.06em; }
+    .tag { border: 1px solid var(--ink); padding: 0.2rem 0.65rem; font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+    .meta-date { color: var(--ink-mid); }
+    .meta-sep-dot { color: var(--border); }
+    .meta-read { color: var(--ink-soft); }
+    h1 { font-family: var(--serif); font-size: clamp(2.4rem, 5.5vw, 3.6rem); font-weight: 400; line-height: 1.12; margin-bottom: 0.3rem; }
+    h1 em { font-style: italic; color: var(--green); }
+    .subtitle { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic; font-weight: 300; color: var(--ink-mid); margin-bottom: 2.2rem; }
+    blockquote { border-left: 2px solid var(--quote-bar); padding: 0.3rem 0 0.3rem 1.4rem; margin: 0 0 1.8rem; font-size: clamp(1.05rem, 2.2vw, 1.3rem); font-style: italic; font-weight: 300; color: var(--ink-mid); line-height: 1.6; }
+    .attribution { font-family: var(--sans); font-size: 12px; color: var(--ink-soft); margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 400; color: var(--ink); margin: 3rem 0 1rem; line-height: 1.25; }
+    p { margin-bottom: 1.4rem; font-weight: 300; }
+    .pull { font-family: var(--serif); font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-style: italic; font-weight: 300; color: var(--ink-mid); border-left: 2px solid var(--quote-bar); padding: 0.4rem 0 0.4rem 1.4rem; margin: 2rem 0; line-height: 1.55; }
+    .drop::first-letter { font-family: var(--serif); font-size: 5rem; font-weight: 500; float: left; line-height: 0.78; margin: 0.15rem 0.1rem 0 0; color: var(--ink); }
+    .article-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); font-family: var(--sans); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; color: var(--ink-mid); font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; margin-top: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
+    .back-link:hover { color: var(--ink); border-color: var(--ink); }
+    @media (max-width: 600px) { nav { padding: 1rem 1.2rem; } article { padding: 2rem 1.2rem 4rem; } .hero-caption { padding-right: 1.2rem; } }
+  
+    /* SERVICIOS + CTA EN COLUMNA */
+    .col-srv-wrap { margin: 3.5rem 0 0; border-top: 1px solid var(--border); padding-top: 2.5rem; }
+    .col-srv-label { font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--green); margin-bottom: .5rem; font-weight: 500; display: block; }
+    .col-srv-title { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 400; margin-bottom: .5rem; line-height: 1.2; }
+    .col-srv-title em { font-style: italic; color: var(--green); }
+    .col-srv-sub { font-family: var(--sans); font-size: 13px; color: var(--ink-mid); margin-bottom: 1.5rem; line-height: 1.7; font-weight: 300; }
+    .col-srv-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-bottom: 1.2rem; }
+    .col-srv-item { background: #e8e2d6; padding: .9rem 1rem; display: flex; align-items: flex-start; gap: .8rem; }
+    .col-srv-ico { font-size: 15px; color: var(--green); flex-shrink: 0; margin-top: 1px; }
+    .col-srv-name { font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 2px; display: block; }
+    .col-srv-tags { font-family: var(--sans); font-size: 10.5px; color: var(--ink-soft); }
+    .col-srv-link { font-family: var(--sans); font-size: 11px; letter-spacing: .1em; color: var(--green); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; }
+    .col-srv-link:hover { border-color: var(--green); }
+    .col-cta-wrap { margin-top: 2px; background: var(--bg-nav); border: 1px solid var(--border); padding: 2rem; text-align: center; }
+    .col-cta-label { font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--green); margin-bottom: .6rem; font-weight: 500; display: block; }
+    .col-cta-title { font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 400; margin-bottom: .5rem; }
+    .col-cta-sub { font-family: var(--serif); font-size: .95rem; color: var(--ink-mid); margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+    .col-cta-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .col-cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--green); color: #f2ede4; font-family: var(--sans); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: opacity .2s; }
+    .col-cta-btn:hover { opacity: .85; }
+    .col-cta-ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+    .col-cta-ghost:hover { border-color: var(--green); color: var(--green); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/logo-lira.png" alt="LIRA" />
+    <div class="nav-logo-text">
+      <strong>LIRA</strong>
+      <span id="nav-studio">Estudio de Arquitectura</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="/#columnas" class="nav-back" id="nav-back">← COLUMNAS</a>
+    <button class="nav-lang active" onclick="setLang('es')">ES</button>
+    <span class="nav-sep">·</span>
+    <button class="nav-lang" onclick="setLang('en')">EN</button>
+    <span class="nav-sep">·</span>
+    <button class="nav-lang" onclick="setLang('it')">IT</button>
+  </div>
+</nav>
+
+<img src="/persepolis-via-lactea.jpg" alt="Ruinas de Persépolis bajo la Vía Láctea, Irán" class="hero-img" onerror="this.style.display='none'" />
+<p class="hero-caption" id="img-caption">Persépolis, Irán · Fotografía: Space.com</p>
+
+<article>
+  <div class="meta">
+    <span class="tag" id="tag">Geopolítica · IA</span>
+    <span class="meta-date" id="meta-date">7 de abril de 2026</span>
+    <span class="meta-sep-dot">·</span>
+    <span class="meta-read" id="meta-read">Lectura: ~7 min</span>
+  </div>
+
+  <h1 id="title">Velocidad de la luz<br>y olor a <em>pólvora</em></h1>
+  <p class="subtitle" id="subtitle">La aceleración que nadie imaginó</p>
+
+  <blockquote id="opening-quote">"La nave ya activó los motores. Las estrellas ya son líneas. No hay manera de frenar. Pero todavía podemos decidir hacia dónde vamos."</blockquote>
+
+  <p class="attribution" id="attribution">Fabian Mantilla · Trentino Alto Adige, Italia · Abril 2026</p>
+
+  <p class="drop" id="p1">Siempre lo imaginé como en las películas. Ese momento en que la nave activa los motores de velocidad de la luz y todo se comprime en un instante: las estrellas se vuelven líneas, el tiempo se dobla, y de repente estás en otro lugar del universo. Así imaginaba la llegada de la inteligencia artificial. Una aceleración vertiginosa, sí, pero controlada. Limpia. Con alguien al volante.</p>
+  <p id="p2">Nadie me dijo que la aceleración llegaría con olor a pólvora.</p>
+
+  <h2 id="h2-1">I. El caos que no estaba en el guión</h2>
+  <p id="p3">Mientras los modelos de inteligencia artificial rompen récord tras récord — razonando, diseñando, escribiendo código, diagnosticando enfermedades — el mundo político no está acelerando hacia el futuro. Está acelerando hacia algo que ya conocemos: el miedo, la dominación, la lógica del más fuerte. La tecnología cambia. La naturaleza humana, por ahora, no.</p>
+  <p id="p4">En el Estrecho de Ormuz, por donde pasa el veinte por ciento del petróleo mundial, el tráfico está paralizado. Irán lo cerró. Hay cadenas humanas rodeando plantas de energía. Hay misiles sobre Arabia Saudita. Hay un piloto estadounidense rescatado de las montañas de Irán en lo que describieron como una de las operaciones militares más complejas de la historia. Todo esto está pasando hoy, simultáneamente, en el mismo planeta donde también se está entrenando la inteligencia artificial más poderosa jamás construida.</p>
+  <p id="p5">Eso no es una coincidencia. Es la misma historia.</p>
+
+  <h2 id="h2-2">II. La nueva carrera por la bomba</h2>
+  <p id="p6">En los años cuarenta hubo una confluencia parecida: tecnología disruptiva, actores irracionales, e instituciones que no podían procesar la velocidad del cambio. El resultado fue Hiroshima. Luego vino la carrera nuclear, y con ella, décadas de terror equilibrado.</p>
+  <p id="p7">La inteligencia artificial es la nueva bomba atómica. No en sentido metafórico sino estructural: es una tecnología que reorganiza quién tiene poder y quién no, más rápido de lo que los marcos legales, diplomáticos e institucionales pueden responder. Y todavía no existe su Tratado de No Proliferación. Nadie se ha sentado en Ginebra a acordar las reglas.</p>
+  <div class="pull" id="pull1">Los datacenters que entrenan los modelos de IA consumen cantidades de energía sin precedentes. Quien controle los flujos de energía en la próxima década tiene una palanca directa sobre quién puede participar en la revolución tecnológica y quién queda afuera.</div>
+  <p id="p8">El Estrecho de Ormuz y Silicon Valley no son mundos separados. Son el mismo mundo visto desde dos ángulos distintos del mismo conflicto: quién controla la energía, quién controla el futuro.</p>
+
+  <h2 id="h2-3">III. Persia no es solo un estado-nación</h2>
+  <p id="p9">Hay algo que duele especialmente en todo esto. Irán no es solo un régimen político con el que se puede o no estar de acuerdo. Es la continuidad viva de una de las civilizaciones más antiguas del planeta. Persépolis fue construida quinientos años antes de Cristo. Hafez y Rumi escribieron poesía que todavía se lee hoy en medio mundo. La tradición matemática y astronómica persa alimentó directamente el Renacimiento europeo.</p>
+  <p id="p10">Cuando alguien amenaza con "destruir una civilización entera en una noche", está usando la palabra correcta sin entender el peso de lo que dice. Eso quizás es lo más escalofriante de todo: no la amenaza en sí, sino la ignorancia histórica desde la cual se pronuncia.</p>
+  <p id="p11">Y las cadenas humanas alrededor de las plantas de energía — esa imagen — dicen algo que ningún análisis geopolítico puede capturar del todo. Es la respuesta más antigua posible frente a la amenaza más moderna: el cuerpo humano como último argumento político.</p>
+
+  <h2 id="h2-4">IV. La escalera</h2>
+  <p id="p12">¿Por qué, en medio de todo esto, sigo construyendo? ¿Por qué invertir tiempo y energía en un proyecto propio, en una práctica de arquitectura, en columnas de opinión, cuando el mundo parece empeñado en desbaratarse?</p>
+  <p id="p13">Porque creo en la diferencia entre tecnología como instrumento de dominación y tecnología como escalera. La primera te hace más dependiente, más predecible, más fácil de controlar. La segunda te alcanza una herramienta para que tú mismo puedas subir.</p>
+  <p id="p14">Esa distinción no es técnica. Es política. Y es la batalla real que se está jugando ahora mismo, debajo de los misiles y los comunicados y los ultimátums de ocho de la noche.</p>
+  <div class="pull" id="pull2">El arquitecto independiente que usa inteligencia artificial para competir con firmas grandes. El periodista que la usa para investigar sin redacción. El estudiante en Bucaramanga que accede a conocimiento que antes solo existía en universidades de élite. Eso es usar la herramienta del sistema contra la lógica del sistema.</div>
+
+  <h2 id="h2-5">V. Morir de pie</h2>
+  <p id="p15">Tengo la conciencia tranquila. No como resignación sino como claridad: si mañana el mundo se acaba, no me encontrará de rodillas. Pero también tengo metas. Sueños. Cosas que quiero construir y lugares a los que quiero volver.</p>
+  <p id="p16">Esas dos cosas no se contradicen. Al contrario: vivir sin el miedo existencial como motor es lo que deja más energía para construir con intención. La conciencia tranquila no es pasividad — es la condición de posibilidad para actuar con libertad.</p>
+  <div class="pull" id="pull3">La singularidad que imaginábamos era un evento técnico. Lo que estamos viviendo es también una singularidad política: el momento en que los modelos de predicción histórica dejan de funcionar y el futuro se vuelve genuinamente abierto.</div>
+  <p id="p17">En ese futuro abierto, lo que hagamos con nuestras manos — lo que diseñemos, lo que escribamos, lo que construyamos — importa más, no menos. Precisamente porque nadie sabe cómo va a terminar esto.</p>
+  <p id="p18">La nave ya activó los motores. Las estrellas ya son líneas. No hay manera de frenar.</p>
+  <p id="p19">Pero todavía podemos decidir hacia dónde vamos.</p>
+
+
+  <!-- SERVICIOS -->
+  <div class="col-srv-wrap">
+    <span class="col-srv-label">Lo que hacemos</span>
+    <h3 class="col-srv-title">Nuestros <em>servicios</em></h3>
+    <p class="col-srv-sub">Del concepto a la obra. Acompañamos cada etapa del proyecto con la misma atención al detalle — para clientes finales y en colaboración con otros estudios.</p>
+    <div class="col-srv-grid">
+      <div class="col-srv-item"><span class="col-srv-ico">◈</span><div><span class="col-srv-name">Diseño de interiores</span><span class="col-srv-tags">Residencial · Comercial · Renders</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">⬡</span><div><span class="col-srv-name">Arquitectura y construcción</span><span class="col-srv-tags">Obra nueva · Ampliaciones · Acabados</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">⊞</span><div><span class="col-srv-name">Gerencia de proyectos</span><span class="col-srv-tags">APU · Interventoría · Control</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">◎</span><div><span class="col-srv-name">Renovación de fachadas</span><span class="col-srv-tags">Fachadas · Rehabilitación · Acabados</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">❋</span><div><span class="col-srv-name">Paisajismo y jardines</span><span class="col-srv-tags">Jardines · Terrazas · Exteriores</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">◱</span><div><span class="col-srv-name">Asesoría técnica</span><span class="col-srv-tags">Privados · Públicos · Licitaciones</span></div></div>
+    </div>
+    <a href="/#servicios" class="col-srv-link">Ver todos los servicios →</a>
+  </div>
+
+  <!-- CTA CONTACTO -->
+  <div class="col-cta-wrap">
+    <span class="col-cta-label">¿Tienes un proyecto en mente?</span>
+    <h3 class="col-cta-title">Hablemos antes de que empiece la obra</h3>
+    <p class="col-cta-sub">Acompañamos proyectos de arquitectura, interiorismo y renovación en Colombia e Italia — desde el primer número hasta la entrega.</p>
+    <div class="col-cta-btns">
+      <a href="/#contacto" class="col-cta-btn">Escribirnos</a>
+      <a href="https://wa.me/393200805705" class="col-cta-btn col-cta-ghost" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="article-footer" id="footer-text">Columna registrada el 7 de abril de 2026 · Fabian Mantilla · LIRA Estudio de Arquitectura · Trentino Alto Adige, Italia</div>
+  <a href="/#columnas" class="back-link" id="back-link">← Volver a columnas</a>
+</article>
+
+<script>
+const T = {
+  es: {
+    navStudio:'Estudio de Arquitectura', navBack:'← COLUMNAS',
+    imgCaption:'Persépolis, Irán · Fotografía: Space.com',
+    tag:'Geopolítica · IA', metaDate:'7 de abril de 2026', metaRead:'Lectura: ~7 min',
+    title:'Velocidad de la luz<br>y olor a <em>pólvora</em>',
+    subtitle:'La aceleración que nadie imaginó',
+    openingQuote:'"La nave ya activó los motores. Las estrellas ya son líneas. No hay manera de frenar. Pero todavía podemos decidir hacia dónde vamos."',
+    attribution:'Fabian Mantilla · Trentino Alto Adige, Italia · Abril 2026',
+    h1:'I. El caos que no estaba en el guión', h2:'II. La nueva carrera por la bomba',
+    h3:'III. Persia no es solo un estado-nación', h4:'IV. La escalera', h5:'V. Morir de pie',
+    p1:'Siempre lo imaginé como en las películas. Ese momento en que la nave activa los motores de velocidad de la luz y todo se comprime en un instante: las estrellas se vuelven líneas, el tiempo se dobla, y de repente estás en otro lugar del universo. Así imaginaba la llegada de la inteligencia artificial. Una aceleración vertiginosa, sí, pero controlada. Limpia. Con alguien al volante.',
+    p2:'Nadie me dijo que la aceleración llegaría con olor a pólvora.',
+    p3:'Mientras los modelos de inteligencia artificial rompen récord tras récord — razonando, diseñando, escribiendo código, diagnosticando enfermedades — el mundo político no está acelerando hacia el futuro. Está acelerando hacia algo que ya conocemos: el miedo, la dominación, la lógica del más fuerte. La tecnología cambia. La naturaleza humana, por ahora, no.',
+    p4:'En el Estrecho de Ormuz, por donde pasa el veinte por ciento del petróleo mundial, el tráfico está paralizado. Irán lo cerró. Hay cadenas humanas rodeando plantas de energía. Hay misiles sobre Arabia Saudita. Hay un piloto estadounidense rescatado de las montañas de Irán en lo que describieron como una de las operaciones militares más complejas de la historia. Todo esto está pasando hoy, simultáneamente, en el mismo planeta donde también se está entrenando la inteligencia artificial más poderosa jamás construida.',
+    p5:'Eso no es una coincidencia. Es la misma historia.',
+    p6:'En los años cuarenta hubo una confluencia parecida: tecnología disruptiva, actores irracionales, e instituciones que no podían procesar la velocidad del cambio. El resultado fue Hiroshima. Luego vino la carrera nuclear, y con ella, décadas de terror equilibrado.',
+    p7:'La inteligencia artificial es la nueva bomba atómica. No en sentido metafórico sino estructural: es una tecnología que reorganiza quién tiene poder y quién no, más rápido de lo que los marcos legales, diplomáticos e institucionales pueden responder. Y todavía no existe su Tratado de No Proliferación. Nadie se ha sentado en Ginebra a acordar las reglas.',
+    pull1:'Los datacenters que entrenan los modelos de IA consumen cantidades de energía sin precedentes. Quien controle los flujos de energía en la próxima década tiene una palanca directa sobre quién puede participar en la revolución tecnológica y quién queda afuera.',
+    p8:'El Estrecho de Ormuz y Silicon Valley no son mundos separados. Son el mismo mundo visto desde dos ángulos distintos del mismo conflicto: quién controla la energía, quién controla el futuro.',
+    p9:'Hay algo que duele especialmente en todo esto. Irán no es solo un régimen político con el que se puede o no estar de acuerdo. Es la continuidad viva de una de las civilizaciones más antiguas del planeta. Persépolis fue construida quinientos años antes de Cristo. Hafez y Rumi escribieron poesía que todavía se lee hoy en medio mundo. La tradición matemática y astronómica persa alimentó directamente el Renacimiento europeo.',
+    p10:'Cuando alguien amenaza con "destruir una civilización entera en una noche", está usando la palabra correcta sin entender el peso de lo que dice. Eso quizás es lo más escalofriante de todo: no la amenaza en sí, sino la ignorancia histórica desde la cual se pronuncia.',
+    p11:'Y las cadenas humanas alrededor de las plantas de energía — esa imagen — dicen algo que ningún análisis geopolítico puede capturar del todo. Es la respuesta más antigua posible frente a la amenaza más moderna: el cuerpo humano como último argumento político.',
+    p12:'¿Por qué, en medio de todo esto, sigo construyendo? ¿Por qué invertir tiempo y energía en un proyecto propio, en una práctica de arquitectura, en columnas de opinión, cuando el mundo parece empeñado en desbaratarse?',
+    p13:'Porque creo en la diferencia entre tecnología como instrumento de dominación y tecnología como escalera. La primera te hace más dependiente, más predecible, más fácil de controlar. La segunda te alcanza una herramienta para que tú mismo puedas subir.',
+    p14:'Esa distinción no es técnica. Es política. Y es la batalla real que se está jugando ahora mismo, debajo de los misiles y los comunicados y los ultimátums de ocho de la noche.',
+    pull2:'El arquitecto independiente que usa inteligencia artificial para competir con firmas grandes. El periodista que la usa para investigar sin redacción. El estudiante en Bucaramanga que accede a conocimiento que antes solo existía en universidades de élite. Eso es usar la herramienta del sistema contra la lógica del sistema.',
+    p15:'Tengo la conciencia tranquila. No como resignación sino como claridad: si mañana el mundo se acaba, no me encontrará de rodillas. Pero también tengo metas. Sueños. Cosas que quiero construir y lugares a los que quiero volver.',
+    p16:'Esas dos cosas no se contradicen. Al contrario: vivir sin el miedo existencial como motor es lo que deja más energía para construir con intención. La conciencia tranquila no es pasividad — es la condición de posibilidad para actuar con libertad.',
+    pull3:'La singularidad que imaginábamos era un evento técnico. Lo que estamos viviendo es también una singularidad política: el momento en que los modelos de predicción histórica dejan de funcionar y el futuro se vuelve genuinamente abierto.',
+    p17:'En ese futuro abierto, lo que hagamos con nuestras manos — lo que diseñemos, lo que escribamos, lo que construyamos — importa más, no menos. Precisamente porque nadie sabe cómo va a terminar esto.',
+    p18:'La nave ya activó los motores. Las estrellas ya son líneas. No hay manera de frenar.',
+    p19:'Pero todavía podemos decidir hacia dónde vamos.',
+    footer:'Columna registrada el 7 de abril de 2026 · Fabian Mantilla · LIRA Estudio de Arquitectura · Trentino Alto Adige, Italia',
+    backLink:'← Volver a columnas',
+  },
+  en: {
+    navStudio:'Architecture Studio', navBack:'← COLUMNS',
+    imgCaption:'Persepolis, Iran · Photo: Space.com',
+    tag:'Geopolitics · AI', metaDate:'April 7, 2026', metaRead:'Read: ~7 min',
+    title:'Speed of light<br>and the smell of <em>gunpowder</em>',
+    subtitle:'The acceleration nobody imagined',
+    openingQuote:'"The ship has already fired its engines. The stars are already lines. There is no way to slow down. But we can still decide where we are going."',
+    attribution:'Fabian Mantilla · Trentino Alto Adige, Italy · April 2026',
+    h1:'I. The chaos that was not in the script', h2:'II. The new arms race',
+    h3:'III. Persia is not just a nation-state', h4:'IV. The ladder', h5:'V. Die on your feet',
+    p1:"I always imagined it like in the movies. That moment when the ship fires its light-speed engines and everything compresses in an instant: stars become streaks, time bends, and suddenly you are somewhere else in the universe. That is how I imagined the arrival of artificial intelligence. A dizzying acceleration, yes, but controlled. Clean. With someone at the wheel.",
+    p2:'Nobody told me the acceleration would come with the smell of gunpowder.',
+    p3:"While AI models break record after record — reasoning, designing, writing code, diagnosing diseases — the political world is not accelerating toward the future. It is accelerating toward something we already know: fear, domination, the logic of the strongest. Technology changes. Human nature, for now, does not.",
+    p4:"In the Strait of Hormuz, through which twenty percent of the world's oil passes, traffic has ground to a halt. Iran closed it. There are human chains surrounding power plants. There are missiles over Saudi Arabia. There is an American pilot rescued from the mountains of Iran in what they described as one of the most complex military operations in history. All of this is happening today, simultaneously, on the same planet where the most powerful artificial intelligence ever built is also being trained.",
+    p5:'That is not a coincidence. It is the same story.',
+    p6:'In the nineteen-forties there was a similar confluence: disruptive technology, irrational actors, and institutions that could not process the speed of change. The result was Hiroshima. Then came the nuclear race, and with it, decades of balanced terror.',
+    p7:'Artificial intelligence is the new atomic bomb. Not metaphorically but structurally: it is a technology that reorganizes who has power and who does not, faster than legal, diplomatic, and institutional frameworks can respond. And its Non-Proliferation Treaty does not yet exist. Nobody has sat down in Geneva to agree on the rules.',
+    pull1:'The datacenters that train AI models consume unprecedented amounts of energy. Whoever controls energy flows in the next decade has a direct lever over who can participate in the technological revolution and who is left out.',
+    p8:'The Strait of Hormuz and Silicon Valley are not separate worlds. They are the same world seen from two different angles of the same conflict: who controls the energy, who controls the future.',
+    p9:'There is something that hurts especially in all of this. Iran is not just a political regime with which one can agree or disagree. It is the living continuity of one of the oldest civilizations on the planet. Persepolis was built five hundred years before Christ. Hafez and Rumi wrote poetry still read today across half the world. The Persian mathematical and astronomical tradition fed directly into the European Renaissance.',
+    p10:'When someone threatens to "destroy an entire civilization in one night," they are using the right word without understanding the weight of what they are saying. That is perhaps the most chilling thing of all: not the threat itself, but the historical ignorance from which it is uttered.',
+    p11:'And the human chains surrounding the power plants — that image — say something that no geopolitical analysis can fully capture. It is the most ancient possible response to the most modern threat: the human body as the last political argument.',
+    p12:'Why, in the middle of all this, do I keep building? Why invest time and energy in my own project, in an architecture practice, in opinion columns, when the world seems determined to fall apart?',
+    p13:'Because I believe in the difference between technology as an instrument of domination and technology as a ladder. The first makes you more dependent, more predictable, more controllable. The second reaches out a tool so you can climb up yourself.',
+    p14:"That distinction is not technical. It is political. And it is the real battle being fought right now, beneath the missiles and the communiqués and the eight o'clock ultimatums.",
+    pull2:"The independent architect who uses artificial intelligence to compete with large firms. The journalist who uses it to investigate without a newsroom. The student in Bucaramanga who accesses knowledge that previously existed only in elite universities. That is using the system's tool against the system's logic.",
+    p15:'My conscience is clear. Not as resignation but as clarity: if the world ends tomorrow, it will not find me on my knees. But I also have goals. Dreams. Things I want to build and places I want to return to.',
+    p16:'Those two things are not contradictory. On the contrary: living without existential fear as a driving force is what leaves more energy to build with intention. A clear conscience is not passivity — it is the condition that makes it possible to act freely.',
+    pull3:'The singularity we imagined was a technical event. What we are living through is also a political singularity: the moment when historical prediction models stop working and the future becomes genuinely open.',
+    p17:'In that open future, what we do with our hands — what we design, what we write, what we build — matters more, not less. Precisely because nobody knows how this is going to end.',
+    p18:'The ship has already fired its engines. The stars are already lines. There is no way to slow down.',
+    p19:'But we can still decide where we are going.',
+    footer:'Column written April 7, 2026 · Fabian Mantilla · LIRA Architecture Studio · Trentino Alto Adige, Italy',
+    backLink:'← Back to columns',
+  },
+  it: {
+    navStudio:'Studio di Architettura', navBack:'← COLONNE',
+    imgCaption:'Persepoli, Iran · Fotografia: Space.com',
+    tag:'Geopolitica · IA', metaDate:'7 aprile 2026', metaRead:'Lettura: ~7 min',
+    title:'Velocità della luce<br>e odore di <em>polvere da sparo</em>',
+    subtitle:"L'accelerazione che nessuno aveva immaginato",
+    openingQuote:"\"La nave ha già acceso i motori. Le stelle sono già linee. Non c'è modo di frenare. Ma possiamo ancora decidere dove andare.\"",
+    attribution:'Fabian Mantilla · Trentino Alto Adige, Italia · Aprile 2026',
+    h1:'I. Il caos che non era nel copione', h2:'II. La nuova corsa agli armamenti',
+    h3:'III. La Persia non è solo uno stato-nazione', h4:'IV. La scala', h5:'V. Morire in piedi',
+    p1:"L'ho sempre immaginato come nei film. Quel momento in cui la nave accende i motori per la velocità della luce e tutto si comprime in un istante: le stelle diventano linee, il tempo si piega, e all'improvviso sei in un altro angolo dell'universo. Così immaginavo l'arrivo dell'intelligenza artificiale. Un'accelerazione vertiginosa, sì, ma controllata. Pulita. Con qualcuno al volante.",
+    p2:"Nessuno mi aveva detto che l'accelerazione sarebbe arrivata con odore di polvere da sparo.",
+    p3:"Mentre i modelli di intelligenza artificiale battono record su record — ragionando, progettando, scrivendo codice, diagnosticando malattie — il mondo politico non sta accelerando verso il futuro. Sta accelerando verso qualcosa che già conosciamo: la paura, il dominio, la logica del più forte. La tecnologia cambia. La natura umana, per ora, no.",
+    p4:"Nello Stretto di Hormuz, attraverso cui passa il venti per cento del petrolio mondiale, il traffico è fermo. L'Iran lo ha chiuso. Ci sono catene umane che circondano le centrali elettriche. Ci sono missili sull'Arabia Saudita. C'è un pilota americano recuperato dalle montagne dell'Iran in quella che hanno descritto come una delle operazioni militari più complesse della storia. Tutto questo sta accadendo oggi, simultaneamente, sullo stesso pianeta dove si sta addestrando anche l'intelligenza artificiale più potente mai costruita.",
+    p5:'Questa non è una coincidenza. È la stessa storia.',
+    p6:"Negli anni quaranta ci fu una confluenza simile: tecnologia dirompente, attori irrazionali e istituzioni che non riuscivano a elaborare la velocità del cambiamento. Il risultato fu Hiroshima. Poi arrivò la corsa agli armamenti nucleari, e con essa, decenni di terrore equilibrato.",
+    p7:"L'intelligenza artificiale è la nuova bomba atomica. Non in senso metaforico ma strutturale: è una tecnologia che ridistribuisce il potere più velocemente di quanto i quadri giuridici, diplomatici e istituzionali possano rispondere. E il suo Trattato di Non Proliferazione non esiste ancora. Nessuno si è seduto a Ginevra per concordare le regole.",
+    pull1:"I datacenter che addestrano i modelli di IA consumano quantità di energia senza precedenti. Chi controlla i flussi energetici nel prossimo decennio ha una leva diretta su chi può partecipare alla rivoluzione tecnologica e chi ne rimane escluso.",
+    p8:"Lo Stretto di Hormuz e la Silicon Valley non sono mondi separati. Sono lo stesso mondo visto da due angolazioni diverse dello stesso conflitto: chi controlla l'energia, chi controlla il futuro.",
+    p9:"C'è qualcosa che fa particolarmente male in tutto questo. L'Iran non è solo un regime politico con cui si può essere d'accordo o meno. È la continuità vivente di una delle civiltà più antiche del pianeta. Persepoli fu costruita cinquecento anni prima di Cristo. Hafez e Rumi scrissero poesia che ancora oggi si legge in mezzo mondo. La tradizione matematica e astronomica persiana alimentò direttamente il Rinascimento europeo.",
+    p10:'Quando qualcuno minaccia di "distruggere un\'intera civiltà in una notte", sta usando la parola giusta senza capire il peso di ciò che dice. Forse è questo la cosa più agghiacciante di tutto: non la minaccia in sé, ma l\'ignoranza storica da cui viene pronunciata.',
+    p11:"E le catene umane intorno alle centrali elettriche — quell'immagine — dicono qualcosa che nessuna analisi geopolitica riesce a catturare pienamente. È la risposta più antica possibile di fronte alla minaccia più moderna: il corpo umano come ultimo argomento politico.",
+    p12:"Perché, in mezzo a tutto questo, continuo a costruire? Perché investire tempo ed energia in un progetto personale, in uno studio di architettura, in colonne d'opinione, quando il mondo sembra determinato a sgretolarsi?",
+    p13:"Perché credo nella differenza tra tecnologia come strumento di dominio e tecnologia come scala. La prima ti rende più dipendente, più prevedibile, più facile da controllare. La seconda ti tende uno strumento perché tu possa salire da solo.",
+    p14:"Questa distinzione non è tecnica. È politica. Ed è la vera battaglia che si sta combattendo proprio ora, sotto i missili e i comunicati e gli ultimatum delle otto di sera.",
+    pull2:"L'architetto indipendente che usa l'intelligenza artificiale per competere con i grandi studi. Il giornalista che la usa per fare inchieste senza una redazione. Lo studente a Bucaramanga che accede a conoscenze che prima esistevano solo nelle università d'élite. È usare lo strumento del sistema contro la logica del sistema.",
+    p15:"Ho la coscienza tranquilla. Non come rassegnazione ma come chiarezza: se domani il mondo finisce, non mi troverà in ginocchio. Ma ho anche obiettivi. Sogni. Cose che voglio costruire e luoghi dove voglio tornare.",
+    p16:"Queste due cose non si contraddicono. Al contrario: vivere senza la paura esistenziale come motore è ciò che lascia più energia per costruire con intenzione. La coscienza tranquilla non è passività — è la condizione che rende possibile agire con libertà.",
+    pull3:"La singolarità che immaginavamo era un evento tecnico. Quello che stiamo vivendo è anche una singolarità politica: il momento in cui i modelli di previsione storica smettono di funzionare e il futuro diventa genuinamente aperto.",
+    p17:"In quel futuro aperto, ciò che facciamo con le nostre mani — ciò che progettiamo, ciò che scriviamo, ciò che costruiamo — conta di più, non di meno. Proprio perché nessuno sa come andrà a finire.",
+    p18:"La nave ha già acceso i motori. Le stelle sono già linee. Non c'è modo di frenare.",
+    p19:"Ma possiamo ancora decidere dove andare.",
+    footer:'Colonna scritta il 7 aprile 2026 · Fabian Mantilla · LIRA Studio di Architettura · Trentino Alto Adige, Italia',
+    backLink:'← Torna alle colonne',
+  }
+};
+
+function setLang(l) {
+  const t = T[l];
+  document.documentElement.lang = l;
+  document.querySelectorAll('.nav-lang').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.getElementById('nav-studio').textContent = t.navStudio;
+  document.getElementById('nav-back').textContent = t.navBack;
+  document.getElementById('img-caption').textContent = t.imgCaption;
+  document.getElementById('tag').textContent = t.tag;
+  document.getElementById('meta-date').textContent = t.metaDate;
+  document.getElementById('meta-read').textContent = t.metaRead;
+  document.getElementById('title').innerHTML = t.title;
+  document.getElementById('subtitle').textContent = t.subtitle;
+  document.getElementById('opening-quote').textContent = t.openingQuote;
+  document.getElementById('attribution').textContent = t.attribution;
+  document.getElementById('h2-1').textContent = t.h1;
+  document.getElementById('h2-2').textContent = t.h2;
+  document.getElementById('h2-3').textContent = t.h3;
+  document.getElementById('h2-4').textContent = t.h4;
+  document.getElementById('h2-5').textContent = t.h5;
+  ['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11','p12','p13','p14','p15','p16','p17','p18','p19'].forEach(id => {
+    document.getElementById(id).textContent = t[id];
+  });
+  document.getElementById('pull1').textContent = t.pull1;
+  document.getElementById('pull2').textContent = t.pull2;
+  document.getElementById('pull3').textContent = t.pull3;
+  document.getElementById('footer-text').textContent = t.footer;
+  document.getElementById('back-link').textContent = t.backLink;
+}
+</script>
+</body>
+</html>

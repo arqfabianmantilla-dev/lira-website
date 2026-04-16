@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El ladrillo que no cuadra · LIRA</title>
+  <meta name="description" content="Radiografía del sector constructor en Colombia 2026. La paradoja de un sector que vende más pero construye menos. Por Fabian Mantilla — LIRA Estudio de Arquitectura." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f2ede4; --bg-nav: #ede8df; --bg-dark: #e4ddd2;
+      --ink: #1c1a16; --ink-mid: #46433c; --ink-soft: #7a7770;
+      --green: #4a6b4a; --green-lt: #6a8b6a;
+      --rojo: #7a3a2a; --rojo-lt: #a05040;
+      --border: #ccc6b8; --quote-bar: #a89870;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 1.85; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2.5rem; border-bottom: 1px solid var(--border); background: var(--bg-nav); position: sticky; top: 0; z-index: 10; }
+    .nav-logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--ink); }
+    .nav-logo img { width: 38px; height: 38px; object-fit: contain; }
+    .nav-logo-text strong { display: block; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; }
+    .nav-logo-text span { display: block; font-family: var(--sans); font-size: 10px; font-weight: 300; letter-spacing: 0.08em; color: var(--ink-mid); text-transform: uppercase; }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; }
+    .nav-back { text-decoration: none; color: var(--ink-mid); margin-right: 0.4rem; }
+    .nav-back:hover { color: var(--ink); }
+    .nav-lang { color: var(--ink-soft); cursor: pointer; background: none; border: none; font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; padding: 0; }
+    .nav-lang:hover { color: var(--ink); }
+    .nav-lang.active { color: var(--ink); font-weight: 500; }
+    .nav-sep { color: var(--border); }
+
+    /* HERO */
+    .hero-img { width: 100%; max-height: 480px; object-fit: cover; object-position: center 55%; display: block; filter: brightness(0.82) contrast(1.06) saturate(0.88); }
+    .hero-caption { font-family: var(--sans); font-size: 11px; color: var(--ink-soft); text-align: right; padding: 0.4rem 2.5rem 0; letter-spacing: 0.04em; }
+
+    /* ARTICLE */
+    article { max-width: 740px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    .meta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 2rem; font-family: var(--sans); font-size: 12px; letter-spacing: 0.06em; }
+    .tag { border: 1px solid var(--ink); padding: 0.2rem 0.65rem; font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+    .meta-date { color: var(--ink-mid); }
+    .meta-dot { color: var(--border); }
+    .meta-read { color: var(--ink-soft); }
+
+    h1 { font-family: var(--serif); font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 400; line-height: 1.08; margin-bottom: 0.4rem; color: var(--ink); }
+    h1 em { font-style: italic; color: var(--green); }
+    .subtitle { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.25rem); font-style: italic; font-weight: 300; color: var(--ink-mid); margin-bottom: 2.2rem; }
+    blockquote { background: #d8d0c2; border-left: 3px solid var(--quote-bar); padding: 1.4rem 1.8rem; margin: 0 0 1.8rem; font-size: clamp(1.05rem, 2.2vw, 1.3rem); font-style: italic; font-weight: 400; color: #2e2a22; line-height: 1.75; }
+    .attribution { font-family: var(--sans); font-size: 12px; color: var(--ink-soft); margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+
+    h2 { font-family: var(--serif); font-size: clamp(1.45rem, 3.5vw, 2.1rem); font-weight: 400; color: var(--ink); margin: 3.5rem 0 1.2rem; line-height: 1.18; }
+    h2 em { font-style: italic; color: var(--green); }
+    p { margin-bottom: 1.5rem; font-weight: 400; color: var(--ink); font-size: 1.05rem; }
+
+    .pull { font-family: var(--serif); font-size: clamp(1.2rem, 2.8vw, 1.5rem); font-style: italic; font-weight: 400; color: var(--ink-mid); border-left: 2px solid var(--quote-bar); padding: 0.5rem 0 0.5rem 1.4rem; margin: 2.5rem 0; line-height: 1.55; }
+    .pull.arquitecto { background: #7a8f72; color: #f0ece4; border-left: none; padding: 1.4rem 1.8rem; font-style: italic; font-size: clamp(1.15rem, 2.8vw, 1.5rem); }
+
+    /* DATO BOX */
+    .dato { background: var(--bg-dark); border-left: 3px solid var(--green); padding: 1.1rem 1.4rem; margin: 2rem 0; font-family: var(--sans); font-size: 13.5px; color: var(--ink); line-height: 1.7; font-weight: 400; }
+    .dato strong { color: var(--green); font-weight: 500; display: block; margin-bottom: 0.4rem; letter-spacing: 0.05em; text-transform: uppercase; font-size: 10.5px; }
+
+    /* IMAGEN INTERMEDIA */
+    .mid-img-wrap { margin: 3rem -2rem; }
+    .mid-img-wrap img { width: 100%; max-height: 340px; object-fit: cover; object-position: center 40%; display: block; filter: brightness(0.8) contrast(1.08) saturate(0.85); }
+    .mid-img-caption { font-family: var(--sans); font-size: 11px; color: var(--ink-soft); padding: 0.4rem 2rem 0; letter-spacing: 0.04em; text-align: right; }
+
+    /* WRAPPER GRÁFICOS */
+    .grafico-wrap { margin: 2.5rem 0; background: var(--bg-dark); padding: 1.5rem 1.5rem 1.2rem; }
+    .grafico-titulo { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 1.2rem; }
+    .grafico-fuente { font-family: var(--sans); font-size: 10.5px; color: var(--ink-soft); margin-top: 0.8rem; letter-spacing: 0.03em; }
+    svg text { font-family: 'DM Sans', system-ui, sans-serif; }
+
+    /* GRID DE DONUTS */
+    .donuts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2.5rem 0; background: var(--bg-dark); padding: 1.5rem; }
+    .donut-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .donut-item svg { width: 100%; max-width: 130px; height: auto; }
+    .donut-label { font-family: var(--sans); font-size: 11px; color: var(--ink-mid); margin-top: 0.5rem; line-height: 1.4; font-weight: 400; }
+    .donut-label strong { display: block; font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+    .donuts-titulo { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 1.2rem; grid-column: 1 / -1; }
+    .donuts-fuente { font-family: var(--sans); font-size: 10.5px; color: var(--ink-soft); margin-top: 0.6rem; grid-column: 1 / -1; }
+
+    /* DROP CAP */
+    .drop::first-letter { font-family: var(--serif); font-size: 5rem; font-weight: 500; float: left; line-height: 0.78; margin: 0.15rem 0.12rem 0 0; color: var(--ink); }
+
+    /* FOOTER ARTICLE */
+    .article-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); font-family: var(--sans); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.03em; line-height: 1.75; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; color: var(--ink-mid); font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; margin-top: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
+    .back-link:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* CTA */
+    .cta-contacto { background: var(--bg-nav); border: 1px solid var(--border); padding: 2.5rem; margin: 3.5rem 0 0; text-align: center; }
+    .cta-label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 0.7rem; font-weight: 500; }
+    .cta-contacto h3 { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 400; margin-bottom: 0.6rem; color: var(--ink); }
+    .cta-sub { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--ink-mid); margin-bottom: 1.8rem; font-weight: 400; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; background: var(--green); color: #f2ede4; font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: opacity .2s; }
+    .cta-btn:hover { opacity: 0.85; }
+    .cta-btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+    .cta-btn.ghost:hover { border-color: var(--green); color: var(--green); }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.2rem; }
+      article { padding: 2rem 1.2rem 4rem; }
+      .hero-caption { padding-right: 1.2rem; }
+      .cta-contacto { padding: 1.8rem 1.2rem; }
+      .grafico-wrap { padding: 1rem; }
+      .mid-img-wrap { margin: 2.5rem -1.2rem; }
+      .donuts-grid { grid-template-columns: repeat(2, 1fr); padding: 1rem; }
+    }
+  
+    /* SERVICIOS + CTA EN COLUMNA */
+    .col-srv-wrap { margin: 3.5rem 0 0; border-top: 1px solid var(--border); padding-top: 2.5rem; }
+    .col-srv-label { font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--green); margin-bottom: .5rem; font-weight: 500; display: block; }
+    .col-srv-title { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 400; margin-bottom: .5rem; line-height: 1.2; }
+    .col-srv-title em { font-style: italic; color: var(--green); }
+    .col-srv-sub { font-family: var(--sans); font-size: 13px; color: var(--ink-mid); margin-bottom: 1.5rem; line-height: 1.7; font-weight: 300; }
+    .col-srv-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-bottom: 1.2rem; }
+    .col-srv-item { background: #e8e2d6; padding: .9rem 1rem; display: flex; align-items: flex-start; gap: .8rem; }
+    .col-srv-ico { font-size: 15px; color: var(--green); flex-shrink: 0; margin-top: 1px; }
+    .col-srv-name { font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 2px; display: block; }
+    .col-srv-tags { font-family: var(--sans); font-size: 10.5px; color: var(--ink-soft); }
+    .col-srv-link { font-family: var(--sans); font-size: 11px; letter-spacing: .1em; color: var(--green); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; }
+    .col-srv-link:hover { border-color: var(--green); }
+    .col-cta-wrap { margin-top: 2px; background: var(--bg-nav); border: 1px solid var(--border); padding: 2rem; text-align: center; }
+    .col-cta-label { font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--green); margin-bottom: .6rem; font-weight: 500; display: block; }
+    .col-cta-title { font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 400; margin-bottom: .5rem; }
+    .col-cta-sub { font-family: var(--serif); font-size: .95rem; color: var(--ink-mid); margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+    .col-cta-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .col-cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--green); color: #f2ede4; font-family: var(--sans); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: opacity .2s; }
+    .col-cta-btn:hover { opacity: .85; }
+    .col-cta-ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+    .col-cta-ghost:hover { border-color: var(--green); color: var(--green); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/logo-lira.png" alt="LIRA" />
+    <div class="nav-logo-text">
+      <strong>LIRA</strong>
+      <span id="nav-studio">Estudio de Arquitectura</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="/#columnas" class="nav-back" id="nav-back">← COLUMNAS</a>
+    <button class="nav-lang active" onclick="setLang('es')">ES</button>
+    <span class="nav-sep">·</span>
+    <button class="nav-lang" onclick="setLang('en')">EN</button>
+    <span class="nav-sep">·</span>
+    <button class="nav-lang" onclick="setLang('it')">IT</button>
+  </div>
+</nav>
+
+<!-- HERO: imagen limpia sin marcas de agua -->
+<img src="/bucaramanga-panoramica.jpg" alt="Panorámica de Bucaramanga, Colombia" class="hero-img" onerror="this.style.display='none'" />
+<p class="hero-caption" id="img-caption">Bucaramanga, Santander · Colombia</p>
+
+<article>
+  <div class="meta">
+    <span class="tag" id="tag">Mercado · Arquitectura</span>
+    <span class="meta-date" id="meta-date">13 de abril de 2026</span>
+    <span class="meta-dot">·</span>
+    <span class="meta-read" id="meta-read">Lectura: ~8 min</span>
+  </div>
+
+  <h1 id="title">El ladrillo <em>que no cuadra</em></h1>
+  <p class="subtitle" id="subtitle">Radiografía del sector constructor en Colombia 2026</p>
+
+  <blockquote id="opening-quote">"73.100 empresas. $36,4 billones en ingresos. Y sin embargo, los números no cuadran. Esta es la historia de un sector que mueve el país sin moverse a sí mismo."</blockquote>
+
+  <p class="attribution" id="attribution">Fabian Mantilla · Trentino Alto Adige, Italia · Abril 2026</p>
+
+  <!-- ── SECCIÓN 1 ── -->
+  <p class="drop" id="p1">Hay sectores que uno imagina sólidos por definición. La construcción es uno de ellos — ladrillos, concreto, cosas que se ven, que pesan, que duran. Y sin embargo, cuando uno se sienta a mirar los datos del sector constructor en Colombia en 2026, lo que encuentra no es solidez. Es una paradoja enorme que lleva años acumulándose sin que nadie la nombre con claridad.</p>
+
+  <p id="p2">Este artículo no es una denuncia ni una queja gremial. Es un intento de leer los números con honestidad — desde la perspectiva de un arquitecto que trabaja en este campo y necesita entender el terreno que pisa.</p>
+
+  <h2 id="h2-1">I. Colombia construye. <em>¿Pero quién gana?</em></h2>
+
+  <p id="p3">El sector construcción aporta el 4,1% del PIB nacional y dinamiza 32 cadenas productivas — el 54% del aparato productivo colombiano tiene algún vínculo con él. En 2024 reportó ingresos de $36,4 billones y utilidades de $3,0 billones, posicionándose como el cuarto sector más rentable entre las 1.000 empresas más grandes del país.</p>
+
+  <p id="p4">Suena bien. Pero esas utilidades cayeron un 38,8% respecto al año anterior. En un solo año, casi 2 billones de pesos desaparecieron del balance.</p>
+
+  <!-- GRÁFICO BAR: Utilidades 2023 vs 2024 -->
+  <div class="grafico-wrap">
+    <div class="grafico-titulo" id="g1-titulo">Utilidades del sector constructor · 2023 vs 2024</div>
+    <svg viewBox="0 0 560 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <!-- 2023 -->
+      <rect x="60" y="20" width="170" height="110" fill="#4a6b4a" rx="3"/>
+      <text x="145" y="14" text-anchor="middle" font-size="15" font-weight="500" fill="#1c1a16">$4,9 B</text>
+      <text x="145" y="148" text-anchor="middle" font-size="13" fill="#46433c">2023</text>
+      <!-- 2024 -->
+      <rect x="330" y="77" width="170" height="53" fill="#4a6b4a" rx="3" opacity="0.5"/>
+      <text x="415" y="71" text-anchor="middle" font-size="15" font-weight="500" fill="#1c1a16">$3,0 B</text>
+      <text x="415" y="148" text-anchor="middle" font-size="13" fill="#46433c">2024</text>
+      <!-- Etiqueta -->
+      <text x="280" y="170" text-anchor="middle" font-size="12" fill="#7a3a2a" font-weight="500">− 38,8 % en un año</text>
+    </svg>
+    <div class="grafico-fuente" id="g1-fuente">Fuente: Supersociedades · 1.000 empresas más grandes de Colombia 2024 (Pulzo)</div>
+  </div>
+
+  <p id="p5">Y hay un dato que resume el momento mejor que cualquier análisis: entre agosto de 2022 y septiembre de 2025, 206.161 hogares colombianos desistieron de comprar vivienda. Eso equivale a $60 billones que no entraron al sector. Sesenta billones de demanda real — con nombre y apellido — que se fue.</p>
+
+  <!-- GRÁFICO BAR: Ventas vs Obras -->
+  <div class="grafico-wrap">
+    <div class="grafico-titulo" id="g2-titulo">Vivienda — ventas vs obras iniciadas · ene–sep 2025</div>
+    <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <rect x="40" y="20" width="190" height="130" fill="#4a6b4a" rx="3"/>
+      <text x="135" y="14" text-anchor="middle" font-size="14" font-weight="500" fill="#1c1a16">128.543</text>
+      <text x="135" y="165" text-anchor="middle" font-size="12" fill="#46433c" id="g2-l1">Viviendas vendidas</text>
+      <text x="135" y="181" text-anchor="middle" font-size="12" fill="#4a6b4a" font-weight="500">+ 12 %</text>
+      <rect x="330" y="87" width="190" height="63" fill="#7a3a2a" rx="3" opacity="0.65"/>
+      <text x="425" y="80" text-anchor="middle" font-size="14" font-weight="500" fill="#1c1a16">78.679</text>
+      <text x="425" y="165" text-anchor="middle" font-size="12" fill="#46433c" id="g2-l2">Obras iniciadas</text>
+      <text x="425" y="181" text-anchor="middle" font-size="12" fill="#7a3a2a" font-weight="500">− 28,6 %</text>
+    </svg>
+    <div class="grafico-fuente" id="g2-fuente">Fuente: DIAN · Camacol 2025 — los constructores venden inventario pero no arrancan obra nueva</div>
+  </div>
+
+  <!-- ── IMAGEN INTERMEDIA (imagen 2 como paisaje urbano de apoyo) ── -->
+  <div class="mid-img-wrap">
+    <img src="/bucaramanga-panoramica-2.jpg" alt="Vista aérea de Bucaramanga, Colombia" onerror="this.style.display='none'" />
+    <p class="mid-img-caption" id="mid-caption">Vista aérea del centro de Bucaramanga</p>
+  </div>
+
+  <!-- ── SECCIÓN 2 ── -->
+  <h2 id="h2-2">II. 73.100 empresas, <em>una sola paradoja</em></h2>
+
+  <p id="p6">El sector tiene aproximadamente 73.100 empresas formales activas — el 4,7% del tejido empresarial del país. En 2023 fue el sector que más empresas nuevas creó. Parece un ecosistema dinámico y vibrante.</p>
+
+  <p id="p7">Pero la estructura interna cuenta otra historia. Una muy distinta.</p>
+
+  <!-- DONUTS GRID: Estructura empresarial -->
+  <div class="donuts-grid">
+    <div class="donuts-titulo" id="g3-titulo">Estructura del universo empresarial constructor · Colombia 2024</div>
+
+    <!-- Donut 1: Microempresas 94.2% -->
+    <div class="donut-item">
+      <svg viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#ddd5c5" stroke-width="5"/>
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#4a6b4a" stroke-width="5"
+          stroke-dasharray="94.2 5.8" stroke-dashoffset="25" stroke-linecap="butt"/>
+        <text x="21" y="19" text-anchor="middle" font-size="7" font-weight="500" fill="#1c1a16">94,2%</text>
+        <text x="21" y="26" text-anchor="middle" font-size="4.5" fill="#7a7770">micro</text>
+      </svg>
+      <div class="donut-label" id="d1-label"><strong>68.800 empresas</strong>Menos de 10 empleados</div>
+    </div>
+
+    <!-- Donut 2: Pequeñas 4.2% -->
+    <div class="donut-item">
+      <svg viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#ddd5c5" stroke-width="5"/>
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#6a8b6a" stroke-width="5"
+          stroke-dasharray="4.2 95.8" stroke-dashoffset="25" stroke-linecap="butt"/>
+        <text x="21" y="19" text-anchor="middle" font-size="7" font-weight="500" fill="#1c1a16">4,2%</text>
+        <text x="21" y="26" text-anchor="middle" font-size="4.5" fill="#7a7770">pequeñas</text>
+      </svg>
+      <div class="donut-label" id="d2-label"><strong>3.070 empresas</strong>10 a 50 empleados</div>
+    </div>
+
+    <!-- Donut 3: Grandes concentran 85% ingresos -->
+    <div class="donut-item">
+      <svg viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#ddd5c5" stroke-width="5"/>
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#1c1a16" stroke-width="5"
+          stroke-dasharray="85 15" stroke-dashoffset="25" stroke-linecap="butt"/>
+        <text x="21" y="19" text-anchor="middle" font-size="7" font-weight="500" fill="#1c1a16">85%</text>
+        <text x="21" y="26" text-anchor="middle" font-size="4.5" fill="#7a7770">ingresos</text>
+      </svg>
+      <div class="donut-label" id="d3-label"><strong>~263 grandes</strong>Concentran el 85% de todos los ingresos del sector</div>
+    </div>
+
+    <div class="donuts-fuente" id="g3-fuente">Fuente: Confecámaras · DANE 2024 (estimado)</div>
+  </div>
+
+  <div class="dato" id="dato1">
+    <strong>Caso real · Rentabilidad 2024</strong>
+    Marval lideró con ingresos de $985.343M y utilidades de $209.157M — un margen del 21,2%, gracias a su apuesta por vivienda de interés social y renovación urbana. Amarilo facturó más de $2 billones y reportó pérdidas. Facturar más no siempre significa ganar más.
+  </div>
+
+  <!-- ── SECCIÓN 3 ── -->
+  <h2 id="h2-3">III. Lo que los números <em>no dicen solos</em></h2>
+
+  <p id="p9">Hay una cifra que se esconde detrás de los balances y los metros cuadrados: la informalidad laboral en el sector de edificaciones en 2024 fue del 79%. De cada 100 trabajadores, 79 no tienen contrato formal, no cotizan a pensión, no tienen ARL. Trabajan en uno de los oficios más peligrosos del país sin la protección que el sistema promete.</p>
+
+  <!-- DONUTS: Formalidad e Informalidad -->
+  <div class="donuts-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="donuts-titulo" id="g4-titulo">Empleo en construcción de edificaciones · Colombia 2024</div>
+
+    <!-- Donut informalidad 79% -->
+    <div class="donut-item">
+      <svg viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#ddd5c5" stroke-width="5"/>
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#7a3a2a" stroke-width="5"
+          stroke-dasharray="79 21" stroke-dashoffset="25" stroke-linecap="butt"/>
+        <text x="21" y="19" text-anchor="middle" font-size="7" font-weight="500" fill="#7a3a2a">79%</text>
+        <text x="21" y="26" text-anchor="middle" font-size="4.2" fill="#7a7770">informal</text>
+      </svg>
+      <div class="donut-label" id="d4-label"><strong>319.287 trabajadores</strong>Sin contrato, sin pensión, sin ARL</div>
+    </div>
+
+    <!-- Donut formalidad 21% -->
+    <div class="donut-item">
+      <svg viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#ddd5c5" stroke-width="5"/>
+        <circle cx="21" cy="21" r="15.9155" fill="transparent" stroke="#4a6b4a" stroke-width="5"
+          stroke-dasharray="21 79" stroke-dashoffset="25" stroke-linecap="butt"/>
+        <text x="21" y="19" text-anchor="middle" font-size="7" font-weight="500" fill="#4a6b4a">21%</text>
+        <text x="21" y="26" text-anchor="middle" font-size="4.2" fill="#7a7770">formal</text>
+      </svg>
+      <div class="donut-label" id="d5-label"><strong>130.549 trabajadores</strong>Con contrato formal</div>
+    </div>
+
+    <div class="donuts-fuente" id="g4-fuente">Fuente: ILO · DANE 2024. En microempresas la informalidad alcanza el 95%.</div>
+  </div>
+
+  <div class="dato" id="dato2">
+    <strong>El dato más grave del período</strong>
+    Entre febrero de 2023 y febrero de 2024, el sector perdió 50.000 empleos — la mayor destrucción de empleo de todos los sectores de la economía colombiana en ese período. El 90% de los trabajadores del sector edificador gana menos de cuatro salarios mínimos.
+  </div>
+
+  <!-- ── SECCIÓN 4 ── -->
+  <h2 id="h2-4">IV. Radiografía de un sector <em>que mueve el país sin moverse a sí mismo</em></h2>
+
+  <p id="p12">Un sector que representa el 4,1% del PIB, que dinamiza más de la mitad del aparato productivo, no ha logrado construir condiciones dignas para la mayoría de las personas que lo sostienen. La paradoja no está en los grandes números. Está en que el sector que literalmente construye el país funciona sobre una base de precariedad que contradice todo lo que esa arquitectura promete desde afuera.</p>
+
+  <div class="pull" id="pull1">La mano de obra representa el 20,4% de los costos totales de construcción en 2024 — el segundo componente más grande después de los materiales. Y es el primero en comprimirse cuando los márgenes caen.</div>
+
+  <p id="p13">No es un problema de actores irresponsables. Es la estructura de un mercado donde la competencia feroz entre 73.000 microempresas presiona los costos hacia abajo — y ese ajuste siempre termina cayendo sobre el eslabón más débil.</p>
+
+  <!-- ── SECCIÓN 5 ── -->
+  <h2 id="h2-5">V. Lo que esto <em>le dice al que quiere construir hoy</em></h2>
+
+  <p id="p15">Si estás pensando en construir o renovar en Colombia — ya sea una vivienda, un local o una inversión — estos datos no son para desanimarte. Son para ayudarte a tomar mejores decisiones en un mercado que no perdona la improvisación.</p>
+
+  <p id="p16">El mercado está en un momento de tensión real. Los constructores venden inventario pero no arrancan obras nuevas. En los próximos meses puede haber escasez de oferta nueva, lo que tiende a presionar precios al alza. Quien construya hoy con cabeza puede posicionarse bien.</p>
+
+  <p id="p17">En un mercado donde el 94% de las empresas son microempresas y la informalidad supera el 79%, la selección del equipo de trabajo es crítica. No basta con buscar el precio más bajo. Hay que buscar formalidad, experiencia documentada, y un proceso claro desde el diseño hasta la entrega.</p>
+
+  <div class="pull arquitecto" id="pull2">El arquitecto no es un lujo en este ecosistema. Es el profesional que puede leer estos datos, anticipar los riesgos, y diseñar un proceso que proteja la inversión del cliente.</div>
+
+  <p id="p18">El dato de Marval lo dice todo: la empresa más rentable del sector no es la más grande — es la que encontró un nicho claro y lo trabajó con consistencia. Esa lección aplica tanto para constructores como para clientes: especialización y claridad estratégica valen más que el volumen.</p>
+
+  <p id="p19">El ladrillo no cuadra hoy en Colombia. Pero eso no significa que no haya manera de hacer que cuadre — para quienes entienden los números y trabajan con profesionales que también los entienden.</p>
+
+  <!-- FOOTER -->
+  <div class="article-footer" id="footer-text">
+    Columna publicada el 13 de abril de 2026 · Fabian Mantilla · LIRA Estudio de Arquitectura · Trentino Alto Adige, Italia<br>
+    <span style="opacity:0.65;">Fuentes: Supersociedades · DANE · Camacol · DIAN · ILO · Pulzo · Infobae · Holland &amp; Knight · Ámbito Jurídico</span>
+  </div>
+  <a href="/#columnas" class="back-link" id="back-link">← Volver a columnas</a>
+
+
+  <!-- SERVICIOS -->
+  <div class="col-srv-wrap">
+    <span class="col-srv-label">Lo que hacemos</span>
+    <h3 class="col-srv-title">Nuestros <em>servicios</em></h3>
+    <p class="col-srv-sub">Del concepto a la obra. Acompañamos cada etapa del proyecto con la misma atención al detalle — para clientes finales y en colaboración con otros estudios.</p>
+    <div class="col-srv-grid">
+      <div class="col-srv-item"><span class="col-srv-ico">◈</span><div><span class="col-srv-name">Diseño de interiores</span><span class="col-srv-tags">Residencial · Comercial · Renders</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">⬡</span><div><span class="col-srv-name">Arquitectura y construcción</span><span class="col-srv-tags">Obra nueva · Ampliaciones · Acabados</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">⊞</span><div><span class="col-srv-name">Gerencia de proyectos</span><span class="col-srv-tags">APU · Interventoría · Control</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">◎</span><div><span class="col-srv-name">Renovación de fachadas</span><span class="col-srv-tags">Fachadas · Rehabilitación · Acabados</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">❋</span><div><span class="col-srv-name">Paisajismo y jardines</span><span class="col-srv-tags">Jardines · Terrazas · Exteriores</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">◱</span><div><span class="col-srv-name">Asesoría técnica</span><span class="col-srv-tags">Privados · Públicos · Licitaciones</span></div></div>
+    </div>
+    <a href="/#servicios" class="col-srv-link">Ver todos los servicios →</a>
+  </div>
+
+  <!-- CTA CONTACTO -->
+  <div class="cta-contacto">
+    <p class="cta-label" id="cta-label">¿Tienes un proyecto en mente?</p>
+    <h3 id="cta-title">Hablemos antes de que empiece la obra</h3>
+    <p class="cta-sub" id="cta-sub">Acompañamos proyectos de arquitectura, interiorismo y renovación en Colombia e Italia — desde el primer número hasta la entrega.</p>
+    <div class="cta-btns">
+      <a href="/#contacto" class="cta-btn" id="cta-btn1">Escribirnos</a>
+      <a href="https://wa.me/393200805705" class="cta-btn ghost" id="cta-btn2" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+
+</article>
+
+<script>
+const T = {
+  es: {
+    navStudio:'Estudio de Arquitectura', navBack:'← COLUMNAS',
+    imgCaption:'Bucaramanga, Santander · Colombia',
+    midCaption:'Vista aérea del centro de Bucaramanga',
+    tag:'Mercado · Arquitectura', metaDate:'13 de abril de 2026', metaRead:'Lectura: ~8 min',
+    title:'El ladrillo <em>que no cuadra</em>',
+    subtitle:'Radiografía del sector constructor en Colombia 2026',
+    openingQuote:'"73.100 empresas. $36,4 billones en ingresos. Y sin embargo, los números no cuadran. Esta es la historia de un sector que mueve el país sin moverse a sí mismo."',
+    attribution:'Fabian Mantilla · Trentino Alto Adige, Italia · Abril 2026',
+    g1:'Utilidades del sector constructor · 2023 vs 2024',
+    g1f:'Fuente: Supersociedades · 1.000 empresas más grandes de Colombia 2024 (Pulzo)',
+    g2:'Vivienda — ventas vs obras iniciadas · ene–sep 2025',
+    g2l1:'Viviendas vendidas', g2l2:'Obras iniciadas',
+    g2f:'Fuente: DIAN · Camacol 2025 — los constructores venden inventario pero no arrancan obra nueva',
+    g3:'Estructura del universo empresarial constructor · Colombia 2024',
+    d1:'68.800 empresas||Menos de 10 empleados',
+    d2:'3.070 empresas||10 a 50 empleados',
+    d3:'~263 grandes||Concentran el 85% de todos los ingresos del sector',
+    g3f:'Fuente: Confecámaras · DANE 2024 (estimado)',
+    g4:'Empleo en construcción de edificaciones · Colombia 2024',
+    d4:'319.287 trabajadores||Sin contrato, sin pensión, sin ARL',
+    d5:'130.549 trabajadores||Con contrato formal',
+    g4f:'Fuente: ILO · DANE 2024. En microempresas la informalidad alcanza el 95%.',
+    footer:'Columna publicada el 13 de abril de 2026 · Fabian Mantilla · LIRA Estudio de Arquitectura · Trentino Alto Adige, Italia',
+    backLink:'← Volver a columnas',
+    ctaLabel:'¿Tienes un proyecto en mente?',
+    ctaTitle:'Hablemos antes de que empiece la obra',
+    ctaSub:'Acompañamos proyectos de arquitectura, interiorismo y renovación en Colombia e Italia — desde el primer número hasta la entrega.',
+    ctaBtn1:'Escribirnos', ctaBtn2:'WhatsApp',
+  },
+  en: {
+    navStudio:'Architecture Studio', navBack:'← COLUMNS',
+    imgCaption:'Bucaramanga, Santander · Colombia',
+    midCaption:'Aerial view of downtown Bucaramanga',
+    tag:'Market · Architecture', metaDate:'April 13, 2026', metaRead:'Read: ~8 min',
+    title:'The brick <em>that doesn\'t add up</em>',
+    subtitle:'An x-ray of Colombia\'s construction sector in 2026',
+    openingQuote:'"73,100 companies. $36.4 billion in revenue. And yet the numbers don\'t add up. This is the story of a sector that builds the country without building itself."',
+    attribution:'Fabian Mantilla · Trentino Alto Adige, Italy · April 2026',
+    g1:'Construction sector profits · 2023 vs 2024',
+    g1f:'Source: Supersociedades · Top 1,000 Colombian companies 2024 (Pulzo)',
+    g2:'Housing — sales vs new starts · Jan–Sep 2025',
+    g2l1:'Units sold', g2l2:'New starts',
+    g2f:'Source: DIAN · Camacol 2025 — builders are selling inventory but not starting new projects',
+    g3:'Construction company structure · Colombia 2024',
+    d1:'68,800 companies||Fewer than 10 employees',
+    d2:'3,070 companies||10 to 50 employees',
+    d3:'~263 large companies||Hold 85% of all sector revenue',
+    g3f:'Source: Confecámaras · DANE 2024 (estimated)',
+    g4:'Employment in building construction · Colombia 2024',
+    d4:'319,287 workers||No contract, no pension, no insurance',
+    d5:'130,549 workers||With formal contract',
+    g4f:'Source: ILO · DANE 2024. In micro-enterprises informality reaches 95%.',
+    footer:'Column published April 13, 2026 · Fabian Mantilla · LIRA Architecture Studio · Trentino Alto Adige, Italy',
+    backLink:'← Back to columns',
+    ctaLabel:'Do you have a project in mind?',
+    ctaTitle:'Let\'s talk before construction begins',
+    ctaSub:'We accompany architecture, interior design and renovation projects in Colombia and Italy — from the first number to handover.',
+    ctaBtn1:'Contact us', ctaBtn2:'WhatsApp',
+  },
+  it: {
+    navStudio:'Studio di Architettura', navBack:'← COLONNE',
+    imgCaption:'Bucaramanga, Santander · Colombia',
+    midCaption:'Vista aerea del centro di Bucaramanga',
+    tag:'Mercato · Architettura', metaDate:'13 aprile 2026', metaRead:'Lettura: ~8 min',
+    title:'Il mattone <em>che non torna</em>',
+    subtitle:'Radiografia del settore costruzioni in Colombia nel 2026',
+    openingQuote:'"73.100 aziende. 36,4 miliardi di ricavi. Eppure i conti non tornano. Questa è la storia di un settore che costruisce il paese senza costruire se stesso."',
+    attribution:'Fabian Mantilla · Trentino Alto Adige, Italia · Aprile 2026',
+    g1:'Utili del settore costruzioni · 2023 vs 2024',
+    g1f:'Fonte: Supersociedades · Top 1.000 aziende Colombia 2024 (Pulzo)',
+    g2:'Abitazioni — vendite vs cantieri avviati · gen–set 2025',
+    g2l1:'Unità vendute', g2l2:'Cantieri avviati',
+    g2f:'Fonte: DIAN · Camacol 2025 — i costruttori vendono scorte ma non avviano nuovi cantieri',
+    g3:'Struttura aziendale del settore costruzioni · Colombia 2024',
+    d1:'68.800 aziende||Meno di 10 dipendenti',
+    d2:'3.070 aziende||Da 10 a 50 dipendenti',
+    d3:'~263 grandi aziende||Concentrano l\'85% di tutti i ricavi del settore',
+    g3f:'Fonte: Confecámaras · DANE 2024 (stimato)',
+    g4:'Occupazione in edilizia · Colombia 2024',
+    d4:'319.287 lavoratori||Senza contratto, pensione o assicurazione',
+    d5:'130.549 lavoratori||Con contratto formale',
+    g4f:'Fonte: ILO · DANE 2024. Nelle microimprese l\'informalità raggiunge il 95%.',
+    footer:'Colonna pubblicata il 13 aprile 2026 · Fabian Mantilla · LIRA Studio di Architettura · Trentino Alto Adige, Italia',
+    backLink:'← Torna alle colonne',
+    ctaLabel:'Hai un progetto in mente?',
+    ctaTitle:'Parliamone prima che inizino i lavori',
+    ctaSub:'Seguiamo progetti di architettura, interior design e ristrutturazione in Colombia e Italia — dal primo numero alla consegna.',
+    ctaBtn1:'Scrivici', ctaBtn2:'WhatsApp',
+  }
+};
+
+function setLabel(el, str) {
+  const parts = str.split('||');
+  el.innerHTML = '<strong>' + parts[0] + '</strong>' + (parts[1] || '');
+}
+
+function setLang(l) {
+  const t = T[l];
+  document.documentElement.lang = l;
+  document.querySelectorAll('.nav-lang').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.getElementById('nav-studio').textContent = t.navStudio;
+  document.getElementById('nav-back').textContent = t.navBack;
+  document.getElementById('img-caption').textContent = t.imgCaption;
+  document.getElementById('mid-caption').textContent = t.midCaption;
+  document.getElementById('tag').textContent = t.tag;
+  document.getElementById('meta-date').textContent = t.metaDate;
+  document.getElementById('meta-read').textContent = t.metaRead;
+  document.getElementById('title').innerHTML = t.title;
+  document.getElementById('subtitle').textContent = t.subtitle;
+  document.getElementById('opening-quote').textContent = t.openingQuote;
+  document.getElementById('attribution').textContent = t.attribution;
+  document.getElementById('g1-titulo').textContent = t.g1;
+  document.getElementById('g1-fuente').textContent = t.g1f;
+  document.getElementById('g2-titulo').textContent = t.g2;
+  document.getElementById('g2-l1').textContent = t.g2l1;
+  document.getElementById('g2-l2').textContent = t.g2l2;
+  document.getElementById('g2-fuente').textContent = t.g2f;
+  document.getElementById('g3-titulo').textContent = t.g3;
+  setLabel(document.getElementById('d1-label'), t.d1);
+  setLabel(document.getElementById('d2-label'), t.d2);
+  setLabel(document.getElementById('d3-label'), t.d3);
+  document.getElementById('g3-fuente').textContent = t.g3f;
+  document.getElementById('g4-titulo').textContent = t.g4;
+  setLabel(document.getElementById('d4-label'), t.d4);
+  setLabel(document.getElementById('d5-label'), t.d5);
+  document.getElementById('g4-fuente').textContent = t.g4f;
+  document.getElementById('h2-1').innerHTML = 'I. Colombia construye. <em>' + (l==='es'?'¿Pero quién gana?':l==='en'?'But who profits?':'Ma chi guadagna?') + '</em>';
+  document.getElementById('h2-2').innerHTML = 'II. ' + (l==='es'?'73.100 empresas, <em>una sola paradoja</em>':l==='en'?'73,100 companies, <em>one single paradox</em>':'73.100 aziende, <em>un solo paradosso</em>');
+  document.getElementById('h2-3').innerHTML = 'III. ' + (l==='es'?'Lo que los números <em>no dicen solos</em>':l==='en'?'What the numbers <em>don\'t say on their own</em>':'Quello che i numeri <em>non dicono da soli</em>');
+  document.getElementById('h2-4').innerHTML = 'IV. ' + (l==='es'?'Radiografía de un sector <em>que mueve el país sin moverse a sí mismo</em>':l==='en'?'X-ray of a sector <em>that moves the country without moving itself</em>':'Radiografia di un settore <em>che muove il paese senza muovere se stesso</em>');
+  document.getElementById('h2-5').innerHTML = 'V. ' + (l==='es'?'Lo que esto <em>le dice al que quiere construir hoy</em>':l==='en'?'What this <em>tells anyone who wants to build today</em>':'Cosa dice tutto questo <em>a chi vuole costruire oggi</em>');
+  document.getElementById('footer-text').innerHTML = t.footer + '<br><span style="opacity:0.65;">Fuentes: Supersociedades · DANE · Camacol · DIAN · ILO · Pulzo · Infobae · Holland &amp; Knight · Ámbito Jurídico</span>';
+  document.getElementById('back-link').textContent = t.backLink;
+  document.getElementById('cta-label').textContent = t.ctaLabel;
+  document.getElementById('cta-title').textContent = t.ctaTitle;
+  document.getElementById('cta-sub').textContent = t.ctaSub;
+  document.getElementById('cta-btn1').textContent = t.ctaBtn1;
+  document.getElementById('cta-btn2').textContent = t.ctaBtn2;
+}
+</script>
+</body>
+</html>

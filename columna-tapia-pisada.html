@@ -88,7 +88,19 @@
     .back-link { display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; color: var(--ink-mid); font-family: var(--sans); font-size: 12px; letter-spacing: 0.08em; margin-top: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
     .back-link:hover { color: var(--ink); border-color: var(--ink); }
 
-    .col-cta-wrap { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 2.5rem; }
+    .col-srv-wrap { margin: 3.5rem 0 0; border-top: 1px solid var(--border); padding-top: 2.5rem; }
+    .col-srv-label { font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--green); margin-bottom: .5rem; font-weight: 500; display: block; }
+    .col-srv-title { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 400; margin-bottom: .5rem; line-height: 1.2; }
+    .col-srv-title em { font-style: italic; color: var(--green); }
+    .col-srv-sub { font-family: var(--sans); font-size: 13px; color: var(--ink-mid); margin-bottom: 1.5rem; line-height: 1.7; font-weight: 300; }
+    .col-srv-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-bottom: 1.2rem; }
+    .col-srv-item { background: #e8e2d6; padding: .9rem 1rem; display: flex; align-items: flex-start; gap: .8rem; }
+    .col-srv-ico { font-size: 15px; color: var(--green); flex-shrink: 0; margin-top: 1px; }
+    .col-srv-name { font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 2px; display: block; }
+    .col-srv-tags { font-family: var(--sans); font-size: 10.5px; color: var(--ink-soft); }
+    .col-srv-link { font-family: var(--sans); font-size: 11px; letter-spacing: .1em; color: var(--green); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; }
+    .col-srv-link:hover { border-color: var(--green); }
+    .col-cta-wrap { margin-top: 2px; border-top: none; padding-top: 0; }
     .col-cta-label { font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--green); margin-bottom: .6rem; font-weight: 500; display: block; }
     .col-cta-inner { background: var(--bg-nav); border: 1px solid var(--border); padding: 2rem; text-align: center; margin-top: 0.5rem; }
     .col-cta-title { font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 400; margin-bottom: .5rem; }
@@ -261,6 +273,22 @@
     <a href="/#columnas" class="back-link" id="back-link">← Volver a columnas</a>
   </div>
 
+  <!-- SERVICIOS -->
+  <div class="col-srv-wrap">
+    <span class="col-srv-label" id="srv-label">Lo que hacemos</span>
+    <h3 class="col-srv-title" id="srv-title">Nuestros <em>servicios</em></h3>
+    <p class="col-srv-sub" id="srv-sub">Del concepto a la obra. Acompañamos cada etapa del proyecto con la misma atención al detalle — para clientes finales y en colaboración con otros estudios.</p>
+    <div class="col-srv-grid">
+      <div class="col-srv-item"><span class="col-srv-ico">◈</span><div><span class="col-srv-name" id="srv-1-name">Diseño de interiores</span><span class="col-srv-tags" id="srv-1-tags">Residencial · Comercial · Renders</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">⬡</span><div><span class="col-srv-name" id="srv-2-name">Arquitectura y construcción</span><span class="col-srv-tags" id="srv-2-tags">Obra nueva · Ampliaciones · Acabados</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">⊞</span><div><span class="col-srv-name" id="srv-3-name">Gerencia de proyectos</span><span class="col-srv-tags" id="srv-3-tags">APU · Interventoría · Control</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">◎</span><div><span class="col-srv-name" id="srv-4-name">Renovación de fachadas</span><span class="col-srv-tags" id="srv-4-tags">Fachadas · Rehabilitación · Acabados</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">❋</span><div><span class="col-srv-name" id="srv-5-name">Paisajismo y jardines</span><span class="col-srv-tags" id="srv-5-tags">Jardines · Terrazas · Exteriores</span></div></div>
+      <div class="col-srv-item"><span class="col-srv-ico">◱</span><div><span class="col-srv-name" id="srv-6-name">Asesoría técnica</span><span class="col-srv-tags" id="srv-6-tags">Privados · Públicos · Licitaciones</span></div></div>
+    </div>
+    <a href="/#servicios" class="col-srv-link" id="srv-link">Ver todos los servicios →</a>
+  </div>
+
   <!-- CTA -->
   <div class="col-cta-wrap">
     <span class="col-cta-label" id="cta-label">¿Tienes un proyecto en mente?</span>
@@ -302,6 +330,12 @@ const T = {
     dato1Label:'Dato técnico',
     dato1:'La tapia pisada tiene baja conductividad calórica, excelente inercia térmica, aislamiento acústico superior al ladrillo y capacidad higroscópica — absorbe y libera humedad regulando el ambiente interior. En italiano: <em>inerzia termica</em>. En Barichara: "fresco".',
     pull2:'"Desde Italia entiendo mejor esa pérdida. Aquí el patrimonio construido es industria, turismo, identidad nacional. Nadie demuele una casa del siglo XVII para poner bloque. En Santander sí."',
+    p1:'Hay una paradoja que vivo cada vez que entro a una ferretería aquí en el norte de Italia. Los estantes están llenos de sistemas de aislamiento térmico — lanas minerales, paneles de corcho prensado, membranas de vapor, soluciones de alta tecnología para mantener el calor adentro en invierno y afuera en verano. Todo costoso. Todo importado. Todo celebrado como innovación.',
+    p2:'En Santander, mis abuelos vivían en casas de tapia pisada que hacían exactamente lo mismo. Gratis. Con tierra del mismo lote.',
+    p3:'La tapia pisada es un muro construido con tierra arcillosa húmeda compactada en capas de 10 a 15 centímetros dentro de un encofrado de madera. Sin hierro, sin cemento, sin aditivos industriales. La tierra se seca al sol. El encofrado se corre. El muro queda.',
+    p4:'Su secreto bioclimático es la inercia térmica. Los muros de tapia tienen un grosor que oscila entre 50 y 90 centímetros. Esa masa absorbe el calor durante las horas de mayor temperatura y lo libera lentamente durante la noche, cuando el exterior se enfría. El resultado es un interior que permanece fresco de día y templado de noche — sin aire acondicionado, sin calefacción, sin factura eléctrica.',
+    p5:'Investigadores de la Universidad Santo Tomás — mi universidad — estudiaron el comportamiento térmico de viviendas en tapia pisada en San Juan Girón, Santander, en un clima cálido húmedo. Los resultados confirmaron lo que los maestros de obra locales saben desde siempre: que la tierra portante responde bien al clima tropical cuando la orientación del edificio acompaña.',
+    p6:'No hay problema técnico. El problema fue cultural. En algún momento del siglo XX decidimos que lo moderno era lo importado — el bloque de cemento, la losa de concreto, el aire acondicionado para compensar lo que la envolvente ya no hace. Y la tapia quedó reducida a patrimonio, a museo, a imagen pintoresca en una postal de Barichara.',
     p6b:'No es un diagnóstico nuevo. Simón Vélez lo dijo sobre la guadua hace décadas: que en Colombia la gente imaginaba que era material para pobres, mientras en Europa la exponían en ferias de arquitectura internacional. La tapia pisada vive el mismo malentendido. Lo que en Santander construyó catedrales, casas patronales y centros históricos declarados patrimonio de la humanidad, hoy se mira con vergüenza desde adentro. El problema no es el material — es el prestigio que le negamos a lo propio.',
     dato2Label:'En LIRA',
     dato2:'El proyecto Casa Campestre Mesa de los Santos (2023) fue construido en tapia pisada en el municipio de Mesa de los Santos, Santander. El proceso, los materiales y el resultado están documentados en video en nuestro portafolio.',
@@ -311,6 +345,16 @@ const T = {
     ctaTitle:'Hablemos antes de que empiece la obra',
     ctaSub:'Acompañamos proyectos de arquitectura bioclimática, interiorismo y patrimonio en Colombia e Italia.',
     ctaBtn1:'Escribirnos', ctaBtn2:'WhatsApp',
+    srvLabel:'Lo que hacemos',
+    srvTitle:'Nuestros <em>servicios</em>',
+    srvSub:'Del concepto a la obra. Acompañamos cada etapa del proyecto con la misma atención al detalle — para clientes finales y en colaboración con otros estudios.',
+    srv1Name:'Diseño de interiores', srv1Tags:'Residencial · Comercial · Renders',
+    srv2Name:'Arquitectura y construcción', srv2Tags:'Obra nueva · Ampliaciones · Acabados',
+    srv3Name:'Gerencia de proyectos', srv3Tags:'APU · Interventoría · Control',
+    srv4Name:'Renovación de fachadas', srv4Tags:'Fachadas · Rehabilitación · Acabados',
+    srv5Name:'Paisajismo y jardines', srv5Tags:'Jardines · Terrazas · Exteriores',
+    srv6Name:'Asesoría técnica', srv6Tags:'Privados · Públicos · Licitaciones',
+    srvLink:'Ver todos los servicios →',
     h21:'I. La ferretería <em>y la paradoja</em>',
     h22:'II. Cómo funciona la <em>tierra que respira</em>',
     h23:'III. El problema <em>no fue técnico</em>',
@@ -340,7 +384,6 @@ const T = {
     dato1Label:'Technical note',
     dato1:'Rammed earth has low thermal conductivity, excellent thermal mass, acoustic insulation superior to brick, and hygroscopic capacity — absorbing and releasing moisture to regulate the interior environment. In Italian: <em>inerzia termica</em>. In Barichara: simply "cool".',
     pull2:'"From Italy I understand that loss better. Here the built heritage is an industry, a tourism draw, a national identity. Nobody demolishes a 17th-century house to put in blocks. In Santander, they do."',
-    p6b:'This is not a new diagnosis. Simón Vélez said it about guadua bamboo decades ago: that in Colombia people imagined it was a material for the poor, while in Europe it was exhibited at international architecture fairs. Rammed earth lives the same misunderstanding. What built cathedrals, manor houses and historic centres declared world heritage in Santander is today looked upon with embarrassment from within. The problem is not the material — it is the prestige we deny to what is our own.',
     dato2Label:'At LIRA',
     dato2:'The Casa Campestre Mesa de los Santos project (2023) was built in rammed earth in the municipality of Mesa de los Santos, Santander. The process, materials and result are documented in video in our portfolio.',
     footer:'Column published April 2026 · Fabian Mantilla · LIRA Architecture Studio · Trentino Alto Adige, Italy',
@@ -349,6 +392,27 @@ const T = {
     ctaTitle:'Let\'s talk before construction begins',
     ctaSub:'We accompany bioclimatic architecture, interior design and heritage projects in Colombia and Italy.',
     ctaBtn1:'Contact us', ctaBtn2:'WhatsApp',
+    srvLabel:'What we do',
+    srvTitle:'Our <em>services</em>',
+    srvSub:'From concept to construction. We accompany every stage of the project with the same attention to detail — for end clients and in collaboration with other studios.',
+    srv1Name:'Interior design', srv1Tags:'Residential · Commercial · Renders',
+    srv2Name:'Architecture & construction', srv2Tags:'New build · Extensions · Finishes',
+    srv3Name:'Project management', srv3Tags:'Estimates · Supervision · Control',
+    srv4Name:'Façade renovation', srv4Tags:'Façades · Rehabilitation · Finishes',
+    srv5Name:'Landscaping & gardens', srv5Tags:'Gardens · Terraces · Exteriors',
+    srv6Name:'Technical consulting', srv6Tags:'Private · Public · Tenders',
+    srvLink:'View all services →',
+    p1:'There is a paradox I experience every time I walk into a hardware store here in northern Italy. The shelves are full of thermal insulation systems — mineral wool, pressed cork panels, vapour barriers, high-tech solutions for keeping heat in during winter and out in summer. All expensive. All imported. All celebrated as innovation.',
+    p2:'In Santander, my grandparents lived in rammed earth houses that did exactly the same thing. For free. With soil from the same plot.',
+    p3:'Rammed earth is a wall built with moist clay soil compacted in layers of 10 to 15 centimetres inside a wooden formwork. No steel, no cement, no industrial additives. The earth dries in the sun. The formwork slides along. The wall remains.',
+    p4:'Its bioclimatic secret is thermal mass. Rammed earth walls range from 50 to 90 centimetres thick. That mass absorbs heat during the hottest hours and releases it slowly at night, when the outside cools. The result is an interior that stays cool by day and warm by night — no air conditioning, no heating, no electricity bill.',
+    p5:'Researchers at Universidad Santo Tomás — my university — studied the thermal behaviour of rammed earth homes in San Juan Girón, Santander, in a hot humid climate. The results confirmed what local master builders have always known: that load-bearing earth responds well to the tropical climate when the building\'s orientation works with it.',
+    p6:'There is no technical problem. The problem was cultural. At some point in the twentieth century we decided that modern meant imported — the concrete block, the concrete slab, the air conditioning to compensate for what the envelope no longer does. And rammed earth was reduced to heritage, to museum pieces, to a picturesque image on a postcard of Barichara.',
+    p6b:'This is not a new diagnosis. Simón Vélez said it about guadua bamboo decades ago: that in Colombia people imagined it was a material for the poor, while in Europe it was exhibited at international architecture fairs. Rammed earth lives the same misunderstanding. What built cathedrals, manor houses and historic centres declared world heritage in Santander is today looked upon with embarrassment from within. The problem is not the material — it is the prestige we deny to what is our own.',
+    p7:'Bioclimatic architecture is not invented — it is remembered. What is sold today at European sustainability fairs as cutting-edge innovation has been demonstrating its efficiency for centuries in the historic centres of Santander. The difference is that there it is called <em>cappotto termico</em> and comes with a certified installation manual. Here it was called rammed earth and was known by the local master builder.',
+    p8:'At LIRA we work with rammed earth not out of nostalgia but out of technical conviction. It is the material that makes most sense in the territory we know — bioclimatic by nature, local by definition, built with soil from the same plot where people are going to live. And more honest than any imported solution arriving on a pallet from Europe.',
+    p9:'The next time someone in Europe tells you that sustainable architecture is expensive, tell them that in Santander there are 300-year-old houses still standing — built with earth, no steel, no cement — that maintain an interior temperature of 22°C in one of the most demanding climates in the Andean tropics.',
+    p10:'That is not heritage. That is engineering.',
     h21:'I. The hardware store <em>and the paradox</em>',
     h22:'II. How <em>breathing earth</em> works',
     h23:'III. The problem <em>was not technical</em>',
@@ -378,7 +442,6 @@ const T = {
     dato1Label:'Nota tecnica',
     dato1:'La tapia pisada ha bassa conducibilità termica, eccellente inerzia termica, isolamento acustico superiore al laterizio e capacità igroscopica — assorbe e rilascia umidità regolando l\'ambiente interno. In italiano: <em>inerzia termica</em>. A Barichara: semplicemente "fresco".',
     pull2:'"Dall\'Italia capisco meglio quella perdita. Qui il patrimonio costruito è industria, turismo, identità nazionale. Nessuno demolisce una casa del XVII secolo per metterci dei blocchi. A Santander sì."',
-    p6b:'Non è una diagnosi nuova. Simón Vélez lo disse sul bambù guadua decenni fa: che in Colombia la gente immaginava fosse un materiale per i poveri, mentre in Europa lo esponevano nelle fiere di architettura internazionale. La tapia pisada vive lo stesso malinteso. Ciò che a Santander ha costruito cattedrali, case padronali e centri storici dichiarati patrimonio dell\'umanità, oggi viene guardato con vergogna dall\'interno. Il problema non è il materiale — è il prestigio che neghiamo a ciò che è nostro.',
     dato2Label:'In LIRA',
     dato2:'Il progetto Casa Campestre Mesa de los Santos (2023) è stato costruito in terra battuta nel comune di Mesa de los Santos, Santander. Il processo, i materiali e il risultato sono documentati in video nel nostro portfolio.',
     footer:'Colonna pubblicata ad aprile 2026 · Fabian Mantilla · LIRA Studio di Architettura · Trentino Alto Adige, Italia',
@@ -387,6 +450,27 @@ const T = {
     ctaTitle:'Parliamone prima che inizino i lavori',
     ctaSub:'Seguiamo progetti di architettura bioclimatica, interior design e patrimonio in Colombia e Italia.',
     ctaBtn1:'Scrivici', ctaBtn2:'WhatsApp',
+    srvLabel:'Cosa facciamo',
+    srvTitle:'I nostri <em>servizi</em>',
+    srvSub:"Dal concept all'opera. Accompagniamo ogni fase del progetto con la stessa attenzione al dettaglio — per clienti finali e in collaborazione con altri studi.",
+    srv1Name:"Design d'interni", srv1Tags:'Residenziale · Commerciale · Render',
+    srv2Name:'Architettura e costruzione', srv2Tags:'Nuova costruzione · Ampliamenti · Finiture',
+    srv3Name:'Project management', srv3Tags:'Computi metrici · Direzione lavori · Controllo',
+    srv4Name:'Ristrutturazione di facciate', srv4Tags:'Facciate · Riqualificazione · Finiture',
+    srv5Name:'Paesaggismo e giardini', srv5Tags:'Giardini · Terrazze · Esterni',
+    srv6Name:'Consulenza tecnica', srv6Tags:"Privati · Pubblici · Gare d'appalto",
+    srvLink:'Vedi tutti i servizi →',
+    p1:"C'è un paradosso che vivo ogni volta che entro in un negozio di ferramenta qui nel nord Italia. Gli scaffali sono pieni di sistemi di isolamento termico — lana minerale, pannelli di sughero pressato, membrane vapore, soluzioni ad alta tecnologia per tenere il calore dentro d'inverno e fuori d'estate. Tutto costoso. Tutto importato. Tutto celebrato come innovazione.",
+    p2:'A Santander, i miei nonni vivevano in case di tapia pisada che facevano esattamente la stessa cosa. Gratis. Con la terra dello stesso terreno.',
+    p3:"La tapia pisada è un muro costruito con terra argillosa umida compattata in strati da 10 a 15 centimetri all'interno di un'armatura di legno. Senza ferro, senza cemento, senza additivi industriali. La terra si asciuga al sole. L'armatura scorre. Il muro rimane.",
+    p4:"Il suo segreto bioclimatico è l'inerzia termica. I muri di tapia hanno uno spessore che oscilla tra 50 e 90 centimetri. Quella massa assorbe il calore durante le ore di maggiore temperatura e lo rilascia lentamente di notte, quando l'esterno si raffredda. Il risultato è un interno che rimane fresco di giorno e tiepido di notte — senza aria condizionata, senza riscaldamento, senza bolletta elettrica.",
+    p5:"Ricercatori dell'Universidad Santo Tomás — la mia università — hanno studiato il comportamento termico delle abitazioni in tapia pisada a San Juan Girón, Santander, in un clima caldo umido. I risultati hanno confermato ciò che i capomastri locali sanno da sempre: che la terra portante risponde bene al clima tropicale quando l'orientamento dell'edificio accompagna.",
+    p6:"Non c'è problema tecnico. Il problema è stato culturale. A un certo punto del XX secolo abbiamo deciso che il moderno era ciò che veniva importato — il blocco di cemento, il solaio in calcestruzzo, l'aria condizionata per compensare ciò che l'involucro non fa più. E la tapia è stata ridotta a patrimonio, a museo, a immagine pittoresca in una cartolina di Barichara.",
+    p6b:"Non è una diagnosi nuova. Simón Vélez lo disse sul bambù guadua decenni fa: che in Colombia la gente immaginava fosse un materiale per i poveri, mentre in Europa lo esponevano nelle fiere di architettura internazionale. La tapia pisada vive lo stesso malinteso. Ciò che a Santander ha costruito cattedrali, case padronali e centri storici dichiarati patrimonio dell'umanità, oggi viene guardato con vergogna dall'interno. Il problema non è il materiale — è il prestigio che neghiamo a ciò che è nostro.",
+    p7:"L'architettura bioclimatica non si inventa — si ricorda. Quello che oggi viene venduto nelle fiere della sostenibilità europee come innovazione d'avanguardia dimostra la sua efficienza da secoli nei centri storici di Santander. La differenza è che lì si chiama <em>cappotto termico</em> e ha un manuale di posa certificato. Qui si chiamava tapia pisada e la sapeva il capomastro del paese.",
+    p8:"In LIRA lavoriamo con la tapia pisada non per nostalgia, ma per convinzione tecnica. È il materiale che ha più senso nel territorio che conosciamo — bioclimatico per natura, locale per definizione, costruito con la terra dello stesso lotto dove andrà a vivere la gente. E più onesto di qualsiasi soluzione importata che arriva su un pallet dall'Europa.",
+    p9:"La prossima volta che qualcuno in Europa vi dice che l'architettura sostenibile è cara, raccontategli che a Santander ci sono case di 300 anni ancora in piedi — costruite con terra, senza ferro, senza cemento — che mantengono una temperatura interna di 22°C in uno dei climi più esigenti dei tropici andini.",
+    p10:'Questo non è patrimonio. È ingegneria.',
     h21:'I. Il negozio di ferramenta <em>e il paradosso</em>',
     h22:'II. Come funziona la <em>terra che respira</em>',
     h23:'III. Il problema <em>non era tecnico</em>',
@@ -433,6 +517,10 @@ function setLang(l) {
   document.getElementById('dato1-text').innerHTML     = t.dato1;
   document.getElementById('pull2').textContent        = t.pull2;
   document.getElementById('p6b').textContent          = t.p6b;
+  ['p1','p2','p3','p4','p5','p6','p8','p9','p10'].forEach(id => {
+    document.getElementById(id).textContent = t[id];
+  });
+  document.getElementById('p7').innerHTML              = t.p7;
   document.getElementById('mid-caption').textContent  = t.midCaption;
   document.getElementById('dato2-label').textContent  = t.dato2Label;
   document.getElementById('dato2-text').textContent   = t.dato2;
@@ -443,6 +531,22 @@ function setLang(l) {
   document.getElementById('cta-sub').textContent     = t.ctaSub;
   document.getElementById('cta-btn1').textContent    = t.ctaBtn1;
   document.getElementById('cta-btn2').textContent    = t.ctaBtn2;
+  document.getElementById('srv-label').textContent   = t.srvLabel;
+  document.getElementById('srv-title').innerHTML     = t.srvTitle;
+  document.getElementById('srv-sub').textContent     = t.srvSub;
+  document.getElementById('srv-1-name').textContent  = t.srv1Name;
+  document.getElementById('srv-1-tags').textContent  = t.srv1Tags;
+  document.getElementById('srv-2-name').textContent  = t.srv2Name;
+  document.getElementById('srv-2-tags').textContent  = t.srv2Tags;
+  document.getElementById('srv-3-name').textContent  = t.srv3Name;
+  document.getElementById('srv-3-tags').textContent  = t.srv3Tags;
+  document.getElementById('srv-4-name').textContent  = t.srv4Name;
+  document.getElementById('srv-4-tags').textContent  = t.srv4Tags;
+  document.getElementById('srv-5-name').textContent  = t.srv5Name;
+  document.getElementById('srv-5-tags').textContent  = t.srv5Tags;
+  document.getElementById('srv-6-name').textContent  = t.srv6Name;
+  document.getElementById('srv-6-tags').textContent  = t.srv6Tags;
+  document.getElementById('srv-link').textContent    = t.srvLink;
   document.getElementById('h2-1').innerHTML          = t.h21;
   document.getElementById('h2-2').innerHTML          = t.h22;
   document.getElementById('h2-3').innerHTML          = t.h23;
